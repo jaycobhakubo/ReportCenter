@@ -40,6 +40,7 @@ namespace GTI.Modules.ReportCenter.UI
             this.ReportManagerMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@ namespace GTI.Modules.ReportCenter.UI
             // fileMenu
             // 
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
             this.exitMenu});
             this.fileMenu.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder;
             this.fileMenu.Name = "fileMenu";
@@ -70,7 +72,7 @@ namespace GTI.Modules.ReportCenter.UI
             // exitMenu
             // 
             this.exitMenu.Name = "exitMenu";
-            this.exitMenu.Size = new System.Drawing.Size(108, 26);
+            this.exitMenu.Size = new System.Drawing.Size(152, 26);
             this.exitMenu.Text = "E&xit";
             this.exitMenu.Click += new System.EventHandler(this.ExitMenu_Click);
             // 
@@ -138,6 +140,12 @@ namespace GTI.Modules.ReportCenter.UI
             this.aboutMenu.Text = "&About ...";
             this.aboutMenu.Click += new System.EventHandler(this.aboutMenu_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
             // frmReportCenterMDIParent
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -179,6 +187,7 @@ namespace GTI.Modules.ReportCenter.UI
         private System.Windows.Forms.ToolStripMenuItem michiganQuarterlyReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cashAccountabilityReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReportManagerMenu;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }
 

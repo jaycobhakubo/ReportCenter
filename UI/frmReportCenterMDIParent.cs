@@ -55,6 +55,9 @@ namespace GTI.Modules.ReportCenter.UI
             mCenter = new FrmReportManager { Dock = DockStyle.Fill, MyParent = this };      //US1622
             mCustomizeReport = new frmCustomizeReport(this) {Dock = DockStyle.Fill};
             mCustomizeReport.Closed += CustomizeUserReport_Closed;
+
+            mEditReport = new frmEditReport(this) { Dock = DockStyle.Fill };
+            mEditReport.Closed += mEditReport_Closed;
         }
 
         private void ReportCenterMDIParent_Load(object sender, EventArgs e)
@@ -83,6 +86,13 @@ namespace GTI.Modules.ReportCenter.UI
         {
  
             Debug.WriteLine("CustomizeUserReport_Closed");
+        }
+
+
+        private void mEditReport_Closed(object sender, EventArgs e)
+        {
+
+            Debug.WriteLine("mEditReport_Closed");
         }
 
         #endregion 
@@ -627,6 +637,7 @@ namespace GTI.Modules.ReportCenter.UI
                     mEditReport.Closed += CustomizeUserReport_Closed;
                     mEditReport.Dock = DockStyle.Fill;
                 }
+                userReportMenu.Visible = false;
                 LoadTarget(mEditReport);
             }
             catch (Exception ex)

@@ -19,5 +19,11 @@ namespace GTI.Modules.ReportCenter.UI
             MyParent = myParent;
             InitializeComponent();
         }
+
+        private void frmEditReport_Load(object sender, EventArgs e)
+        {
+            if (MyParent.userReportMenu != null)
+                MyParent.userReportMenu.Visible = false;
+        }
     }
 }

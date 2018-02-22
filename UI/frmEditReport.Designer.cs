@@ -48,6 +48,7 @@
             this.Name = "frmEditReport";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Load += new System.EventHandler(this.frmEditReport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

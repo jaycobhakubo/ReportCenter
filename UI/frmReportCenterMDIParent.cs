@@ -25,6 +25,7 @@ namespace GTI.Modules.ReportCenter.UI
         //private FrmReportCenter mCenter;
         private FrmReportManager mCenter;       //US1622
         private frmCustomizeReport mCustomizeReport;
+        private frmEditReport mEditReport;
         private MichiganQuarterlyReport m_michiganQuarterlyReport;
         private CashAccountabilityForm m_cashAccountability;
         public ToolStrip userReportMenu;
@@ -615,6 +616,25 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (mEditReport == null || mEditReport.Disposing ||
+                             mEditReport.IsDisposed)
+                {
+                    mEditReport = new frmEditReport(this);
+                    mEditReport.Closed += CustomizeUserReport_Closed;
+                    mEditReport.Dock = DockStyle.Fill;
+                }
+                LoadTarget(mEditReport);
+            }
+            catch (Exception ex)
+            {
+                MessageForm.Show(this, "editToolStripMenuItem_Click()..Exception: " + ex.Message, Resources.report_center);
+            }
+        }
+
         private void michiganQuarterlyReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -650,5 +670,7 @@ namespace GTI.Modules.ReportCenter.UI
                 MessageForm.Show(this, "CashAccountabilityForm..Exception: " + ex.Message, Resources.report_center);
             }
         }
+
+       
     }
 }

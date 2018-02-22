@@ -76,10 +76,10 @@ namespace GTI.Modules.ReportCenter.UI
             this.customReportTreeView.HideSelection = false;
             this.customReportTreeView.LabelEdit = true;
             this.customReportTreeView.Name = "customReportTreeView";
-            this.customReportTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.customReportTreeView_AfterCheck);
-            this.customReportTreeView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.customReportLabelEdit);
-            this.customReportTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.customReportSelect);
             this.customReportTreeView.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.customReportTreeView_BeforeLabelEdit);
+            this.customReportTreeView.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.customReportLabelEdit);
+            this.customReportTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.customReportTreeView_AfterCheck);
+            this.customReportTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.customReportSelect);
             // 
             // newTypeButton
             // 
@@ -88,8 +88,8 @@ namespace GTI.Modules.ReportCenter.UI
             resources.ApplyResources(this.newTypeButton, "newTypeButton");
             this.newTypeButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
             this.newTypeButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
-            this.newTypeButton.MinimumSize = new System.Drawing.Size(30, 30);
             this.newTypeButton.Name = "newTypeButton";
+            this.newTypeButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.newTypeButton.UseVisualStyleBackColor = false;
             this.newTypeButton.Click += new System.EventHandler(this.newTypeClick);
             // 
@@ -100,8 +100,8 @@ namespace GTI.Modules.ReportCenter.UI
             this.newGroupButton.FocusColor = System.Drawing.Color.Black;
             this.newGroupButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
             this.newGroupButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
-            this.newGroupButton.MinimumSize = new System.Drawing.Size(30, 30);
             this.newGroupButton.Name = "newGroupButton";
+            this.newGroupButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.newGroupButton.UseVisualStyleBackColor = false;
             this.newGroupButton.Click += new System.EventHandler(this.newGroupClick);
             // 
@@ -112,8 +112,8 @@ namespace GTI.Modules.ReportCenter.UI
             resources.ApplyResources(this.saveButton, "saveButton");
             this.saveButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
             this.saveButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
-            this.saveButton.MinimumSize = new System.Drawing.Size(30, 30);
             this.saveButton.Name = "saveButton";
+            this.saveButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Click += new System.EventHandler(this.saveReportsClick);
             // 
@@ -124,8 +124,8 @@ namespace GTI.Modules.ReportCenter.UI
             this.addReportButton.FocusColor = System.Drawing.Color.Black;
             this.addReportButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
             this.addReportButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
-            this.addReportButton.MinimumSize = new System.Drawing.Size(30, 30);
             this.addReportButton.Name = "addReportButton";
+            this.addReportButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.addReportButton.UseVisualStyleBackColor = false;
             this.addReportButton.Click += new System.EventHandler(this.addCheckedReportClick);
             // 
@@ -136,8 +136,8 @@ namespace GTI.Modules.ReportCenter.UI
             this.deleteButton.FocusColor = System.Drawing.Color.Black;
             this.deleteButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
             this.deleteButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
-            this.deleteButton.MinimumSize = new System.Drawing.Size(30, 30);
             this.deleteButton.Name = "deleteButton";
+            this.deleteButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.deleteButton.UseVisualStyleBackColor = false;
             this.deleteButton.Click += new System.EventHandler(this.DeleteClick);
             // 
@@ -160,10 +160,10 @@ namespace GTI.Modules.ReportCenter.UI
             this.Name = "frmCustomizeReport";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCustomizeReport_FormClosing);
             this.Load += new System.EventHandler(this.CustomizeReport_Load);
             this.Enter += new System.EventHandler(this.frmCustomizeReport_Enter);
             this.Leave += new System.EventHandler(this.frmCustomizeReport_Leave);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCustomizeReport_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

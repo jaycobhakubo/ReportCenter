@@ -31,6 +31,7 @@ namespace GTI.Modules.ReportCenter.UI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReportCenterMDIParent));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.standardReportsMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +41,6 @@ namespace GTI.Modules.ReportCenter.UI
             this.ReportManagerMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +68,13 @@ namespace GTI.Modules.ReportCenter.UI
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.Size = new System.Drawing.Size(49, 26);
             this.fileMenu.Text = "&File";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // exitMenu
             // 
@@ -139,12 +146,6 @@ namespace GTI.Modules.ReportCenter.UI
             this.aboutMenu.Size = new System.Drawing.Size(148, 26);
             this.aboutMenu.Text = "&About ...";
             this.aboutMenu.Click += new System.EventHandler(this.aboutMenu_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
-            this.editToolStripMenuItem.Text = "Edit";
             // 
             // frmReportCenterMDIParent
             // 

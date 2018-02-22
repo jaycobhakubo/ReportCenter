@@ -1,0 +1,138 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ArrowButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="StoryMouseEnter">
+                            <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pathNext" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF35D3FF"/>
+                                <SplineColorKeyFrame KeyTime="00:00:00.1000000" Value="#FF59F822"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryMouseLeave">
+                            <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pathNext" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF59F822"/>
+                                <SplineColorKeyFrame KeyTime="00:00:00.1000000" Value="#FF35D3FF"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryPressed">
+                            <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF1D50BD"/>
+                                <SplineColorKeyFrame KeyTime="00:00:00.1000000" Value="#FF273045"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryUnPressed">
+                            <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ellipse" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF273045"/>
+                                <SplineColorKeyFrame KeyTime="00:00:00.2000000" Value="#FF1D50BD"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryDisabled">
+                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GrayEllipse" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryEnabled">
+                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="GrayEllipse" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00.2000000" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryPrev">
+                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pathPrev" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pathNext" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="StoryNext">
+                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pathNext" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="pathPrev" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.50*"/>
+                            <RowDefinition Height="0.25*"/>
+                        </Grid.RowDefinitions>
+                        <Ellipse x:Name="ellipse" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="3">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush GradientOrigin="0.246,0.724">
+                                    <GradientStop Color="#FF1D50BD" Offset="1"/>
+                                    <GradientStop Color="#FFC2D6FF"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Path x:Name="pathNext" Stretch="Fill" Margin="0,0,-5,0" 
+								Data="M0,0.5 L2,2 0,3.5 z" 
+								HorizontalAlignment="Stretch" 
+								Grid.Column="1" Grid.Row="1"  Fill="#FF35D3FF"/>
+                        <Path x:Name="pathPrev" Stretch="Fill" Margin="-5,0,0,0"
+								Data="M2,0.5 L0,2 2,3.5 z" 
+								HorizontalAlignment="Stretch" 
+								Grid.Column="1" Grid.Row="1"  Fill="#FF35D3FF"/>
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+							Grid.ColumnSpan="3" Grid.RowSpan="3" RecognizesAccessKey="True" Content=""/>
+                        <Ellipse x:Name="GrayEllipse" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="3"
+							Fill="#AA777777" Visibility="Hidden"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Tag" Value="Prev">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="StoryPrev_BeginStoryboard" Storyboard="{StaticResource StoryPrev}"/>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="Tag" Value="Next">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="StoryNext_BeginStoryboard" Storyboard="{StaticResource StoryNext}"/>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="StoryEnabled_BeginStoryboard" Storyboard="{StaticResource StoryEnabled}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard x:Name="StoryDisabled_BeginStoryboard" Storyboard="{StaticResource StoryDisabled}"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Trigger.ExitActions>
+                                <BeginStoryboard x:Name="StoryUnPressed_BeginStoryboard" Storyboard="{StaticResource StoryUnPressed}"/>
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="StoryPressed_BeginStoryboard" Storyboard="{StaticResource StoryPressed}"/>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="StoryMouseEnter_BeginStoryboard" Storyboard="{StaticResource StoryMouseEnter}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard x:Name="StoryMouseLeave_BeginStoryboard" Storyboard="{StaticResource StoryMouseLeave}"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

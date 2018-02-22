@@ -1,0 +1,424 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:WPFControls="clr-namespace:WPFControls"
+	x:Class="WPFControls.CashAccountabilityControl"
+	x:Name="UserControl"
+    Loaded="UserControl_Loaded" Width="785" Height="696">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        <Style x:Key="HeaderTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="DescTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Background" Value="#00000000"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="2,1,1,1"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Padding" Value="35,4,0,4"/>
+        </Style>
+        <Style x:Key="EditTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="1,1,2,1"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="BorderThickness" Value="1,1,2,1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="AllowDrop" Value="False"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="EmptyCellBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1,1,2,1"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style x:Key="InfoTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Padding" Value="0,4,4,0"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1,1,2,1"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="IsTabStop" Value="False"/>
+        </Style>
+        <WPFControls:MoneyConverter x:Key="MoneyConverter"/>
+        <SolidColorBrush x:Key="NetBrush" Color="#FFD8E4F8"/>
+        <SolidColorBrush x:Key="RevenueBrush" Color="#FFC8ECCA"/>
+        <SolidColorBrush x:Key="RevenueItemBrush" Color="#FFE5F8E6"/>
+        <SolidColorBrush x:Key="ExpenseBrush" Color="#FFFFE0C0"/>
+        <SolidColorBrush x:Key="ExpenseItemBrush" Color="#FFFFEFDF"/>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Border Padding="3" Background="Black"  >
+            <Grid x:Name="DataGrid" IsSharedSizeScope="True" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition SharedSizeGroup="group1"/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="135"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="1,1,1,1" BorderBrush="Black" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="White"/>
+                                <GradientStop Color="#FFADC4DA" Offset="0.5"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DatePicker Height="auto" Margin="20,2,2,2" Grid.Column="2"
+                                   Name="datePicker1"  
+                                   VerticalAlignment="Top" 
+                                   FontSize="14"
+                                   SelectedDate="{Binding Date}" 
+                                   CalendarOpened="datePicker1_CalendarOpened"    
+                                   CalendarClosed="datePicker1_CalendarClosed" />
+                        <ComboBox Grid.Column="3" FontSize="16"
+                                  Margin="2" HorizontalContentAlignment="Center"
+                                  Name="comboBoxSession" ItemsSource="{Binding Sessions}"
+                                  DisplayMemberPath="Value"
+                                  SelectedValuePath="Key"
+                                  IsEnabled="False"
+                                  SelectedValue="{Binding SessionNumber, Mode=TwoWay}" 
+                                  SelectionChanged="comboBoxSession_SelectionChanged" 
+                                  HorizontalAlignment="Left" Width="136" />
+                        <Button x:Name="QuitButton" FontSize="14" 
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center" 
+                                Click="Quit_Click" Visibility="Hidden"
+                                Content="_Quit" Margin="2">
+                        </Button>
+                        <Button x:Name="ExitButton" FontSize="14" 
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center" 
+                                Click="ExitClick" 
+                                Content="E_xit" Margin="2">
+                        </Button>
+                        <Button x:Name="SaveButton" FontSize="14" 
+                                HorizontalContentAlignment="Center" Grid.Column="1"
+                                VerticalContentAlignment="Center" 
+                                Click="Save_Click" Visibility="Hidden"
+                                Content="_Save" Margin="2">
+                        </Button>
+                        <Button x:Name="LoadButton" FontSize="14" 
+                                HorizontalContentAlignment="Center" Grid.Column="1"
+                                VerticalContentAlignment="Center" 
+                                Click="Load_Click"
+                                Content="_Load" Margin="2">
+                        </Button>
+                        <Label Grid.Column="4" 
+                               Margin="2" Height="auto" 
+                               VerticalAlignment="Center" HorizontalContentAlignment="Right"
+                               Content="Start : "/>
+                        <Label Grid.Column="6"
+                               Margin="2" Height="auto" 
+                               VerticalAlignment="Center" HorizontalContentAlignment="Right"
+                               Content="End : "/>
+                        <Label Grid.Column="5" Margin="2" Name="lblStart" 
+                               Width="auto" Height="auto" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Left"
+                               HorizontalContentAlignment="Right"
+                               Content="{Binding StartTransactionNumber}"/>
+                        <Label Grid.Column="7"
+                               Margin="2" Name="lblEnd" 
+                               Width="auto" Height="auto" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Left"
+                               HorizontalContentAlignment="Right"
+                               Content="{Binding EndTransactionNumber}"/>
+                        <Label Grid.Column="4" Grid.ColumnSpan="4"
+                               Margin="2" Height="auto" Background="BlanchedAlmond"
+                               Visibility="{Binding InvalidDateOrSession, Converter={StaticResource BoolToVisibility}}"
+                               VerticalAlignment="Center"
+                               Content="The Specified Date or Session does not exist in the database. "/>
+                        <Label Grid.Column="4" Grid.ColumnSpan="4"
+                               Margin="2" Height="auto" Background="Yellow"
+                               Visibility="{Binding ShowInstructions, Converter={StaticResource BoolToVisibility}}"
+                               VerticalAlignment="Center"
+                               Content="Select a Date and Session then press Load."/>
+                    </Grid>
+                </Border>
+                <TextBox Text="Attendance" 
+        			 Padding="13,4,0,4" 
+                     Grid.Row="1"
+                     Background="{DynamicResource NetBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="BINGO REVENUE:" 
+        			 Padding="13,4,0,4" 
+                     Grid.Row="2"
+                     Background="{DynamicResource RevenueBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}" 
+                     FontWeight="Bold"/>
+                <TextBox Text="1. Admission / Bingo Cards (Master Control)" 
+        			 Grid.Row="3" 
+                     Background="{DynamicResource RevenueItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="    Admission / Bingo Cards (Disposable Bingo Card Account)" 
+        			 Grid.Row="4"
+                     Background="{DynamicResource RevenueItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="    Admission / Bingo Cards (Electronic)" 
+        			 Grid.Row="5"
+                     Background="{DynamicResource RevenueItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="2. Progressive Jackpot Card Sales" 
+        			 Grid.Row="6"
+                     Background="{DynamicResource RevenueItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="3. Other Revenue (sales of supplies)" 
+        			 Grid.Row="7"
+                     Background="{DynamicResource RevenueItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="4. Total Revenue (add lines 1 - 3)" 
+        			 Grid.Row="8"
+                     FontWeight="Bold"
+                     Background="{DynamicResource NetBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="BINGO CASH EXPENSE:" 
+        			 Padding="13,4,0,4" FontWeight="Bold"
+                     Grid.Row="9"
+                     Background="{DynamicResource ExpenseBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="5. Progressive Jackpot Consolation Prize (cash)" 
+        			 Grid.Row="10"
+                     Background="{DynamicResource ExpenseItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="6. All Other Prizes" 
+        			 Grid.Row="11"
+                     Background="{DynamicResource ExpenseItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="7. Worker Compensation" 
+        			 Grid.Row="12"
+                     Background="{DynamicResource ExpenseItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="8. Total Expenses (add lines 5 - 7)" 
+        			 Grid.Row="13"
+                     FontWeight="Bold"
+                     Background="{DynamicResource ExpenseItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="9. Bingo cash proceeds (subtract line 8 from line 4)" 
+        			 Grid.Row="14"
+                     FontWeight="Bold"
+                     Background="{DynamicResource NetBrush}" 
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="Charity Game Tickets:" 
+        			 Padding="13,4,0,4" FontWeight="Bold"
+                     Grid.Row="15" 
+                     Background="{DynamicResource RevenueBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="10. Ticket Sales" 
+        			 Grid.Row="16"
+                     Background="{DynamicResource RevenueItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="11. Prizes" 
+        			 Grid.Row="17"
+                     Background="{DynamicResource ExpenseItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="12. Charity Game Ticket Gross Profit (subtract line 11 from line 10)" 
+        			 Grid.Row="18"
+                     FontWeight="Bold"
+                     Background="{DynamicResource NetBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="Reconcile Cash:" 
+                     Background="{DynamicResource RevenueBrush}"
+        			 Padding="13,4,0,4" FontWeight="Bold"
+                     Grid.Row="19"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="13. Net Proceeds (add line 9 and 12)" 
+        			 Grid.Row="20"
+                     FontWeight="Bold"
+                     Background="{DynamicResource NetBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="14. Start Cash (if deposited weekly)" 
+        			 Grid.Row="21"
+                     Background="{DynamicResource RevenueItemBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="15. Calculated Deposit  (add lines 13 and 14)" 
+        			 Grid.Row="22" 
+                     FontWeight="Bold"
+                     Background="{DynamicResource NetBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}" />
+                <TextBox Text="16. Actual Deposit" 
+        			 Grid.Row="23"
+                     Background="{DynamicResource NetBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+                <TextBox Text="17. Discrepancy (subtract line 16 from line 15)" 
+        			 Grid.Row="24" 
+                     FontWeight="Bold" BorderThickness="2,1,1,2"
+                     Background="{DynamicResource NetBrush}"
+                     Style="{DynamicResource DescTextBoxStyle}"/>
+
+                <TextBox Grid.Column="1" Grid.Row="1" 
+        			Text="{Binding Attendance, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" 
+        			Style="{DynamicResource EditTextBoxStyle}"
+        			GotFocus="Decimal_GotFocus"/>
+                <Border Grid.Column="1" Grid.Row="2"  
+                    Style="{DynamicResource EmptyCellBorderStyle}" 
+                    Background="{DynamicResource RevenueBrush}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" 
+        			Text="{Binding BingoMasterRevenue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="4" 
+        			Text="{Binding BingoDisposableRevenue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="5" 
+        			Text="{Binding BingoElectronicRevenue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="6" 
+        			Text="{Binding BingoJackpotSales, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="7" 
+        			Text="{Binding BingoOtherRevenue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="8"
+        			Text="{Binding BingoRevenue, Converter={StaticResource MoneyConverter}, Mode=OneWay}" 
+        			Style="{DynamicResource InfoTextBoxStyle}" 
+                    Background="{DynamicResource NetBrush}"/>
+                <Border Grid.Column="1" Grid.Row="9" 
+                    Style="{DynamicResource EmptyCellBorderStyle}" 
+                    Background="{DynamicResource ExpenseBrush}"/>
+                <TextBox Grid.Column="1" Grid.Row="10" 
+        			Text="{Binding BingoJackpotPrizeExpense, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="11" 
+        			Text="{Binding BingoOtherPrizeExpense, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="12" 
+        			Text="{Binding BingoWorkerCompExpense, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="13"
+        			Text="{Binding BingoExpenses, Converter={StaticResource MoneyConverter}, Mode=OneWay}" 
+        			Style="{DynamicResource InfoTextBoxStyle}" 
+                    Background="{DynamicResource ExpenseItemBrush}"/>
+                <TextBox Grid.Column="1" Grid.Row="14"
+        			Text="{Binding BingoCashProceeds, Converter={StaticResource MoneyConverter}, Mode=OneWay}" 
+        			Style="{DynamicResource InfoTextBoxStyle}" 
+                    Background="{DynamicResource NetBrush}"/>
+                <Border Grid.Column="1" Grid.Row="15" 
+                    Style="{DynamicResource EmptyCellBorderStyle}" 
+                    Background="{DynamicResource RevenueBrush}"/>
+                <TextBox Grid.Column="1" Grid.Row="16" 
+        			Text="{Binding CharityTicketSales, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}"
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="17" 
+        			Text="{Binding CharityPrizes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}" 
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="18"
+        			Text="{Binding CharityGrossProfit, Converter={StaticResource MoneyConverter}, Mode=OneWay}" 
+        			Style="{DynamicResource InfoTextBoxStyle}" 
+                    Background="{DynamicResource NetBrush}"/>
+                <Border Grid.Column="1" Grid.Row="19" 
+                    Style="{DynamicResource EmptyCellBorderStyle}" 
+                    Background="{DynamicResource RevenueBrush}"/>
+                <TextBox Grid.Column="1" Grid.Row="20"
+        			Text="{Binding NetProceeds, Converter={StaticResource MoneyConverter}, Mode=OneWay}" 
+        			Style="{DynamicResource InfoTextBoxStyle}" 
+                    Background="{DynamicResource NetBrush}"/>
+                <TextBox Grid.Column="1" Grid.Row="21" 
+        			Text="{Binding StartCash, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}"  
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="22"
+        			Text="{Binding NetProceeds, Converter={StaticResource MoneyConverter}, Mode=OneWay}" 
+        			Style="{DynamicResource InfoTextBoxStyle}" 
+                    Background="{DynamicResource NetBrush}"/>
+                <TextBox Grid.Column="1" Grid.Row="23" 
+        			Text="{Binding ActualDeposit, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, StringFormat=c}"  
+        			Style="{DynamicResource EditTextBoxStyle}" 
+        			GotFocus="Money_GotFocus" LostFocus="Money_LostFocus"/>
+                <TextBox Grid.Column="1" Grid.Row="24"
+        			Text="{Binding Discrepancy, Converter={StaticResource MoneyConverter}, Mode=OneWay}" 
+        			Style="{DynamicResource InfoTextBoxStyle}" 
+                    Background="{DynamicResource NetBrush}"
+                    BorderThickness="1,1,2,2"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="reportTypeElectronics" xml:space="preserve">
+    <value>Electronics</value>
+  </data>
+  <data name="errorFailedToSaveToServer" xml:space="preserve">
+    <value>Failed to save data back to server</value>
+  </data>
+  <data name="infoNameNotNull" xml:space="preserve">
+    <value>Type or Group name cannot be blank.</value>
+  </data>
+  <data name="report_6" xml:space="preserve">
+    <value>Misc Staff</value>
+  </data>
+  <data name="infoCheckingReports" xml:space="preserve">
+    <value>Checking reports.</value>
+  </data>
+  <data name="report_15" xml:space="preserve">
+    <value>Winners Report</value>
+  </data>
+  <data name="infoStartDate" xml:space="preserve">
+    <value>Start Date:</value>
+  </data>
+  <data name="infoPlayer" xml:space="preserve">
+    <value>Player:</value>
+  </data>
+  <data name="reportTypeStaff" xml:space="preserve">
+    <value>Staff</value>
+  </data>
+  <data name="splashInfoLoadStationSettings" xml:space="preserve">
+    <value>Retrieving this machine's information.</value>
+  </data>
+  <data name="errorLoadData" xml:space="preserve">
+    <value>Failed to get data from server</value>
+  </data>
+  <data name="infoNewGroupDefaultValue" xml:space="preserve">
+    <value>ReportGroup</value>
+  </data>
+  <data name="errorPrint" xml:space="preserve">
+    <value>Failed to print. Error:</value>
+  </data>
+  <data name="reportType_Exceptions" xml:space="preserve">
+    <value>Exceptions</value>
+  </data>
+  <data name="report_4" xml:space="preserve">
+    <value>Machine Inventory</value>
+  </data>
+  <data name="errorNewReportParamter" xml:space="preserve">
+    <value>Parameters between Report and database are mismatched, please contact support team</value>
+  </data>
+  <data name="infoNoPeronFound" xml:space="preserve">
+    <value>No person has been found</value>
+  </data>
+  <data name="infoNewGroupPrompt" xml:space="preserve">
+    <value>Please type a new group name</value>
+  </data>
+  <data name="infoFindPlayer" xml:space="preserve">
+    <value>Find Player</value>
+  </data>
+  <data name="reportType_Misc" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="reportTypeExceptioins" xml:space="preserve">
+    <value>Exceptions</value>
+  </data>
+  <data name="reportType_POS" xml:space="preserve">
+    <value>POS</value>
+  </data>
+  <data name="infoNewTypeDefaultValue" xml:space="preserve">
+    <value>ReportType</value>
+  </data>
+  <data name="report_1" xml:space="preserve">
+    <value>Credit Balances</value>
+  </data>
+  <data name="reportTypePlayers" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="reportType_Staff" xml:space="preserve">
+    <value>Staff</value>
+  </data>
+  <data name="reportType_Players" xml:space="preserve">
+    <value>Players</value>
+  </data>
+  <data name="report_2" xml:space="preserve">
+    <value>Electronic Ball Call</value>
+  </data>
+  <data name="report_5" xml:space="preserve">
+    <value>Machine Status</value>
+  </data>
+  <data name="infoStaff" xml:space="preserve">
+    <value>Staff:</value>
+  </data>
+  <data name="report_3" xml:space="preserve">
+    <value>Electronis Sales By Device</value>
+  </data>
+  <data name="reportType_Bingo" xml:space="preserve">
+    <value>Bingo</value>
+  </data>
+  <data name="infoCustomerTypeLimit" xml:space="preserve">
+    <value>The maximum of {0} custom reports has already been reached.</value>
+  </data>
+  <data name="errorStart" xml:space="preserve">
+    <value>Critical error, application is being closed now</value>
+  </data>
+  <data name="errorGetReportServerMsg" xml:space="preserve">
+    <value>'GetReportMessage' Server Message returned Error. No Report returned.</value>
+  </data>
+  <data name="report_7" xml:space="preserve">
+    <value>Player List</value>
+  </data>
+  <data name="report_10" xml:space="preserve">
+    <value>Point Liability</value>
+  </data>
+  <data name="reportType_Sales" xml:space="preserve">
+    <value>Sales</value>
+  </data>
+  <data name="infoNewTypePrompt" xml:space="preserve">
+    <value>Please enter a new type name (15 characters max.)</value>
+  </data>
+  <data name="reportType_Electronics" xml:space="preserve">
+    <value>Electronics</value>
+  </data>
+  <data name="infoAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="report_center" xml:space="preserve">
+    <value>Report Center</value>
+  </data>
+  <data name="reportTypeBingo" xml:space="preserve">
+    <value>Bingo</value>
+  </data>
+  <data name="report_9" xml:space="preserve">
+    <value>Player Mailing Labels</value>
+  </data>
+  <data name="report_14" xml:space="preserve">
+    <value>Sales Totals</value>
+  </data>
+  <data name="report_8" xml:space="preserve">
+    <value>Player Loyalty List</value>
+  </data>
+  <data name="report_11" xml:space="preserve">
+    <value>Sales By Device</value>
+  </data>
+  <data name="reportType_Paper" xml:space="preserve">
+    <value>Paper</value>
+  </data>
+  <data name="report_UnknowID" xml:space="preserve">
+    <value>Unknown Report</value>
+  </data>
+  <data name="titleSearchStaff" xml:space="preserve">
+    <value>Search Staff</value>
+  </data>
+  <data name="infoFindStaff" xml:space="preserve">
+    <value>Find Staff</value>
+  </data>
+  <data name="reportTypeSales" xml:space="preserve">
+    <value>Sales</value>
+  </data>
+  <data name="infoNewTypeTitle" xml:space="preserve">
+    <value>New Report Type</value>
+  </data>
+  <data name="report_12" xml:space="preserve">
+    <value>Sales Register Closing Report</value>
+  </data>
+  <data name="reportTypeMisc" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="titleSearchPlayer" xml:space="preserve">
+    <value>Search Player</value>
+  </data>
+  <data name="report_13" xml:space="preserve">
+    <value>Sales Register Detail Report</value>
+  </data>
+  <data name="infoEndDate" xml:space="preserve">
+    <value>End Date:</value>
+  </data>
+  <data name="infoNewGroupTitle" xml:space="preserve">
+    <value>New Report Group</value>
+  </data>
+  <data name="errorNoReport" xml:space="preserve">
+    <value>Specified Report not found on Server.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BlueButtonDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlueButtonDown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BlueButtonUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlueButtonUp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Reports" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Reports.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Waiting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Waiting.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MachineText" xml:space="preserve">
+    <value>Machine: </value>
+  </data>
+  <data name="PlayerText" xml:space="preserve">
+    <value>Player: </value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Downloading {0}.</value>
+  </data>
+  <data name="errorDownloadFailure" xml:space="preserve">
+    <value>Failed to properly download the report {0} from the server.</value>
+  </data>
+  <data name="reportTypePlayersMachine" xml:space="preserve">
+    <value>Machines</value>
+  </data>
+  <data name="infoNameInvalid" xml:space="preserve">
+    <value>Type or Group name contain invalid characters.</value>
+  </data>
+  <data name="CustomReports" xml:space="preserve">
+    <value> Custom Reports</value>
+  </data>
+  <data name="CustomReportsNotSaved" xml:space="preserve">
+    <value>Changes to your custom reports have not been saved.  Click Yes to save or No to ignore and save later.</value>
+  </data>
+  <data name="reportIsMissing" xml:space="preserve">
+    <value>Report Info for '{0}' is missing on the server.</value>
+  </data>
+  <data name="reportType_Gaming" xml:space="preserve">
+    <value>Gaming</value>
+  </data>
+  <data name="reportType_Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="reportType_Accruals" xml:space="preserve">
+    <value>Progressives</value>
+  </data>
+  <data name="reportType_Payouts" xml:space="preserve">
+    <value>Payouts</value>
+  </data>
+  <data name="errorFailedToGetData" xml:space="preserve">
+    <value>Failed to get data</value>
+  </data>
+  <data name="reportType_Texas" xml:space="preserve">
+    <value>Texas</value>
+  </data>
+  <data name="reportType_Coupon" xml:space="preserve">
+    <value>Coupon</value>
+  </data>
+  <data name="PleaseWait" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\pleasewait.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

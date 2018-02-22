@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportCenter", "ReportCenter.csproj", "{FD245B93-9EE8-41B0-B4BB-78755C3FA485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTIControls", "..\..\DLLs\GTIControls\GTIControls.csproj", "{A2B9C7C4-AE7E-48DC-B39C-C9442CF017F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedEliteModule", "..\..\DLLs\ManagedEliteModule\ManagedEliteModule.csproj", "{308EF933-6B4E-48B2-9C54-85318FE50C63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFControls", "WPFControls\WPFControls.csproj", "{41E1595F-1622-4AA4-A19C-A4D13E058E54}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD245B93-9EE8-41B0-B4BB-78755C3FA485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD245B93-9EE8-41B0-B4BB-78755C3FA485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD245B93-9EE8-41B0-B4BB-78755C3FA485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD245B93-9EE8-41B0-B4BB-78755C3FA485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B9C7C4-AE7E-48DC-B39C-C9442CF017F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B9C7C4-AE7E-48DC-B39C-C9442CF017F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B9C7C4-AE7E-48DC-B39C-C9442CF017F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B9C7C4-AE7E-48DC-B39C-C9442CF017F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{308EF933-6B4E-48B2-9C54-85318FE50C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{308EF933-6B4E-48B2-9C54-85318FE50C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{308EF933-6B4E-48B2-9C54-85318FE50C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{308EF933-6B4E-48B2-9C54-85318FE50C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41E1595F-1622-4AA4-A19C-A4D13E058E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41E1595F-1622-4AA4-A19C-A4D13E058E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41E1595F-1622-4AA4-A19C-A4D13E058E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41E1595F-1622-4AA4-A19C-A4D13E058E54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

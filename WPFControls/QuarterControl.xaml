@@ -1,0 +1,23 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="WPFControls.QuarterControl"
+	x:Name="UserControl"
+    Width="155.32"
+    >
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/WPFControls;Component/StyleDictionary.xaml"/>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48*" />
+            <ColumnDefinition Width="62*" />
+            <ColumnDefinition Width="45.32*" />
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" x:Name="PrevQuarterButton" Tag="Prev" Style="{DynamicResource ArrowButtonStyle}" Click="Button_Click" />
+        <Button Grid.Column="2" x:Name="NextQuarterButton" Tag="Next" Style="{DynamicResource ArrowButtonStyle}" Click="Button_Click" />
+        <TextBlock Grid.Column="1" x:Name="QuarterText" Margin="3,0,3,0" TextAlignment="Center" Text="Q2" VerticalAlignment="Center" FontSize="20" Height="auto"/>
+    </Grid>
+</UserControl>

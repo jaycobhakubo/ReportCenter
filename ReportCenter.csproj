@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FD245B93-9EE8-41B0-B4BB-78755C3FA485}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GTI.Modules.ReportCenter</RootNamespace>
+    <AssemblyName>ReportCenter</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ApplicationIcon>Resources\Reports.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/ReportCenter/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\WINDOWS\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\Configuration.cs" />
+    <Compile Include="Business\IGTIModule.cs" />
+    <Compile Include="Business\ReportCenter.cs" />
+    <Compile Include="Business\ReportCenterModule.cs" />
+    <Compile Include="Business\Utilities.cs" />
+    <Compile Include="Data\AuditTypes.cs" />
+    <Compile Include="Data\clsReport.cs" />
+    <Compile Include="Data\GetAuditTypes.cs" />
+    <Compile Include="Data\FindStaffOrPlayer.cs" />
+    <Compile Include="Data\GetDailySalesData.cs" />
+    <Compile Include="Data\GetLocationList.cs" />
+    <Compile Include="Data\GetMenuList.cs" />
+    <Compile Include="Data\GetMonthlyOtherSalesData.cs" />
+    <Compile Include="Data\GetMonthlySalesData.cs" />
+    <Compile Include="Data\GetMontlyBingoSalesData.cs" />
+    <Compile Include="Data\GetPositionList.cs" />
+    <Compile Include="Data\GetProductGroupsList.cs" />
+    <Compile Include="Data\GetProductItemList.cs" />
+    <Compile Include="Data\GetProductTypesList.cs" />
+    <Compile Include="Data\GetProgramList.cs" />
+    <Compile Include="Data\GetReportSessionList.cs" />
+    <Compile Include="Data\GetSerialNumbers.cs" />
+    <Compile Include="Data\GetUserReportList.cs" />
+    <Compile Include="Data\LocationType.cs" />
+    <Compile Include="Data\PositionType.cs" />
+    <Compile Include="Data\PosMenuType.cs" />
+    <Compile Include="Data\ProductGroupData.cs" />
+    <Compile Include="Data\ProductItemData.cs" />
+    <Compile Include="Data\ProductTypes.cs" />
+    <Compile Include="Data\ProgramType.cs" />
+    <Compile Include="Data\ReportTreeNode.cs" />
+    <Compile Include="Data\SerialNumbersType.cs" />
+    <Compile Include="Data\SetDailySalesData.cs" />
+    <Compile Include="Data\SetMonthlySalesData.cs" />
+    <Compile Include="Data\SetUserReportList.cs" />
+    <Compile Include="Data\UserReportGroupTreeNode.cs" />
+    <Compile Include="Data\UserReportType.cs" />
+    <Compile Include="Data\UserReportTypeTreeNode.cs" />
+    <Compile Include="Data\GetCompList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CashAccountabilityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CashAccountabilityForm.Designer.cs">
+      <DependentUpon>CashAccountabilityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmCustomizeReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmCustomizeReport.designer.cs">
+      <DependentUpon>frmCustomizeReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmInputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmInputBox.designer.cs">
+      <DependentUpon>frmInputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmReport.designer.cs">
+      <DependentUpon>frmReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmReportCenterMDIParent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmReportCenterMDIParent.designer.cs">
+      <DependentUpon>frmReportCenterMDIParent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmReportManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmReportManager.Designer.cs">
+      <DependentUpon>frmReportManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MichiganQuarterlyReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MichiganQuarterlyReport.designer.cs">
+      <DependentUpon>MichiganQuarterlyReport.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\BlueButtonDown.png" />
+    <Content Include="Resources\BlueButtonUp.png" />
+    <Content Include="Resources\PleaseWait.gif" />
+    <None Include="Resources\Reports.ico" />
+    <None Include="Resources\Waiting.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CashAccountabilityForm.resx">
+      <DependentUpon>CashAccountabilityForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmCustomizeReport.resx">
+      <DependentUpon>frmCustomizeReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmInputBox.resx">
+      <DependentUpon>frmInputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmReport.resx">
+      <DependentUpon>frmReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmReportCenterMDIParent.resx">
+      <DependentUpon>frmReportCenterMDIParent.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmReportManager.resx">
+      <DependentUpon>frmReportManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MichiganQuarterlyReport.resx">
+      <DependentUpon>MichiganQuarterlyReport.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DLLs\GTIControls\GTIControls.csproj">
+      <Project>{A2B9C7C4-AE7E-48DC-B39C-C9442CF017F6}</Project>
+      <Name>GTIControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DLLs\ManagedEliteModule\ManagedEliteModule.csproj">
+      <Project>{308EF933-6B4E-48B2-9C54-85318FE50C63}</Project>
+      <Name>ManagedEliteModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="WPFControls\WPFControls.csproj">
+      <Project>{41E1595F-1622-4AA4-A19C-A4D13E058E54}</Project>
+      <Name>WPFControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

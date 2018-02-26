@@ -16,6 +16,7 @@ using GTI.Modules.ReportCenter.Data;
 using GTI.Modules.Shared;
 using GTI.Modules.ReportCenter.Business;
 using GTI.Modules.ReportCenter.Properties;
+using System.ComponentModel;
 
 namespace GTI.Modules.ReportCenter.UI
 {
@@ -37,6 +38,11 @@ namespace GTI.Modules.ReportCenter.UI
             get { return mCenter.ReportsDictionary; }
         }
 
+        internal BindingList<ReportInfo> ReportListDataBind
+        {
+            get { return mCenter.ReportListDataBind_; }
+        }
+
         internal Dictionary<int, UserReportType> UserReportTypesDictionary
         {
             get
@@ -56,8 +62,8 @@ namespace GTI.Modules.ReportCenter.UI
             mCustomizeReport = new frmCustomizeReport(this) {Dock = DockStyle.Fill};
             mCustomizeReport.Closed += CustomizeUserReport_Closed;
 
-            mEditReport = new frmEditReport(this) { Dock = DockStyle.Fill };
-            mEditReport.Closed += mEditReport_Closed;
+            //mEditReport = new frmEditReport(this, ReportListDataBind) { Dock = DockStyle.Fill };
+            //mEditReport.Closed += mEditReport_Closed;
         }
 
         private void ReportCenterMDIParent_Load(object sender, EventArgs e)
@@ -633,10 +639,14 @@ namespace GTI.Modules.ReportCenter.UI
                 if (mEditReport == null || mEditReport.Disposing ||
                              mEditReport.IsDisposed)
                 {
-                    mEditReport = new frmEditReport(this);
+                    mEditReport = new frmEditReport(this, ReportListDataBind);//We dont have to initialize because its already been created.
+                 
                     mEditReport.Closed += CustomizeUserReport_Closed;
                     mEditReport.Dock = DockStyle.Fill;
                 }
+                mEditReport.ReportsDictionary = ReportsDictionary;
+                //mEditReport.ReportListDataBind = ReportListDataBind;
+                //mEditReport.LoadDataIntoTheDataGridView();
                 userReportMenu.Visible = false;
                 LoadTarget(mEditReport);
             }

@@ -167,10 +167,13 @@ namespace GTI.Modules.ReportCenter.UI
         private int m_PosMenuId; // US2744
         private int m_CompId;
 
+        private BindingList<ReportInfo> ReportListDataBind;
+
         #endregion
 
         #region Properties
-        internal Dictionary<int, ReportInfo> ReportsDictionary { get { return m_gotReports.Reports; } }
+        internal Dictionary<int, ReportInfo> ReportsDictionary { get { return m_gotReports.Reports; } }//knc
+        internal BindingList<ReportInfo> ReportListDataBind_ { get { return ReportListDataBind; } }//knc
         public Form MyParent { get { return m_frmMyParent; } set { m_frmMyParent = (frmReportCenterMDIParent)value; } }
         public string ErrorMessage { get; set; }
         #endregion
@@ -713,7 +716,7 @@ namespace GTI.Modules.ReportCenter.UI
             Dictionary<int, string> rpts = new Dictionary<int, string>();
             reportTreeView.Nodes.Clear(); //clear up 
 
-            m_reportsDictionary = ((frmReportCenterMDIParent)MdiParent).ReportsDictionary;
+            m_reportsDictionary = ((frmReportCenterMDIParent)MdiParent).ReportsDictionary;//knc
 
             //US1831: allow ALL parameters to be seen
             //rpts.Add(0, "All Reports");
@@ -796,15 +799,20 @@ namespace GTI.Modules.ReportCenter.UI
             const int bingoCardSalesDetailReport = 16;
             const int bingoCardSummaryReport = 24;
             //END RALLY DE 4505
+
+
+            ReportListDataBind = new BindingList<ReportInfo>();
+ 
             foreach (int c in rpts.Keys)
             {
                 UserReportGroupTreeNode urgNode = new UserReportGroupTreeNode(rpts[c], false);
 
                 reportTreeView.Nodes.Add(urgNode);
                 ctr++;
-
+               
                 foreach (ReportInfo rpt in m_reportsDictionary.Values)
                 {
+             
                     if (rpt.TypeID == c)
                     {
                         // DE4505 - Do NOT show bingoCard reports if PWP is on.
@@ -816,10 +824,11 @@ namespace GTI.Modules.ReportCenter.UI
                         if (rpt.TypeID == (int)ReportTypes.Texas && !Configuration.m_txPayoutsEnabled)
                             continue;
 
-                        ReportTreeNode rtn = new ReportTreeNode(rpt, false);
+                        ReportTreeNode rtn = new ReportTreeNode(rpt, false);//knc
+                        ReportListDataBind.Add(rpt);//This is were it adding data to the new binding list
                         reportTreeView.Nodes[ctr - 1].Nodes.Add(rtn);
                     }
-                }
+                }                
             }
 
             lblReportType.Text = "Standard Reports";
@@ -831,6 +840,7 @@ namespace GTI.Modules.ReportCenter.UI
                 reportTreeView.TopNode = reportTreeView.Nodes[0];
             }
         }
+
 
         private void LoadAccrualsCombos()
         {

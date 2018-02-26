@@ -379,7 +379,7 @@ namespace GTI.Modules.ReportCenter.Business
                         case ReportParamIDs.ByPackage:  //us1808
                             doc.SetParameterValue(arg.Value, report.ByPackage);
                             break;
-                        case ReportParamIDs.RaffleOrDrawingSetting:         //knc 20150827 
+                        case ReportParamIDs.RaffleOrDrawingSetting:  
                             doc.SetParameterValue(arg.Value, Configuration.RaffleOrDrawing);
                             break;
                         case ReportParamIDs.CompID:  //knc_3

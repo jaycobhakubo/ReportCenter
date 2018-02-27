@@ -43,6 +43,11 @@ namespace GTI.Modules.ReportCenter.UI
             get { return mCenter.ReportListDataBind_; }
         }
 
+        internal List<ReportInfo> ListOfAvailableReports
+        {
+            get { return mCenter.ListOfAvailableReports__; }
+        }
+
         internal Dictionary<int, UserReportType> UserReportTypesDictionary
         {
             get
@@ -56,21 +61,17 @@ namespace GTI.Modules.ReportCenter.UI
         public frmReportCenterMDIParent()
         {
             InitializeComponent();
-
             //mCenter = new FrmReportCenter {Dock = DockStyle.Fill, MyParent = this};
             mCenter = new FrmReportManager { Dock = DockStyle.Fill, MyParent = this };      //US1622
             mCustomizeReport = new frmCustomizeReport(this) {Dock = DockStyle.Fill};
-            mCustomizeReport.Closed += CustomizeUserReport_Closed;
-
-            //mEditReport = new frmEditReport(this, ReportListDataBind) { Dock = DockStyle.Fill };
-            //mEditReport.Closed += mEditReport_Closed;
+            mCustomizeReport.Closed += CustomizeUserReport_Closed;                                                                                                                                                                                        //mEditReport = new frmEditReport(this, ReportListDataBind) { Dock = DockStyle.Fill };//mEditReport.Closed += mEditReport_Closed;            
         }
 
         private void ReportCenterMDIParent_Load(object sender, EventArgs e)
         {
             //US1831
-            //standardReportsMenu_Click(this, null);
-            ReportManagerMenu_Click(this, null);
+
+            ReportManagerMenu_Click(this, null); //standardReportsMenu_Click(this, null);
         }
         #endregion
 
@@ -639,14 +640,12 @@ namespace GTI.Modules.ReportCenter.UI
                 if (mEditReport == null || mEditReport.Disposing ||
                              mEditReport.IsDisposed)
                 {
-                    mEditReport = new frmEditReport(this, ReportListDataBind);//We dont have to initialize because its already been created.
-                 
+                    mEditReport = new frmEditReport(this, ListOfAvailableReports);//We dont have to initialize because its already been created.
+                    //mEditReport = new frmEditReport(this, ListOfAvailableReports);
                     mEditReport.Closed += CustomizeUserReport_Closed;
                     mEditReport.Dock = DockStyle.Fill;
                 }
-                mEditReport.ReportsDictionary = ReportsDictionary;
-                //mEditReport.ReportListDataBind = ReportListDataBind;
-                //mEditReport.LoadDataIntoTheDataGridView();
+                mEditReport.ReportsDictionary = ReportsDictionary;              
                 userReportMenu.Visible = false;
                 LoadTarget(mEditReport);
             }

@@ -30,13 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditReport));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgReportList = new System.Windows.Forms.DataGridView();
-            this.acceptImageButton = new GTI.Controls.ImageButton();
-            this.cancelImageButton = new GTI.Controls.ImageButton();
             this.ReportEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acceptImageButton = new GTI.Controls.ImageButton();
+            this.cancelImageButton = new GTI.Controls.ImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +49,7 @@
             this.dgReportList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -62,42 +61,9 @@
             this.ReportEnabled,
             this.DisplayName,
             this.FileName});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgReportList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgReportList.MultiSelect = false;
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
-            // 
-            // acceptImageButton
-            // 
-            this.acceptImageButton.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.acceptImageButton, "acceptImageButton");
-            this.acceptImageButton.FocusColor = System.Drawing.Color.Black;
-            this.acceptImageButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
-            this.acceptImageButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
-            this.acceptImageButton.Name = "acceptImageButton";
-            this.acceptImageButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
-            this.acceptImageButton.ShowFocus = false;
-            this.acceptImageButton.UseVisualStyleBackColor = false;
-            // 
-            // cancelImageButton
-            // 
-            this.cancelImageButton.BackColor = System.Drawing.Color.Transparent;
-            this.cancelImageButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelImageButton.FocusColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.cancelImageButton, "cancelImageButton");
-            this.cancelImageButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
-            this.cancelImageButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
-            this.cancelImageButton.Name = "cancelImageButton";
-            this.cancelImageButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
-            this.cancelImageButton.ShowFocus = false;
-            this.cancelImageButton.UseVisualStyleBackColor = false;
             // 
             // ReportEnabled
             // 
@@ -124,6 +90,31 @@
             this.FileName.Name = "FileName";
             this.FileName.ReadOnly = true;
             // 
+            // acceptImageButton
+            // 
+            this.acceptImageButton.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.acceptImageButton, "acceptImageButton");
+            this.acceptImageButton.FocusColor = System.Drawing.Color.Black;
+            this.acceptImageButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
+            this.acceptImageButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
+            this.acceptImageButton.Name = "acceptImageButton";
+            this.acceptImageButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
+            this.acceptImageButton.ShowFocus = false;
+            this.acceptImageButton.UseVisualStyleBackColor = false;
+            // 
+            // cancelImageButton
+            // 
+            this.cancelImageButton.BackColor = System.Drawing.Color.Transparent;
+            this.cancelImageButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelImageButton.FocusColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.cancelImageButton, "cancelImageButton");
+            this.cancelImageButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
+            this.cancelImageButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
+            this.cancelImageButton.Name = "cancelImageButton";
+            this.cancelImageButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
+            this.cancelImageButton.ShowFocus = false;
+            this.cancelImageButton.UseVisualStyleBackColor = false;
+            // 
             // frmEditReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -145,12 +136,12 @@
 
         #endregion
 
-        public System.Windows.Forms.DataGridView dgReportList;
         private Controls.ImageButton acceptImageButton;
         private Controls.ImageButton cancelImageButton;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ReportEnabled;
         private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridView dgReportList;
 
 
     }

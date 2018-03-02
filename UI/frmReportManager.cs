@@ -110,7 +110,7 @@ namespace GTI.Modules.ReportCenter.UI
         AuditLogType = 61,
         ByPackage = 62,             //US1808
         CharityId = 63,             // US2715
-        RaffleOrDrawingSetting = -10,  //knc 20150827: Note not in EDGE.Daily.ReportParameter
+        RaffleOrDrawingSetting = -10,  //Note not in EDGE.Daily.ReportParameter
         IsActive = 64,
     }
 

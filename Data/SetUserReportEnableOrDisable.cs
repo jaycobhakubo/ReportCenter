@@ -12,9 +12,9 @@ namespace GTI.Modules.ReportCenter.Data
     class SetUserReportEnableOrDisable : ServerMessage
     {
         private List<ReportInfo> mListOfListReportsEnableDisable;
-
-        public SetUserReportEnableOrDisable(List<ReportInfo> ListOfListReportsEnableDisable)
+ListOfListReportsEnableDisable)
         {
+        public SetUserReportEnableOrDisable(List<ReportInfo> 
             m_id = 18252;
             mListOfListReportsEnableDisable = ListOfListReportsEnableDisable;
         }
@@ -30,19 +30,14 @@ namespace GTI.Modules.ReportCenter.Data
             {
                 requestWriter.Write((int)rptInfo.ID);
                 requestWriter.Write(1);
-                requestWriter.Write((ushort)rptInfo.DisplayName.Length);
-                requestWriter.Write(rptInfo.DisplayName.ToCharArray());
+                requestWriter.Write(rptInfo.DisplayName.ToString());
+                //requestWriter.Write(rptInfo.DisplayName.ToCharArray());
             }
 
             m_requestPayload = requestStream.ToArray();
             requestWriter.Close();            // Close the streams.bn
         }
 
-        //protected override void UnpackResponse()
-        //{
-        //    base.UnpackResponse();
-
-        //}
     }
 }
 

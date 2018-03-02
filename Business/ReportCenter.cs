@@ -245,9 +245,6 @@ namespace GTI.Modules.ReportCenter.Business
                             }
                         }
 
-                        //knc 20150827 
-                        //I dont want to assign a new parameter into the Daily.ReportParameter Table so I have to go with this one. 
-                        //Hardcoded: assign value to rptParams. Use negative sign int starting with -10.
                         if (doc.ParameterFields[i].Name == "@spRaffleOrDrawingSetting")
                         {                          
                             rptParams.Add(-10, "@spRaffleOrDrawingSetting");
@@ -379,10 +376,10 @@ namespace GTI.Modules.ReportCenter.Business
                         case ReportParamIDs.ByPackage:  //us1808
                             doc.SetParameterValue(arg.Value, report.ByPackage);
                             break;
-                        case ReportParamIDs.RaffleOrDrawingSetting:         //knc 20150827 
+                        case ReportParamIDs.RaffleOrDrawingSetting:     
                             doc.SetParameterValue(arg.Value, Configuration.RaffleOrDrawing);
                             break;
-                        case ReportParamIDs.CompID:  //knc_3
+                        case ReportParamIDs.CompID:  
                             doc.SetParameterValue(arg.Value, report.CompID);
                             break;
                         case ReportParamIDs.IsActive:  

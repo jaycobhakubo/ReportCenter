@@ -33,6 +33,8 @@
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancel = new GTI.Controls.ImageButton();
+            this.btnSaveReportEdit = new GTI.Controls.ImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,8 +55,6 @@
             this.dgReportList.MultiSelect = false;
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
-            this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
-
             this.dgReportList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellValueChanged);
             // 
             // ID
@@ -80,10 +80,36 @@
             this.FileName.Name = "FileName";
             this.FileName.ReadOnly = true;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Transparent;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FocusColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImageNormal")));
+            this.btnCancel.ImagePressed = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImagePressed")));
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
+            this.btnCancel.UseVisualStyleBackColor = false;
+            // 
+            // btnSaveReportEdit
+            // 
+            this.btnSaveReportEdit.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveReportEdit.FocusColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btnSaveReportEdit, "btnSaveReportEdit");
+            this.btnSaveReportEdit.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnSaveReportEdit.ImageNormal")));
+            this.btnSaveReportEdit.ImagePressed = ((System.Drawing.Image)(resources.GetObject("btnSaveReportEdit.ImagePressed")));
+            this.btnSaveReportEdit.Name = "btnSaveReportEdit";
+            this.btnSaveReportEdit.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
+            this.btnSaveReportEdit.UseVisualStyleBackColor = false;
+            this.btnSaveReportEdit.Click += new System.EventHandler(this.btnSaveReportEdit_Click);
+            // 
             // frmEditReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSaveReportEdit);
             this.Controls.Add(this.dgReportList);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -103,6 +129,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private Controls.ImageButton btnCancel;
+        private Controls.ImageButton btnSaveReportEdit;
 
     }
 }

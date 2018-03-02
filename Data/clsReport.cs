@@ -52,7 +52,7 @@ namespace GTI.Modules.ReportCenter.Data
         public string SerialNbrDevice { get; set; }    // US1839
         public int AuditLogType { get; set; }
         public int ByPackage { get; set; }          //US1808
-        public int CompID { get; set; }//knc_3
+        public int CompID { get; set; }
         public int isActive { get; set; }
         #endregion
 

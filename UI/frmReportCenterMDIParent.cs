@@ -637,6 +637,7 @@ namespace GTI.Modules.ReportCenter.UI
                     mEditReport.Closed += CustomizeUserReport_Closed;
                     mEditReport.Dock = DockStyle.Fill;
                 }
+                mEditReport.LoadDataIntoTheDataGrid();
                 userReportMenu.Visible = false;
                 LoadTarget(mEditReport);
             }

@@ -12,12 +12,15 @@ namespace GTI.Modules.ReportCenter.UI
 {
     public partial class frmEditReport :  GradientForm
     {
-        public frmReportCenterMDIParent MyParent { get; private set; }
 
+        private List<ReportInfo> ListOfAllReports;
+
+        public frmReportCenterMDIParent MyParent { get; private set; }
         public frmEditReport(frmReportCenterMDIParent myParent)
         {
             MyParent = myParent;
             InitializeComponent();
+            //LoadDataIntoTheDataGrid();
         }
 
         private void frmEditReport_Load(object sender, EventArgs e)
@@ -25,5 +28,23 @@ namespace GTI.Modules.ReportCenter.UI
             if (MyParent.userReportMenu != null)
                 MyParent.userReportMenu.Visible = false;
         }
+
+        public void LoadDataIntoTheDataGrid()
+        {
+            ListOfAllReports = new List<ReportInfo>();
+            foreach (ReportInfo x in MyParent.ReportsDictionary.Values)
+            {
+                ListOfAllReports.Add(x);
+            }
+            dgReportList.DataSource = null;
+            dgReportList.Rows.Clear();
+            dgReportList.AutoGenerateColumns = false;
+            dgReportList.AllowUserToAddRows = false;
+            dgReportList.DataSource = ListOfAllReports;
+            dgReportList.ClearSelection();   
+
+        }
     }
 }
+
+

@@ -29,19 +29,48 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditReport));
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dgReportList = new System.Windows.Forms.DataGridView();
+            this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // dgReportList
             // 
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
+            this.dgReportList.AllowUserToAddRows = false;
+            this.dgReportList.AllowUserToDeleteRows = false;
+            this.dgReportList.AllowUserToResizeColumns = false;
+            this.dgReportList.AllowUserToResizeRows = false;
+            this.dgReportList.BackgroundColor = System.Drawing.Color.White;
+            this.dgReportList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            resources.ApplyResources(this.dgReportList, "dgReportList");
+            this.dgReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgReportList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DisplayName,
+            this.FileName});
+            this.dgReportList.MultiSelect = false;
+            this.dgReportList.Name = "dgReportList";
+            this.dgReportList.RowHeadersVisible = false;
+            // 
+            // DisplayName
+            // 
+            this.DisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DisplayName.DataPropertyName = "DisplayName";
+            resources.ApplyResources(this.DisplayName, "DisplayName");
+            this.DisplayName.Name = "DisplayName";
+            // 
+            // FileName
+            // 
+            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FileName.DataPropertyName = "FileName";
+            resources.ApplyResources(this.FileName, "FileName");
+            this.FileName.Name = "FileName";
             // 
             // frmEditReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.dgReportList);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
@@ -49,13 +78,16 @@
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Load += new System.EventHandler(this.frmEditReport_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView dgReportList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+
     }
 }

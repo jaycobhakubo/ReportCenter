@@ -7,16 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GTI.Modules.Shared;
+using GTI.Modules.ReportCenter.Data;
 
 namespace GTI.Modules.ReportCenter.UI
 {
     public partial class frmEditReport :  GradientForm
     {
         public frmReportCenterMDIParent MyParent { get; private set; }
+        private List<ReportInfo> mListOfAllAvailableReports;
+        private List<ReportInfo> mListOfReportToBeModiFied;
 
         public frmEditReport(frmReportCenterMDIParent myParent, List<ReportInfo> ListOfAllAvailableReports)
-        {
-        
+        {       
             InitializeComponent();
             MyParent = myParent;
             dgReportList.AutoGenerateColumns = false;                                                                                                                                                           //dgReportList.DataSource = null;//dgReportList.Rows.Clear();//dgReportList.DataSource = ReportListDataBind; ;//dgReportList.ClearSelection();
@@ -55,7 +57,8 @@ namespace GTI.Modules.ReportCenter.UI
             //dgReportList.Columns.Add(column1);   
             
           //dgReportList.ClearSelection(); 
-            dgReportList.DataSource = ListOfAllAvailableReports;
+            mListOfAllAvailableReports = ListOfAllAvailableReports;
+            dgReportList.DataSource = mListOfAllAvailableReports;
 
         }
 
@@ -89,6 +92,50 @@ namespace GTI.Modules.ReportCenter.UI
        
         }
 
+        private void acceptImageButton_Click(object sender, EventArgs e)
+        {
+            var temp = c;
+            SetReportDisableOrEnable msg = new SetReportDisableOrEnable(mListOfReportToBeModiFied);
+            msg.Send();
+        }
+
+        private void dgReportList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            ////string CurrentDisplayName;
+            ////DataGridCell.
+            ////MessageBox.Show(dgReportList.SelectedCells[0].Value.ToString());
+            //var x = dgReportList.SelectedRows;
+            //var y = dgReportList.SelectedColumns;
+            //var z = dgReportList.SelectedCells;
+
+
+        }
+
+        DataGridViewRow c = new DataGridViewRow();
+
+
+        private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            DataGridViewRow selectedRow = dgReportList.Rows[index];
+            c = dgReportList.Rows[index];
+            var y = dgReportList.SelectedRows;
+            ReportInfo x = new ReportInfo();
+            x.ID = 33;
+            x.IsEnable = true;
+            x.DisplayName = selectedRow.Cells[1].Value.ToString();
+            x.IsModified = true;
+            mListOfReportToBeModiFied = new List<ReportInfo>();
+            mListOfReportToBeModiFied.Add(x);
+
+           // MessageBox.Show("Hello");
+    //         if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+    //{
+    //   MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+        }
+
 
     }
 }
+ 

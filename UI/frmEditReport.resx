@@ -121,10 +121,10 @@
   <data name="dgReportList.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
-  <metadata name="ReportEnabled.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="RemoveTypeT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ReportEnabled.HeaderText" xml:space="preserve">
+  <data name="RemoveTypeT.HeaderText" xml:space="preserve">
     <value>Enabled</value>
   </data>
   <metadata name="DisplayName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -167,9 +167,6 @@
   <data name="&gt;&gt;dgReportList.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="acceptImageButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="acceptImageButton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 10pt, style=Bold</value>
   </data>
@@ -196,7 +193,7 @@
     <value>acceptImageButton</value>
   </data>
   <data name="&gt;&gt;acceptImageButton.Type" xml:space="preserve">
-    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.975, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
+    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.991, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
   </data>
   <data name="&gt;&gt;acceptImageButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -229,7 +226,7 @@
     <value>cancelImageButton</value>
   </data>
   <data name="&gt;&gt;cancelImageButton.Type" xml:space="preserve">
-    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.975, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
+    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.991, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
   </data>
   <data name="&gt;&gt;cancelImageButton.Parent" xml:space="preserve">
     <value>$this</value>
@@ -258,10 +255,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>frmEditReport</value>
   </data>
-  <data name="&gt;&gt;ReportEnabled.Name" xml:space="preserve">
-    <value>ReportEnabled</value>
+  <data name="&gt;&gt;RemoveTypeT.Name" xml:space="preserve">
+    <value>RemoveTypeT</value>
   </data>
-  <data name="&gt;&gt;ReportEnabled.Type" xml:space="preserve">
+  <data name="&gt;&gt;RemoveTypeT.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DisplayName.Name" xml:space="preserve">
@@ -280,6 +277,6 @@
     <value>frmEditReport</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GTI.Modules.Shared.GradientForm, ManagedEliteModule, Version=1.3.42.975, Culture=neutral, PublicKeyToken=f7ab3ec26b04c7cf</value>
+    <value>GTI.Modules.Shared.GradientForm, ManagedEliteModule, Version=1.3.42.991, Culture=neutral, PublicKeyToken=f7ab3ec26b04c7cf</value>
   </data>
 </root>

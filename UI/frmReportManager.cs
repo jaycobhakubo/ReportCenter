@@ -813,8 +813,7 @@ namespace GTI.Modules.ReportCenter.UI
                 ctr++;
                
                 foreach (ReportInfo rpt in m_reportsDictionary.Values)
-                {
-             
+                {             
                     if (rpt.TypeID == c)
                     {
                         // DE4505 - Do NOT show bingoCard reports if PWP is on.
@@ -846,6 +845,8 @@ namespace GTI.Modules.ReportCenter.UI
                 reportTreeView.TopNode = reportTreeView.Nodes[0];
             }
         }
+
+
 
 
         private void LoadAccrualsCombos()

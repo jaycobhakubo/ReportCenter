@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditReport));
             this.dgReportList = new System.Windows.Forms.DataGridView();
-            this.ReportEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.RemoveTypeT = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.acceptImageButton = new GTI.Controls.ImageButton();
@@ -58,21 +58,23 @@
             resources.ApplyResources(this.dgReportList, "dgReportList");
             this.dgReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgReportList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ReportEnabled,
+            this.RemoveTypeT,
             this.DisplayName,
             this.FileName});
             this.dgReportList.MultiSelect = false;
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
+            this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
+            this.dgReportList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellContentClick);
             // 
-            // ReportEnabled
+            // RemoveTypeT
             // 
-            this.ReportEnabled.DataPropertyName = "ReportEnabled";
-            this.ReportEnabled.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ReportEnabled.Frozen = true;
-            resources.ApplyResources(this.ReportEnabled, "ReportEnabled");
-            this.ReportEnabled.Name = "ReportEnabled";
-            this.ReportEnabled.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.RemoveTypeT.DataPropertyName = "RemoveTypeT";
+            this.RemoveTypeT.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.RemoveTypeT.Frozen = true;
+            resources.ApplyResources(this.RemoveTypeT, "RemoveTypeT");
+            this.RemoveTypeT.Name = "RemoveTypeT";
+            this.RemoveTypeT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // DisplayName
             // 
@@ -93,14 +95,15 @@
             // acceptImageButton
             // 
             this.acceptImageButton.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.acceptImageButton, "acceptImageButton");
             this.acceptImageButton.FocusColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.acceptImageButton, "acceptImageButton");
             this.acceptImageButton.ImageNormal = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonUp;
             this.acceptImageButton.ImagePressed = global::GTI.Modules.ReportCenter.Properties.Resources.BlueButtonDown;
             this.acceptImageButton.Name = "acceptImageButton";
             this.acceptImageButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.acceptImageButton.ShowFocus = false;
             this.acceptImageButton.UseVisualStyleBackColor = false;
+            this.acceptImageButton.Click += new System.EventHandler(this.acceptImageButton_Click);
             // 
             // cancelImageButton
             // 
@@ -138,10 +141,10 @@
 
         private Controls.ImageButton acceptImageButton;
         private Controls.ImageButton cancelImageButton;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ReportEnabled;
+        private System.Windows.Forms.DataGridView dgReportList;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn RemoveTypeT;
         private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.DataGridView dgReportList;
 
 
     }

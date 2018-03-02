@@ -133,6 +133,7 @@
     <Compile Include="Data\SerialNumbersType.cs" />
     <Compile Include="Data\SetDailySalesData.cs" />
     <Compile Include="Data\SetMonthlySalesData.cs" />
+    <Compile Include="Data\SetReportDisableOrEnable.cs" />
     <Compile Include="Data\SetUserReportList.cs" />
     <Compile Include="Data\UserReportGroupTreeNode.cs" />
     <Compile Include="Data\UserReportType.cs" />

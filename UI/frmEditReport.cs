@@ -15,6 +15,7 @@ namespace GTI.Modules.ReportCenter.UI
     {
 
         private List<ReportInfo> mListOfAllReports;
+        private List<ReportInfo> mRevertReportList;
         private List<ReportInfo> mListOfReportsEnable;
         ReportInfo SelectedRow = new ReportInfo();
         public frmReportCenterMDIParent MyParent { get; private set; }
@@ -24,7 +25,8 @@ namespace GTI.Modules.ReportCenter.UI
             MyParent = myParent;
             InitializeComponent();
             mListOfReportsEnable = new List<ReportInfo>();
-        }
+            mRevertReportList = new List<ReportInfo>();
+         }
 
         private void frmEditReport_Load(object sender, EventArgs e)
         {
@@ -38,6 +40,7 @@ namespace GTI.Modules.ReportCenter.UI
             foreach (ReportInfo rptInfo in MyParent.ReportsDictionary.Values)
             {
                 mListOfAllReports.Add(rptInfo);
+                mRevertReportList.Add(rptInfo);
             }
             dgReportList.DataSource = null;
             dgReportList.Rows.Clear();
@@ -46,6 +49,10 @@ namespace GTI.Modules.ReportCenter.UI
             dgReportList.DataSource = mListOfAllReports;
             dgReportList.ClearSelection();   
         }
+
+      
+            
+     
 
 
         private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -67,6 +74,30 @@ namespace GTI.Modules.ReportCenter.UI
             SetUserReportEnableOrDisable msg = new SetUserReportEnableOrDisable(mListOfReportsEnable);
             msg.Send();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            mListOfAllReports = mRevertReportList;
+            dgReportList.DataSource = null;
+            dgReportList.Rows.Clear();
+            dgReportList.AutoGenerateColumns = false;
+            dgReportList.AllowUserToAddRows = false;
+            dgReportList.DataSource = mListOfAllReports;
+            dgReportList.ClearSelection();   
+
+
+        }
+
+        //private void dgReportList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        //{
+        //    e.Cancel = true;
+        //}
+
+        //private void dgReportList_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        //{
+        //    e.Cancel = true;
+
+        //}
     }
 }
 

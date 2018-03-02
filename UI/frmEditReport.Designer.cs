@@ -66,6 +66,8 @@
             this.dgReportList.MultiSelect = false;
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
+            //this.dgReportList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgReportList_CellBeginEdit);
+            //this.dgReportList.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgReportList_CellValidating);
             this.dgReportList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellValueChanged);
             // 
             // btnCancel
@@ -79,6 +81,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSaveReportEdit
             // 

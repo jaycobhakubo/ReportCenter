@@ -44,6 +44,16 @@ namespace GTI.Modules.ReportCenter.UI
             dgReportList.ClearSelection();   
 
         }
+
+        private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgReportList_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
 

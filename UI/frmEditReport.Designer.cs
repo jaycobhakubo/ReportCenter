@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditReport));
             this.dgReportList = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
@@ -46,11 +47,22 @@
             resources.ApplyResources(this.dgReportList, "dgReportList");
             this.dgReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgReportList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.DisplayName,
             this.FileName});
             this.dgReportList.MultiSelect = false;
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
+            this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
+            this.dgReportList.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellLeave);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            resources.ApplyResources(this.ID, "ID");
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // DisplayName
             // 
@@ -65,6 +77,7 @@
             this.FileName.DataPropertyName = "FileName";
             resources.ApplyResources(this.FileName, "FileName");
             this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
             // 
             // frmEditReport
             // 
@@ -86,6 +99,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgReportList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
 

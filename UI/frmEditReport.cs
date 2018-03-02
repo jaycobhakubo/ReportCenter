@@ -13,7 +13,8 @@ namespace GTI.Modules.ReportCenter.UI
     public partial class frmEditReport :  GradientForm
     {
 
-        private List<ReportInfo> ListOfAllReports;
+        private List<ReportInfo> mListOfAllReports;
+        private List<ReportInfo> mListOfReportsEnable;
 
         public frmReportCenterMDIParent MyParent { get; private set; }
         public frmEditReport(frmReportCenterMDIParent myParent)
@@ -31,27 +32,46 @@ namespace GTI.Modules.ReportCenter.UI
 
         public void LoadDataIntoTheDataGrid()
         {
-            ListOfAllReports = new List<ReportInfo>();
+            mListOfAllReports = new List<ReportInfo>();
             foreach (ReportInfo x in MyParent.ReportsDictionary.Values)
             {
-                ListOfAllReports.Add(x);
+                mListOfAllReports.Add(x);
             }
             dgReportList.DataSource = null;
             dgReportList.Rows.Clear();
             dgReportList.AutoGenerateColumns = false;
             dgReportList.AllowUserToAddRows = false;
-            dgReportList.DataSource = ListOfAllReports;
+            dgReportList.DataSource = mListOfAllReports;
             dgReportList.ClearSelection();   
 
         }
 
+        ReportInfo SelectedRow = new ReportInfo();
+
         private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+           
+        
         }
 
-        private void dgReportList_CellLeave(object sender, DataGridViewCellEventArgs e)
+
+
+
+
+        private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+   
+            if (e.ColumnIndex == 1 && e.RowIndex != -1)
+            {
+                DataGridViewRow selectedRow = dgReportList.Rows[e.RowIndex];
+                int tempId;
+                bool res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);
+                SelectedRow.ID = tempId;
+                SelectedRow.IsEnable = true;
+                SelectedRow.DisplayName = selectedRow.Cells[1].Value.ToString();
+                mListOfReportsEnable.Add(SelectedRow);
+              
+            }
 
         }
     }

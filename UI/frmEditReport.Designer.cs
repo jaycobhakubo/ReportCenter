@@ -54,7 +54,8 @@
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
             this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
-            this.dgReportList.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellLeave);
+
+            this.dgReportList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellValueChanged);
             // 
             // ID
             // 

@@ -803,8 +803,8 @@ namespace GTI.Modules.ReportCenter.UI
             //END RALLY DE 4505
 
 
-            ReportListDataBind = new BindingList<ReportInfo>();
-            ListOfAvailableReports = new List<ReportInfo>();
+            //ReportListDataBind = new BindingList<ReportInfo>();
+            //ListOfAvailableReports = new List<ReportInfo>();
             foreach (int c in rpts.Keys)
             {
                 UserReportGroupTreeNode urgNode = new UserReportGroupTreeNode(rpts[c], false);
@@ -827,13 +827,13 @@ namespace GTI.Modules.ReportCenter.UI
 
                         ReportTreeNode rtn = new ReportTreeNode(rpt, false);//knc
                         ReportListDataBind.Add(rpt);//This is were it adding data to the new binding list
-                        ListOfAvailableReports.Add(rpt); //NO GO stop creating new object
+                        //ListOfAvailableReports.Add(rpt); //NO GO stop creating new object
                         reportTreeView.Nodes[ctr - 1].Nodes.Add(rtn);
                     }
                 }
                 //knc1
                 //ListOfAvailableReports.OrderBy(l => l.DisplayName).ToList();
-                ListOfAvailableReports__.Sort((x, y) => x.DisplayName.CompareTo(y.DisplayName));
+                //ListOfAvailableReports__.Sort((x, y) => x.DisplayName.CompareTo(y.DisplayName));
             }
 
             lblReportType.Text = "Standard Reports";

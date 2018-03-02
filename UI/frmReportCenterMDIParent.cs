@@ -49,13 +49,10 @@ namespace GTI.Modules.ReportCenter.UI
         #region Constructors
         public frmReportCenterMDIParent()
         {
-            InitializeComponent();
-
-            //mCenter = new FrmReportCenter {Dock = DockStyle.Fill, MyParent = this};
+            InitializeComponent();          
             mCenter = new FrmReportManager { Dock = DockStyle.Fill, MyParent = this };      //US1622
             mCustomizeReport = new frmCustomizeReport(this) {Dock = DockStyle.Fill};
             mCustomizeReport.Closed += CustomizeUserReport_Closed;
-
             mEditReport = new frmEditReport(this) { Dock = DockStyle.Fill };
             mEditReport.Closed += mEditReport_Closed;
         }

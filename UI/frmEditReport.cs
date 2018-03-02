@@ -14,10 +14,12 @@ namespace GTI.Modules.ReportCenter.UI
     public partial class frmEditReport :  GradientForm
     {
 
-        private List<ReportInfo> mListOfAllReports;
-        private List<ReportInfo> mRevertReportList;
+        private List<ReportInfo> mListOfAllReports;     
         private List<ReportInfo> mListOfReportsEnable;
+        private List<ReportInfo> mListOfReportsOriginal;
         ReportInfo SelectedRow = new ReportInfo();
+        ReportInfo SelectedRowOriginalValue = new ReportInfo();
+
         public frmReportCenterMDIParent MyParent { get; private set; }
 
         public frmEditReport(frmReportCenterMDIParent myParent)
@@ -25,7 +27,7 @@ namespace GTI.Modules.ReportCenter.UI
             MyParent = myParent;
             InitializeComponent();
             mListOfReportsEnable = new List<ReportInfo>();
-            mRevertReportList = new List<ReportInfo>();
+            mListOfReportsOriginal = new List<ReportInfo>();
          }
 
         private void frmEditReport_Load(object sender, EventArgs e)
@@ -39,8 +41,7 @@ namespace GTI.Modules.ReportCenter.UI
             mListOfAllReports = new List<ReportInfo>();
             foreach (ReportInfo rptInfo in MyParent.ReportsDictionary.Values)
             {
-                mListOfAllReports.Add(rptInfo);
-                mRevertReportList.Add(rptInfo);
+                mListOfAllReports.Add(rptInfo);               
             }
             dgReportList.DataSource = null;
             dgReportList.Rows.Clear();
@@ -50,22 +51,25 @@ namespace GTI.Modules.ReportCenter.UI
             dgReportList.ClearSelection();   
         }
 
-      
-            
-     
-
+         
 
         private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {  
-            if (e.ColumnIndex == 1 && e.RowIndex != -1)
+            if (e.ColumnIndex == 2 && e.RowIndex != -1)
             {
-                DataGridViewRow selectedRow = dgReportList.Rows[e.RowIndex];
                 int tempId;
-                bool res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);
+                  bool res;
+               
+
+                DataGridViewRow selectedRow = dgReportList.Rows[e.RowIndex];
+               
+                res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);
                 SelectedRow.ID = tempId;
                 SelectedRow.IsEnable = true;
-                SelectedRow.DisplayName = selectedRow.Cells[1].Value.ToString();
-                mListOfReportsEnable.Add(SelectedRow);             
+                SelectedRow.DisplayName = selectedRow.Cells[2].Value.ToString();
+                mListOfReportsEnable.Add(SelectedRow);
+                mListOfReportsOriginal.Add(SelectedRowOriginalValue);
+
             }
         }
 
@@ -77,27 +81,29 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            mListOfAllReports = mRevertReportList;
-            dgReportList.DataSource = null;
-            dgReportList.Rows.Clear();
-            dgReportList.AutoGenerateColumns = false;
-            dgReportList.AllowUserToAddRows = false;
-            dgReportList.DataSource = mListOfAllReports;
-            dgReportList.ClearSelection();   
+            foreach (ReportInfo x in mListOfReportsOriginal)
+            {
+                int temID = x.ID;
+                mListOfAllReports.FirstOrDefault(l => l.ID == temID).DisplayName = x.DisplayName;
 
+            }
 
+            dgReportList.Update();
+            dgReportList.RefreshEdit();
+            dgReportList.Refresh();
         }
 
-        //private void dgReportList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        //{
-        //    e.Cancel = true;
-        //}
-
-        //private void dgReportList_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        //{
-        //    e.Cancel = true;
-
-        //}
+        private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelectedRowOriginalValue = new ReportInfo();
+            DataGridViewRow selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
+            int tempId;
+            bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
+            SelectedRowOriginalValue.ID = tempId;
+            SelectedRowOriginalValue.IsEnable = true;
+            SelectedRowOriginalValue.DisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
+           // mListOfReportsOriginal.Add(SelectedRow);             
+        }
     }
 }
 

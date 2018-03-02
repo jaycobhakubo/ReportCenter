@@ -31,11 +31,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditReport));
             this.dgReportList = new System.Windows.Forms.DataGridView();
-            this.RemoveTypeT = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.acceptImageButton = new GTI.Controls.ImageButton();
             this.cancelImageButton = new GTI.Controls.ImageButton();
+            this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,39 +57,11 @@
             resources.ApplyResources(this.dgReportList, "dgReportList");
             this.dgReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgReportList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.RemoveTypeT,
             this.DisplayName,
             this.FileName});
             this.dgReportList.MultiSelect = false;
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
-            this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
-            this.dgReportList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellContentClick);
-            // 
-            // RemoveTypeT
-            // 
-            this.RemoveTypeT.DataPropertyName = "RemoveTypeT";
-            this.RemoveTypeT.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RemoveTypeT.Frozen = true;
-            resources.ApplyResources(this.RemoveTypeT, "RemoveTypeT");
-            this.RemoveTypeT.Name = "RemoveTypeT";
-            this.RemoveTypeT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // DisplayName
-            // 
-            this.DisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.DisplayName.DataPropertyName = "DisplayName";
-            resources.ApplyResources(this.DisplayName, "DisplayName");
-            this.DisplayName.Name = "DisplayName";
-            this.DisplayName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // FileName
-            // 
-            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FileName.DataPropertyName = "FileName";
-            resources.ApplyResources(this.FileName, "FileName");
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
             // 
             // acceptImageButton
             // 
@@ -103,7 +74,6 @@
             this.acceptImageButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.acceptImageButton.ShowFocus = false;
             this.acceptImageButton.UseVisualStyleBackColor = false;
-            this.acceptImageButton.Click += new System.EventHandler(this.acceptImageButton_Click);
             // 
             // cancelImageButton
             // 
@@ -117,6 +87,22 @@
             this.cancelImageButton.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.cancelImageButton.ShowFocus = false;
             this.cancelImageButton.UseVisualStyleBackColor = false;
+            // 
+            // DisplayName
+            // 
+            this.DisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DisplayName.DataPropertyName = "DisplayName";
+            resources.ApplyResources(this.DisplayName, "DisplayName");
+            this.DisplayName.Name = "DisplayName";
+            this.DisplayName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // FileName
+            // 
+            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FileName.DataPropertyName = "FileName";
+            resources.ApplyResources(this.FileName, "FileName");
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
             // 
             // frmEditReport
             // 
@@ -142,7 +128,6 @@
         private Controls.ImageButton acceptImageButton;
         private Controls.ImageButton cancelImageButton;
         private System.Windows.Forms.DataGridView dgReportList;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn RemoveTypeT;
         private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
 

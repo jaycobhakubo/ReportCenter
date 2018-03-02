@@ -640,12 +640,12 @@ namespace GTI.Modules.ReportCenter.UI
                 if (mEditReport == null || mEditReport.Disposing ||
                              mEditReport.IsDisposed)
                 {
-                    mEditReport = new frmEditReport(this, ListOfAvailableReports);//We dont have to initialize because its already been created.
+                    mEditReport = new frmEditReport(this/*, ListOfAvailableReports*/);//We dont have to initialize because its already been created.
                     //mEditReport = new frmEditReport(this, ListOfAvailableReports);
                     mEditReport.Closed += CustomizeUserReport_Closed;
                     mEditReport.Dock = DockStyle.Fill;
                 }
-                mEditReport.ReportsDictionary = ReportsDictionary;              
+          
                 userReportMenu.Visible = false;
                 LoadTarget(mEditReport);
             }

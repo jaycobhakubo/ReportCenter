@@ -38,11 +38,18 @@ namespace GTI.Modules.ReportCenter.UI
 
         public void LoadDataIntoTheDataGrid()
         {
-            mListOfAllReports = new List<ReportInfo>();
+            mListOfAllReports = new List<ReportInfo>();           
             foreach (ReportInfo rptInfo in MyParent.ReportsDictionary.Values)
             {
-                mListOfAllReports.Add(rptInfo);               
-            }
+                rptInfo.IsEnable = true;//Just for now
+                mListOfAllReports.Add(rptInfo);
+                SetDataGrid();
+            }        
+        }
+
+
+        private void SetDataGrid()
+        {
             dgReportList.DataSource = null;
             dgReportList.Rows.Clear();
             dgReportList.AutoGenerateColumns = false;
@@ -50,26 +57,20 @@ namespace GTI.Modules.ReportCenter.UI
             dgReportList.DataSource = mListOfAllReports;
             dgReportList.ClearSelection();   
         }
-
-         
-
         private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {  
-            if (e.ColumnIndex == 2 && e.RowIndex != -1)
+            if ((e.ColumnIndex == 2 || e.ColumnIndex == 1)  && e.RowIndex != -1)
             {
                 int tempId;
                   bool res;
                
-
-                DataGridViewRow selectedRow = dgReportList.Rows[e.RowIndex];
-               
+                DataGridViewRow selectedRow = dgReportList.Rows[e.RowIndex];              
                 res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);
-                SelectedRow.ID = tempId;
-                SelectedRow.IsEnable = true;
+                SelectedRow.ID = tempId;           
+                SelectedRow.IsEnable = Convert.ToBoolean(selectedRow.Cells[1].Value);
                 SelectedRow.DisplayName = selectedRow.Cells[2].Value.ToString();
                 mListOfReportsEnable.Add(SelectedRow);
                 mListOfReportsOriginal.Add(SelectedRowOriginalValue);
-
             }
         }
 
@@ -85,7 +86,6 @@ namespace GTI.Modules.ReportCenter.UI
             {
                 int temID = x.ID;
                 mListOfAllReports.FirstOrDefault(l => l.ID == temID).DisplayName = x.DisplayName;
-
             }
 
             dgReportList.Update();
@@ -100,7 +100,7 @@ namespace GTI.Modules.ReportCenter.UI
             int tempId;
             bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
             SelectedRowOriginalValue.ID = tempId;
-            SelectedRowOriginalValue.IsEnable = true;
+            SelectedRowOriginalValue.IsEnable = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
             SelectedRowOriginalValue.DisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
            // mListOfReportsOriginal.Add(SelectedRow);             
         }

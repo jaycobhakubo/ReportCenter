@@ -30,7 +30,18 @@ namespace GTI.Modules.ReportCenter.Data
             foreach (ReportInfo rptInfo in mListOfListReportsEnableDisable)  //settings count
             {
                 requestWriter.Write((int)rptInfo.ID);
-                requestWriter.Write((byte)1);
+
+                byte tempIsEnable;
+                if (rptInfo.IsEnable == true)
+                {
+                    tempIsEnable = (byte)1;
+                }
+                else
+                {
+                    tempIsEnable = (byte)0;
+                }
+
+                requestWriter.Write(tempIsEnable);
                 requestWriter.Write((ushort)rptInfo.DisplayName.Length);
                 requestWriter.Write(rptInfo.DisplayName.ToCharArray());
             }

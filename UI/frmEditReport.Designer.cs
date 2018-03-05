@@ -31,12 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditReport));
             this.dgReportList = new System.Windows.Forms.DataGridView();
+            this.btnCancel = new GTI.Controls.ImageButton();
+            this.btnSaveReportEdit = new GTI.Controls.ImageButton();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsEnable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCancel = new GTI.Controls.ImageButton();
-            this.btnSaveReportEdit = new GTI.Controls.ImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,34 +69,6 @@
             this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
             this.dgReportList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellValueChanged);
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            resources.ApplyResources(this.ID, "ID");
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // IsEnable
-            // 
-            resources.ApplyResources(this.IsEnable, "IsEnable");
-            this.IsEnable.Name = "IsEnable";
-            // 
-            // DisplayName
-            // 
-            this.DisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.DisplayName.DataPropertyName = "DisplayName";
-            resources.ApplyResources(this.DisplayName, "DisplayName");
-            this.DisplayName.Name = "DisplayName";
-            // 
-            // FileName
-            // 
-            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FileName.DataPropertyName = "FileName";
-            resources.ApplyResources(this.FileName, "FileName");
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
-            // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Transparent;
@@ -121,6 +93,35 @@
             this.btnSaveReportEdit.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
             this.btnSaveReportEdit.UseVisualStyleBackColor = false;
             this.btnSaveReportEdit.Click += new System.EventHandler(this.btnSaveReportEdit_Click);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            resources.ApplyResources(this.ID, "ID");
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // IsEnable
+            // 
+            this.IsEnable.DataPropertyName = "IsEnable";
+            resources.ApplyResources(this.IsEnable, "IsEnable");
+            this.IsEnable.Name = "IsEnable";
+            // 
+            // DisplayName
+            // 
+            this.DisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.DisplayName.DataPropertyName = "DisplayName";
+            resources.ApplyResources(this.DisplayName, "DisplayName");
+            this.DisplayName.Name = "DisplayName";
+            // 
+            // FileName
+            // 
+            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FileName.DataPropertyName = "FileName";
+            resources.ApplyResources(this.FileName, "FileName");
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
             // 
             // frmEditReport
             // 

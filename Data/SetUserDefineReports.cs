@@ -5,20 +5,21 @@ using System.Linq;
 using System.Text;
 using GTI.Modules.Shared;
 using System.IO;
+using GTI.Modules.ReportCenter.UI;
 
 namespace GTI.Modules.ReportCenter.Data
 {
 
-    class SetUserReportEnableOrDisable : ServerMessage
+    class SetUserDefineReports : ServerMessage
     {
-        private List<ReportInfo> mListOfListReportsEnableDisable;
- 
-     
-        public SetUserReportEnableOrDisable(List<ReportInfo> ListOfListReportsEnableDisable)
+        private List<ReportData> mListOfListReportsEnableDisable;
+
+
+        public SetUserDefineReports(List<ReportData> ListOfListReportsEnableDisable)
         {
             m_id = 18252;
             mListOfListReportsEnableDisable = ListOfListReportsEnableDisable;
-        }
+        } 
 
         protected override void PackRequest()
         {
@@ -27,12 +28,12 @@ namespace GTI.Modules.ReportCenter.Data
 
             requestWriter.Write((ushort)mListOfListReportsEnableDisable.Count());
 
-            foreach (ReportInfo rptInfo in mListOfListReportsEnableDisable)  //settings count
+            foreach (ReportData rptInfo in mListOfListReportsEnableDisable)  //settings count
             {
-                requestWriter.Write((int)rptInfo.ID);
+                requestWriter.Write((int)rptInfo.ReportId);
 
                 byte tempIsEnable;
-                if (rptInfo.IsEnable == true)
+                if (rptInfo.IsActive == true)
                 {
                     tempIsEnable = (byte)1;
                 }
@@ -42,8 +43,11 @@ namespace GTI.Modules.ReportCenter.Data
                 }
 
                 requestWriter.Write(tempIsEnable);
-                requestWriter.Write((ushort)rptInfo.DisplayName.Length);
-                requestWriter.Write(rptInfo.DisplayName.ToCharArray());
+                requestWriter.Write((ushort)rptInfo.ReportDisplayName.Length);
+                requestWriter.Write(rptInfo.ReportDisplayName.ToCharArray());
+                requestWriter.Write((ushort)rptInfo.ReportFileName.Length);
+                requestWriter.Write(rptInfo.ReportFileName.ToCharArray());
+
             }
 
             m_requestPayload = requestStream.ToArray();

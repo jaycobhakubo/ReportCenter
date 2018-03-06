@@ -14,20 +14,19 @@ namespace GTI.Modules.ReportCenter.UI
     public partial class frmEditReport :  GradientForm
     {
 
-        private List<ReportInfo> mListOfAllReports;     
-        private List<ReportInfo> mListOfReportsEnable;
-        private List<ReportInfo> mListOfReportsOriginal;
-        ReportInfo SelectedRow = new ReportInfo();
-        ReportInfo SelectedRowOriginalValue = new ReportInfo();
-
+        private List<ReportData> mListOfAllReports;
+        private List<ReportData> mListOfReportsEnable;
+        private List<ReportData> mListOfReportsOriginal;
+        ReportData SelectedRow = new ReportData();
+        ReportData SelectedRowOriginalValue = new ReportData();
         public frmReportCenterMDIParent MyParent { get; private set; }
 
         public frmEditReport(frmReportCenterMDIParent myParent)
         {
             MyParent = myParent;
             InitializeComponent();
-            mListOfReportsEnable = new List<ReportInfo>();
-            mListOfReportsOriginal = new List<ReportInfo>();
+            mListOfReportsEnable = new List<ReportData>();
+            mListOfReportsOriginal = new List<ReportData>();
          }
 
         private void frmEditReport_Load(object sender, EventArgs e)
@@ -38,15 +37,19 @@ namespace GTI.Modules.ReportCenter.UI
 
         public void LoadDataIntoTheDataGrid()
         {
-            mListOfAllReports = new List<ReportInfo>();           
+            mListOfAllReports = new List<ReportData>();           
             foreach (ReportInfo rptInfo in MyParent.ReportsDictionary.Values)
             {
-                rptInfo.IsEnable = true;//Just for now
-                mListOfAllReports.Add(rptInfo);
+                var rptData = new ReportData();
+                //rptInfo.IsEnable = true;
+                rptData.ReportId = rptInfo.ID;
+                rptData.IsActive = rptInfo.IsEnable;
+                rptData.ReportDisplayName = rptInfo.DisplayName;
+                rptData.ReportFileName = rptInfo.FileName;
+                mListOfAllReports.Add(rptData);
                 SetDataGrid();
             }        
         }
-
 
         private void SetDataGrid()
         {
@@ -66,9 +69,10 @@ namespace GTI.Modules.ReportCenter.UI
                
                 DataGridViewRow selectedRow = dgReportList.Rows[e.RowIndex];              
                 res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);
-                SelectedRow.ID = tempId;           
-                SelectedRow.IsEnable = Convert.ToBoolean(selectedRow.Cells[1].Value);
-                SelectedRow.DisplayName = selectedRow.Cells[2].Value.ToString();
+                SelectedRow.ReportId = tempId;           
+                SelectedRow.IsActive = Convert.ToBoolean(selectedRow.Cells[1].Value);
+                SelectedRow.ReportDisplayName = selectedRow.Cells[2].Value.ToString();
+                SelectedRow.ReportFileName = selectedRow.Cells[3].Value.ToString();
                 mListOfReportsEnable.Add(SelectedRow);
                 mListOfReportsOriginal.Add(SelectedRowOriginalValue);
             }
@@ -76,16 +80,16 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void btnSaveReportEdit_Click(object sender, EventArgs e)
         {
-            SetUserReportEnableOrDisable msg = new SetUserReportEnableOrDisable(mListOfReportsEnable);
+            SetUserDefineReports msg = new SetUserDefineReports(mListOfReportsEnable);
             msg.Send();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            foreach (ReportInfo x in mListOfReportsOriginal)
+            foreach (ReportData x in mListOfReportsOriginal)
             {
-                int temID = x.ID;
-                mListOfAllReports.FirstOrDefault(l => l.ID == temID).DisplayName = x.DisplayName;
+                int temID = x.ReportId;
+                mListOfAllReports.FirstOrDefault(l => l.ReportId == temID).ReportDisplayName= x.ReportDisplayName;
             }
 
             dgReportList.Update();
@@ -95,15 +99,25 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            SelectedRowOriginalValue = new ReportInfo();
+            SelectedRowOriginalValue = new ReportData();
             DataGridViewRow selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
             int tempId;
             bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
-            SelectedRowOriginalValue.ID = tempId;
-            SelectedRowOriginalValue.IsEnable = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
-            SelectedRowOriginalValue.DisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
-           // mListOfReportsOriginal.Add(SelectedRow);             
+            SelectedRowOriginalValue.ReportId = tempId;
+            SelectedRowOriginalValue.IsActive = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
+            SelectedRowOriginalValue.ReportDisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
+            SelectedRowOriginalValue.ReportFileName = selectedRowUnchanged.Cells[3].Value.ToString();
         }
+    }
+
+
+    public class ReportData
+    {
+        public int ReportId { get; set; }
+        public bool IsActive { get; set; }
+        public string ReportDisplayName { get; set; }
+        public string ReportFileName { get; set; }
+
     }
 }
 

@@ -33,10 +33,10 @@
             this.dgReportList = new System.Windows.Forms.DataGridView();
             this.btnCancel = new GTI.Controls.ImageButton();
             this.btnSaveReportEdit = new GTI.Controls.ImageButton();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsEnable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReportId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ReportDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReportFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,10 +59,10 @@
             resources.ApplyResources(this.dgReportList, "dgReportList");
             this.dgReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgReportList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.IsEnable,
-            this.DisplayName,
-            this.FileName});
+            this.ReportId,
+            this.IsActive,
+            this.ReportDisplayName,
+            this.ReportFileName});
             this.dgReportList.MultiSelect = false;
             this.dgReportList.Name = "dgReportList";
             this.dgReportList.RowHeadersVisible = false;
@@ -94,34 +94,34 @@
             this.btnSaveReportEdit.UseVisualStyleBackColor = false;
             this.btnSaveReportEdit.Click += new System.EventHandler(this.btnSaveReportEdit_Click);
             // 
-            // ID
+            // ReportId
             // 
-            this.ID.DataPropertyName = "ID";
-            resources.ApplyResources(this.ID, "ID");
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ReportId.DataPropertyName = "ReportId";
+            resources.ApplyResources(this.ReportId, "ReportId");
+            this.ReportId.Name = "ReportId";
+            this.ReportId.ReadOnly = true;
+            this.ReportId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // IsEnable
+            // IsActive
             // 
-            this.IsEnable.DataPropertyName = "IsEnable";
-            resources.ApplyResources(this.IsEnable, "IsEnable");
-            this.IsEnable.Name = "IsEnable";
+            this.IsActive.DataPropertyName = "IsActive";
+            resources.ApplyResources(this.IsActive, "IsActive");
+            this.IsActive.Name = "IsActive";
             // 
-            // DisplayName
+            // ReportDisplayName
             // 
-            this.DisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.DisplayName.DataPropertyName = "DisplayName";
-            resources.ApplyResources(this.DisplayName, "DisplayName");
-            this.DisplayName.Name = "DisplayName";
+            this.ReportDisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ReportDisplayName.DataPropertyName = "ReportDisplayName";
+            resources.ApplyResources(this.ReportDisplayName, "ReportDisplayName");
+            this.ReportDisplayName.Name = "ReportDisplayName";
             // 
-            // FileName
+            // ReportFileName
             // 
-            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FileName.DataPropertyName = "FileName";
-            resources.ApplyResources(this.FileName, "FileName");
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
+            this.ReportFileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ReportFileName.DataPropertyName = "ReportFileName";
+            resources.ApplyResources(this.ReportFileName, "ReportFileName");
+            this.ReportFileName.Name = "ReportFileName";
+            this.ReportFileName.ReadOnly = true;
             // 
             // frmEditReport
             // 
@@ -147,10 +147,10 @@
         private System.Windows.Forms.DataGridView dgReportList;
         private Controls.ImageButton btnCancel;
         private Controls.ImageButton btnSaveReportEdit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IsEnable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReportId;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReportDisplayName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ReportFileName;
 
     }
 }

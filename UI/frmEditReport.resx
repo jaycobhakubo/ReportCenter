@@ -121,37 +121,37 @@
   <data name="dgReportList.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <metadata name="ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ReportId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="ID.HeaderText" xml:space="preserve">
+  <data name="ReportId.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="ID.Visible" type="System.Boolean, mscorlib">
+  <data name="ReportId.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <metadata name="IsEnable.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="IsActive.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="IsEnable.HeaderText" xml:space="preserve">
+  <data name="IsActive.HeaderText" xml:space="preserve">
     <value>Enable</value>
   </data>
-  <metadata name="DisplayName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ReportDisplayName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="DisplayName.HeaderText" xml:space="preserve">
+  <data name="ReportDisplayName.HeaderText" xml:space="preserve">
     <value>Report Name</value>
   </data>
-  <data name="DisplayName.Width" type="System.Int32, mscorlib">
+  <data name="ReportDisplayName.Width" type="System.Int32, mscorlib">
     <value>134</value>
   </data>
-  <metadata name="FileName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ReportFileName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="FileName.HeaderText" xml:space="preserve">
+  <data name="ReportFileName.HeaderText" xml:space="preserve">
     <value>File Name</value>
   </data>
-  <data name="FileName.Width" type="System.Int32, mscorlib">
+  <data name="ReportFileName.Width" type="System.Int32, mscorlib">
     <value>110</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -678,28 +678,28 @@
   <data name="$this.Text" xml:space="preserve">
     <value>frmEditReport</value>
   </data>
-  <data name="&gt;&gt;ID.Name" xml:space="preserve">
-    <value>ID</value>
+  <data name="&gt;&gt;ReportId.Name" xml:space="preserve">
+    <value>ReportId</value>
   </data>
-  <data name="&gt;&gt;ID.Type" xml:space="preserve">
+  <data name="&gt;&gt;ReportId.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;IsEnable.Name" xml:space="preserve">
-    <value>IsEnable</value>
+  <data name="&gt;&gt;IsActive.Name" xml:space="preserve">
+    <value>IsActive</value>
   </data>
-  <data name="&gt;&gt;IsEnable.Type" xml:space="preserve">
+  <data name="&gt;&gt;IsActive.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DisplayName.Name" xml:space="preserve">
-    <value>DisplayName</value>
+  <data name="&gt;&gt;ReportDisplayName.Name" xml:space="preserve">
+    <value>ReportDisplayName</value>
   </data>
-  <data name="&gt;&gt;DisplayName.Type" xml:space="preserve">
+  <data name="&gt;&gt;ReportDisplayName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FileName.Name" xml:space="preserve">
-    <value>FileName</value>
+  <data name="&gt;&gt;ReportFileName.Name" xml:space="preserve">
+    <value>ReportFileName</value>
   </data>
-  <data name="&gt;&gt;FileName.Type" xml:space="preserve">
+  <data name="&gt;&gt;ReportFileName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

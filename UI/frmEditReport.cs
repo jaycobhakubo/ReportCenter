@@ -20,6 +20,7 @@ namespace GTI.Modules.ReportCenter.UI
         ReportData SelectedRow = new ReportData();
         ReportData SelectedRowOriginalValue = new ReportData();
         public frmReportCenterMDIParent MyParent { get; private set; }
+        private GetUserDefineReports getUserDefineReportsMsg;
 
         public frmEditReport(frmReportCenterMDIParent myParent)
         {
@@ -37,18 +38,24 @@ namespace GTI.Modules.ReportCenter.UI
 
         public void LoadDataIntoTheDataGrid()
         {
-            mListOfAllReports = new List<ReportData>();           
-            foreach (ReportInfo rptInfo in MyParent.ReportsDictionary.Values)
-            {
-                var rptData = new ReportData();
+            mListOfAllReports = new List<ReportData>();
+            getUserDefineReportsMsg = new GetUserDefineReports();
+            getUserDefineReportsMsg.Send();
+            mListOfAllReports = getUserDefineReportsMsg.mListRptData;
+
+            //foreach (ReportInfo rptInfo in MyParent.ReportsDictionary.Values)
+            //{
+                //var rptData = new ReportData();
                 //rptInfo.IsEnable = true;
-                rptData.ReportId = rptInfo.ID;
-                rptData.IsActive = rptInfo.IsEnable;
-                rptData.ReportDisplayName = rptInfo.DisplayName;
-                rptData.ReportFileName = rptInfo.FileName;
-                mListOfAllReports.Add(rptData);
-                SetDataGrid();
-            }        
+                //rptData.ReportId = rptInfo.ID;
+                //rptData.IsActive = rptInfo.IsEnable;
+                //rptData.ReportDisplayName = rptInfo.DisplayName;
+                //rptData.ReportFileName = rptInfo.FileName;
+               // mListOfAllReports.Add(rptData);
+              
+            //}
+
+            SetDataGrid();
         }
 
         private void SetDataGrid()
@@ -117,6 +124,7 @@ namespace GTI.Modules.ReportCenter.UI
         public bool IsActive { get; set; }
         public string ReportDisplayName { get; set; }
         public string ReportFileName { get; set; }
+        public int ReportTypeId { get; set; }
 
     }
 }

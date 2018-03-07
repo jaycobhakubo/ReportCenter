@@ -53,6 +53,7 @@ namespace GTI.Modules.ReportCenter.Data
                 tempValue.ReportDisplayName = new string(responseReader.ReadChars(tempLength));
                 tempLength = responseReader.ReadUInt16();
                 tempValue.ReportFileName = new string(responseReader.ReadChars(tempLength));
+                tempValue.ReportTypeId   = responseReader.ReadInt32();
                 mListRptData.Add(tempValue);    
             }
 

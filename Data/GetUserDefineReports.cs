@@ -45,15 +45,16 @@ namespace GTI.Modules.ReportCenter.Data
             for (int iType = 0; iType < Count; iType++)
             {
                 var tempValue = new ReportData();
-                tempValue.ReportId = responseReader.ReadInt32();
+                tempValue.ReportId = responseReader.ReadInt32();//1
+                tempValue.ReportTypeId = responseReader.ReadInt32();//5
                 byte tIsActive = 0;
-                tIsActive = responseReader.ReadByte();
+                tIsActive = responseReader.ReadByte();//2
                 tempValue.IsActive = tIsActive == 0 ? false : true;
-                tempLength = responseReader.ReadUInt16();
+                tempLength = responseReader.ReadUInt16();//3
                 tempValue.ReportDisplayName = new string(responseReader.ReadChars(tempLength));
-                tempLength = responseReader.ReadUInt16();
+                tempLength = responseReader.ReadUInt16();//4
                 tempValue.ReportFileName = new string(responseReader.ReadChars(tempLength));
-                tempValue.ReportTypeId   = responseReader.ReadInt32();
+              
                 mListRptData.Add(tempValue);    
             }
 

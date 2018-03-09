@@ -51,11 +51,23 @@ namespace GTI.Modules.ReportCenter.UI
                 //rptData.IsActive = rptInfo.IsEnable;
                 //rptData.ReportDisplayName = rptInfo.DisplayName;
                 //rptData.ReportFileName = rptInfo.FileName;
-               // mListOfAllReports.Add(rptData);
-              
+               // mListOfAllReports.Add(rptData);           
             //}
-
             SetDataGrid();
+        }
+
+        private void UpdateOtherReportUI()
+        {
+            List<ReportInfo> temp = new List<ReportInfo>();
+            foreach (ReportData rpt in mListOfReportsEnable)
+            {
+                ReportInfo x = MyParent.ReportsDictionary.Values.FirstOrDefault(l => l.ID == rpt.ReportId);
+                if (x != null)
+                {
+                    x.DisplayName = rpt.ReportDisplayName;
+                    x.IsEnable = rpt.IsActive;
+                }
+            }
         }
 
         private void SetDataGrid()
@@ -67,28 +79,37 @@ namespace GTI.Modules.ReportCenter.UI
             dgReportList.DataSource = mListOfAllReports;
             dgReportList.ClearSelection();   
         }
+
         private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {  
             if ((e.ColumnIndex == 2 || e.ColumnIndex == 1)  && e.RowIndex != -1)
             {
                 int tempId;
-                  bool res;
-               
-                DataGridViewRow selectedRow = dgReportList.Rows[e.RowIndex];              
-                res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);
+                bool res;
+                DataGridViewRow selectedRow = new DataGridViewRow();
+                selectedRow = dgReportList.Rows[e.RowIndex];
+                SelectedRow = new ReportData();
+                res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);              
                 SelectedRow.ReportId = tempId;           
                 SelectedRow.IsActive = Convert.ToBoolean(selectedRow.Cells[1].Value);
                 SelectedRow.ReportDisplayName = selectedRow.Cells[2].Value.ToString();
                 SelectedRow.ReportFileName = selectedRow.Cells[3].Value.ToString();
-                mListOfReportsEnable.Add(SelectedRow);
-                mListOfReportsOriginal.Add(SelectedRowOriginalValue);
+                AddRowData(SelectedRow);
             }
+        }
+
+        private void AddRowData(ReportData SelectedRow)
+        {
+            mListOfReportsEnable.Add(SelectedRow);
+            mListOfReportsOriginal.Add(SelectedRowOriginalValue);
         }
 
         private void btnSaveReportEdit_Click(object sender, EventArgs e)
         {
             SetUserDefineReports msg = new SetUserDefineReports(mListOfReportsEnable);
             msg.Send();
+            UpdateOtherReportUI();
+            mListOfReportsEnable = new List<ReportData>();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

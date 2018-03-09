@@ -45,8 +45,8 @@ namespace GTI.Modules.ReportCenter.Data
                 requestWriter.Write(tempIsEnable);
                 requestWriter.Write((ushort)rptInfo.ReportDisplayName.Length);
                 requestWriter.Write(rptInfo.ReportDisplayName.ToCharArray());
-                requestWriter.Write((ushort)rptInfo.ReportFileName.Length);
-                requestWriter.Write(rptInfo.ReportFileName.ToCharArray());
+                //requestWriter.Write((ushort)rptInfo.ReportFileName.Length);
+                //requestWriter.Write(rptInfo.ReportFileName.ToCharArray());
 
             }
 

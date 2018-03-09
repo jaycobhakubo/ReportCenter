@@ -53,8 +53,6 @@ namespace GTI.Modules.ReportCenter.UI
             mCenter = new FrmReportManager { Dock = DockStyle.Fill, MyParent = this };      //US1622
             mCustomizeReport = new frmCustomizeReport(this) {Dock = DockStyle.Fill};
             mCustomizeReport.Closed += CustomizeUserReport_Closed;
-            //mEditReport = new frmEditReport(this) { Dock = DockStyle.Fill };
-            //mEditReport.Closed += mEditReport_Closed;
         }
 
         private void ReportCenterMDIParent_Load(object sender, EventArgs e)
@@ -88,6 +86,7 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void mEditReport_Closed(object sender, EventArgs e)
         {
+            //Update the whole report
 
             Debug.WriteLine("mEditReport_Closed");
         }
@@ -631,7 +630,7 @@ namespace GTI.Modules.ReportCenter.UI
                              mEditReport.IsDisposed)
                 {
                     mEditReport = new frmEditReport(this);
-                    mEditReport.Closed += CustomizeUserReport_Closed;
+                    mEditReport.Closed += mEditReport_Closed;
                     mEditReport.Dock = DockStyle.Fill;
                 }
                 mEditReport.LoadDataIntoTheDataGrid();

@@ -5,9 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using GTI.Modules.Shared;
 using GTI.Modules.ReportCenter.Data;
+using GTI.Modules.ReportCenter.Business;
+using System.Threading;
 
 namespace GTI.Modules.ReportCenter.UI
 {
@@ -56,19 +59,61 @@ namespace GTI.Modules.ReportCenter.UI
             SetDataGrid();
         }
 
+        private GetReportListExMessage m_gotReports;
+
         private void UpdateOtherReportUI()
         {
-            List<ReportInfo> temp = new List<ReportInfo>();
-            foreach (ReportData rpt in mListOfReportsEnable)
-            {
-                ReportInfo x = MyParent.ReportsDictionary.Values.FirstOrDefault(l => l.ID == rpt.ReportId);
-                if (x != null)
-                {
-                    x.DisplayName = rpt.ReportDisplayName;
-                    x.IsEnable = rpt.IsActive;
-                }
-            }
+
+            //m_gotReports = Configuration.mForceEnglish ?
+            //    new GetReportListExMessage(ReportTypes.All, "en-US") :
+            //    new GetReportListExMessage(ReportTypes.All, Thread.CurrentThread.CurrentCulture.Name);
+
+            // m_gotReports.m_raffledisplaytextsetting = RaffleSettingDisplayText.valuerf;
+            // m_gotReports.Send();
+           
+            IsRefreshRequired = true;
+
+            
+
+            //List<ReportInfo> temp = new List<ReportInfo>();
+            //foreach (ReportData rpt in mListOfReportsEnable)//ReportData
+            //{
+            //    var x = MyParent.ReportsDictionary.Values.FirstOrDefault(l => l.ID == rpt.ReportId);//ReportInfo
+
+            //    if (x != null)
+            //    {
+            //        if (x.DisplayName != rpt.ReportDisplayName)
+            //        {
+            //            x.DisplayName = rpt.ReportDisplayName;
+            //        }
+
+            //        if (!rpt.IsActive)
+            //        {
+            //            var myKey = MyParent.ReportsDictionary.FirstOrDefault(y => y.Value.ID == x.ID).Key;
+            //            MyParent.ReportsDictionary.Remove(myKey);   //does it refresh itself?  
+            //            mListOfReportsEnable.SingleOrDefault(l => l.ReportId == x.ID).Key = myKey;
+
+            //        }
+            //        else
+            //        {
+            //            //if (rpt.ReportTypeId == (int)ReportTypes.Staff)
+            //            //{
+            //            // MyParent.ReportsDictionary.Add(rpt.Key, x);
+            //            //}
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //Refresh the whole report on closing event
+            //        IsRefreshRequired = true;
+            //        break;
+            //    }
+            //}
         }
+
+       public  bool IsRefreshRequired { get; set; }
+
+        public bool Is_IsActiveModify { get; set; }
 
         private void SetDataGrid()
         {
@@ -146,6 +191,7 @@ namespace GTI.Modules.ReportCenter.UI
         public string ReportDisplayName { get; set; }
         public string ReportFileName { get; set; }
         public int ReportTypeId { get; set; }
+        public int Key { get; set; }
 
     }
 }

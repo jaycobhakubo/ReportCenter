@@ -1170,12 +1170,18 @@ namespace GTI.Modules.ReportCenter.UI
             btnPrint.Enabled = btnPreview.Enabled = isOk && AreThereCheckedNodes();
             return isOk;
         }
+
+
+        private SplashScreen msplashScreen = new SplashScreen();
+
         internal bool GetReportsFromServer(SplashScreen splashScreen)
         {
             m_gotReports = Configuration.mForceEnglish ?
                 new GetReportListExMessage(ReportTypes.All, "en-US") :
                 new GetReportListExMessage(ReportTypes.All, Thread.CurrentThread.CurrentCulture.Name);
 
+
+            msplashScreen = splashScreen;
             try
             {
                 m_gotReports.m_raffledisplaytextsetting = RaffleSettingDisplayText.valuerf;
@@ -1208,6 +1214,49 @@ namespace GTI.Modules.ReportCenter.UI
 
             return true;
         }
+
+
+        public bool RefreshReport()
+        {
+            m_gotReports = Configuration.mForceEnglish ?
+                new GetReportListExMessage(ReportTypes.All, "en-US") :
+                new GetReportListExMessage(ReportTypes.All, Thread.CurrentThread.CurrentCulture.Name);
+
+
+            try
+            {
+                m_gotReports.m_raffledisplaytextsetting = RaffleSettingDisplayText.valuerf;
+                m_gotReports.Send();
+
+                // FIX : TA5952 Replace "Server Error 1" exception with msgbox indicating missing reports.
+                // see if server actually has the report
+                List<int> keys = (from report in m_gotReports.Reports
+                                  where string.IsNullOrEmpty(report.Value.FileName)
+                                  select report.Key).ToList();
+                foreach (int key in keys)
+                {
+                    ReportInfo info = m_gotReports.Reports[key];
+                    if (string.IsNullOrEmpty(info.FileName))
+                    {
+                        string msg = string.Format(Resources.reportIsMissing, info.DisplayName);
+                        MessageForm.Show(this, msg, Resources.report_center);
+                    }
+                    m_gotReports.Reports.Remove(key);
+                }
+                // END : TA5952
+                // Try to cache the reports to the local computer.
+                Business.ReportCenter.CacheReports(msplashScreen, m_gotReports.Reports);
+            }
+            catch (ServerException ex)
+            {
+                MessageForm.Show(this, ex.Message, Resources.report_center);
+                return false;
+            }
+
+            return true;
+        }
+
+
         private string GetPersonName(int intID)
         {
             FindStaffOrPlayerMessage foundPersons = new FindStaffOrPlayerMessage(true, 0, "", "", "");

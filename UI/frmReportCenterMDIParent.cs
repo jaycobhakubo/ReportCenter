@@ -79,15 +79,19 @@ namespace GTI.Modules.ReportCenter.UI
         #region Close Events
         private void CustomizeUserReport_Closed(object sender, EventArgs e)
         {
- 
             Debug.WriteLine("CustomizeUserReport_Closed");
         }
 
 
+        private void RefreshAllForm()
+        {
+
+        }
+
         private void mEditReport_Closed(object sender, EventArgs e)
         {
             //Update the whole report
-
+            //mCenter.RefreshReport();
             Debug.WriteLine("mEditReport_Closed");
         }
 
@@ -260,7 +264,7 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
-        public void LoadUserDefinedReports(bool showCustomButtons)
+        public void LoadUserDefinedReports(bool showCustomButtons)//knc
         {
             string locale = Configuration.mForceEnglish ? "en-US" : Thread.CurrentThread.CurrentCulture.Name;
             mUserReports = new GetUserReportList(Configuration.operatorID, Configuration.LoginStaffID,
@@ -426,6 +430,17 @@ namespace GTI.Modules.ReportCenter.UI
             try
             {
                 SuspendLayout();
+                //if ()
+                if (mEditReport != null)
+                {
+                    if (mEditReport.IsRefreshRequired)
+                    {
+                        mCenter.RefreshReport();
+                        target.Name = "";
+                        mEditReport.IsRefreshRequired = false;
+                    }
+                }
+
 
                 if (MdiChildren.Length > 0)
                 {
@@ -441,7 +456,7 @@ namespace GTI.Modules.ReportCenter.UI
                         }
                     }
                 }
-                SetMDIFormValues(target);               
+                SetMDIFormValues(target);
                 target.Show();
                 ResumeLayout(true);
                 PerformLayout();
@@ -449,6 +464,12 @@ namespace GTI.Modules.ReportCenter.UI
             catch (Exception ex)
             {
                 MessageForm.Show(this, "LoadTarget()...Exception: " + ex.Message, "Report Selection");
+            }
+
+            if (mEditReport != null)
+            {
+
+                mEditReport.IsRefreshRequired = false;
             }
         }
 
@@ -481,7 +502,7 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
-        public bool LoadReports(SplashScreen splashScreen)
+        public bool LoadReports(SplashScreen splashScreen)//knc_1
         {
             if (mCenter == null)
             {
@@ -493,7 +514,7 @@ namespace GTI.Modules.ReportCenter.UI
                 return false;
 
             //load user defined type
-            LoadUserDefinedReports(true);
+            LoadUserDefinedReports(true);//knc
 
             return true;
         }
@@ -615,6 +636,7 @@ namespace GTI.Modules.ReportCenter.UI
                     mCustomizeReport.Dock = DockStyle.Fill;
                 }
                 LoadTarget(mCustomizeReport);
+ 
             }
             catch (Exception ex)
             {

@@ -425,17 +425,22 @@ namespace GTI.Modules.ReportCenter.UI
             PerformLayout();
         }
 
+        public void RefreshReport()
+        {
+            mCenter.RefreshReport();
+        }
+
+
+
         public void LoadTarget(Form target)
         {
             try
             {
                 SuspendLayout();
-                //if ()
                 if (mEditReport != null)
                 {
                     if (mEditReport.IsRefreshRequired)
-                    {
-                        mCenter.RefreshReport();
+                    {                        
                         target.Name = "";
                         mEditReport.IsRefreshRequired = false;
                     }

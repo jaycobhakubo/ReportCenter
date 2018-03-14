@@ -35,9 +35,7 @@ namespace GTI.Modules.ReportCenter.Data
             base.UnpackResponse();
             MemoryStream responseStream = new MemoryStream(m_responsePayload);
             BinaryReader responseReader = new BinaryReader(responseStream, Encoding.Unicode);
-            responseReader.BaseStream.Seek(sizeof(int), SeekOrigin.Begin);
-
-        
+            responseReader.BaseStream.Seek(sizeof(int), SeekOrigin.Begin);        
             ushort Count = responseReader.ReadUInt16();
             string tempName = string.Empty;
             ushort tempLength = 0;
@@ -54,7 +52,8 @@ namespace GTI.Modules.ReportCenter.Data
                 tempValue.ReportDisplayName = new string(responseReader.ReadChars(tempLength));
                 tempLength = responseReader.ReadUInt16();//4
                 tempValue.ReportFileName = new string(responseReader.ReadChars(tempLength));
-              
+                tempValue.ReportType = Enum.GetName(typeof(ReportTypes), tempValue.ReportTypeId);
+
                 mListRptData.Add(tempValue);    
             }
 

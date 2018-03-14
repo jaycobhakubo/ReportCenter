@@ -136,6 +136,9 @@
   <data name="IsActive.HeaderText" xml:space="preserve">
     <value>Enable</value>
   </data>
+  <data name="IsActive.Width" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
   <metadata name="ReportDisplayName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -152,7 +155,7 @@
     <value>Report Type</value>
   </data>
   <data name="ReportType.Width" type="System.Int32, mscorlib">
-    <value>200</value>
+    <value>125</value>
   </data>
   <metadata name="ReportFileName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -119,7 +119,7 @@
             // 
             // ReportType
             // 
-            this.ReportType.DataPropertyName = "ReportTypeId";
+            this.ReportType.DataPropertyName = "ReportType";
             resources.ApplyResources(this.ReportType, "ReportType");
             this.ReportType.Name = "ReportType";
             this.ReportType.ReadOnly = true;

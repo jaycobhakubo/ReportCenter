@@ -143,7 +143,6 @@ namespace GTI.Modules.ReportCenter.Business
                     // Listen for the event where something wants the Security Center to stop.
                     StopMe += new EventHandler(mReportMDI.ExitReportCenter);
                     BringToFront += new EventHandler(ComeToFrontEvent);
-
                     mSplashScreen.CloseForm();
                     mSplashScreen.Dispose();
                     Utilities.Log("Start running...", LoggerLevel.Information);

@@ -27,8 +27,7 @@ namespace GTI.Modules.ReportCenter.UI
 
         public frmEditReport(frmReportCenterMDIParent myParent)
         {
-            MyParent = myParent;
-            
+            MyParent = myParent;            
             InitializeComponent();
             mListOfReportsEnable = new List<ReportData>();
             mListOfReportsOriginal = new List<ReportData>();
@@ -140,6 +139,7 @@ namespace GTI.Modules.ReportCenter.UI
         public string ReportDisplayName { get; set; }
         public string ReportFileName { get; set; }
         public int ReportTypeId { get; set; }
+        public string ReportType { get; set; }
     }
 }
 

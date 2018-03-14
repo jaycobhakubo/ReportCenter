@@ -53,7 +53,9 @@ namespace GTI.Modules.ReportCenter.UI
         private void UpdateOtherReportUI()
         {       
             IsRefreshRequired = true;
+            Cursor.Current = Cursors.WaitCursor;
             MyParent.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
 

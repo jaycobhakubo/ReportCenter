@@ -145,6 +145,15 @@
   <data name="ReportDisplayName.Width" type="System.Int32, mscorlib">
     <value>134</value>
   </data>
+  <metadata name="ReportType.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ReportType.HeaderText" xml:space="preserve">
+    <value>Report Type</value>
+  </data>
+  <data name="ReportType.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
   <metadata name="ReportFileName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -156,10 +165,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dgReportList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 40</value>
+    <value>17, 118</value>
   </data>
   <data name="dgReportList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 546</value>
+    <value>992, 444</value>
   </data>
   <data name="dgReportList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -391,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>508, 625</value>
+    <value>508, 587</value>
   </data>
   <data name="btnCancel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>30, 40</value>
@@ -409,7 +418,7 @@
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.991, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
+    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.1015, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
@@ -631,7 +640,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnSaveReportEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 624</value>
+    <value>339, 586</value>
   </data>
   <data name="btnSaveReportEdit.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>30, 40</value>
@@ -649,7 +658,7 @@
     <value>btnSaveReportEdit</value>
   </data>
   <data name="&gt;&gt;btnSaveReportEdit.Type" xml:space="preserve">
-    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.991, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
+    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.1015, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
   </data>
   <data name="&gt;&gt;btnSaveReportEdit.Parent" xml:space="preserve">
     <value>$this</value>
@@ -696,6 +705,12 @@
   <data name="&gt;&gt;ReportDisplayName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ReportType.Name" xml:space="preserve">
+    <value>ReportType</value>
+  </data>
+  <data name="&gt;&gt;ReportType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ReportFileName.Name" xml:space="preserve">
     <value>ReportFileName</value>
   </data>
@@ -706,6 +721,6 @@
     <value>frmEditReport</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GTI.Modules.Shared.GradientForm, ManagedEliteModule, Version=1.3.42.991, Culture=neutral, PublicKeyToken=f7ab3ec26b04c7cf</value>
+    <value>GTI.Modules.Shared.GradientForm, ManagedEliteModule, Version=1.3.42.1015, Culture=neutral, PublicKeyToken=f7ab3ec26b04c7cf</value>
   </data>
 </root>

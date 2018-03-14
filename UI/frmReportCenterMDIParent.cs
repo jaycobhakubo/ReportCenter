@@ -264,7 +264,7 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
-        public void LoadUserDefinedReports(bool showCustomButtons)//knc
+        public void LoadUserDefinedReports(bool showCustomButtons)
         {
             string locale = Configuration.mForceEnglish ? "en-US" : Thread.CurrentThread.CurrentCulture.Name;
             mUserReports = new GetUserReportList(Configuration.operatorID, Configuration.LoginStaffID,
@@ -507,7 +507,7 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
-        public bool LoadReports(SplashScreen splashScreen)//knc_1
+        public bool LoadReports(SplashScreen splashScreen)
         {
             if (mCenter == null)
             {
@@ -519,7 +519,7 @@ namespace GTI.Modules.ReportCenter.UI
                 return false;
 
             //load user defined type
-            LoadUserDefinedReports(true);//knc
+            LoadUserDefinedReports(true);
 
             return true;
         }

@@ -140,8 +140,6 @@ namespace GTI.Modules.ReportCenter.UI
         public string ReportDisplayName { get; set; }
         public string ReportFileName { get; set; }
         public int ReportTypeId { get; set; }
-        public int Key { get; set; }
-
     }
 }
 

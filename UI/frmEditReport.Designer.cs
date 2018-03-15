@@ -45,6 +45,7 @@
             // 
             this.dgReportList.AllowUserToAddRows = false;
             this.dgReportList.AllowUserToDeleteRows = false;
+            this.dgReportList.AllowUserToOrderColumns = true;
             this.dgReportList.AllowUserToResizeColumns = false;
             this.dgReportList.AllowUserToResizeRows = false;
             this.dgReportList.BackgroundColor = System.Drawing.Color.White;
@@ -70,6 +71,7 @@
             this.dgReportList.RowHeadersVisible = false;
             this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
             this.dgReportList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellValueChanged);
+            this.dgReportList.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgReportList_ColumnHeaderMouseClick);
             // 
             // btnCancel
             // 
@@ -103,12 +105,14 @@
             this.ReportId.Name = "ReportId";
             this.ReportId.ReadOnly = true;
             this.ReportId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ReportId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // IsActive
             // 
             this.IsActive.DataPropertyName = "IsActive";
             resources.ApplyResources(this.IsActive, "IsActive");
             this.IsActive.Name = "IsActive";
+            this.IsActive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ReportDisplayName
             // 
@@ -116,6 +120,7 @@
             this.ReportDisplayName.DataPropertyName = "ReportDisplayName";
             resources.ApplyResources(this.ReportDisplayName, "ReportDisplayName");
             this.ReportDisplayName.Name = "ReportDisplayName";
+            this.ReportDisplayName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ReportType
             // 
@@ -123,6 +128,7 @@
             resources.ApplyResources(this.ReportType, "ReportType");
             this.ReportType.Name = "ReportType";
             this.ReportType.ReadOnly = true;
+            this.ReportType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ReportFileName
             // 
@@ -131,6 +137,8 @@
             resources.ApplyResources(this.ReportFileName, "ReportFileName");
             this.ReportFileName.Name = "ReportFileName";
             this.ReportFileName.ReadOnly = true;
+            this.ReportFileName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ReportFileName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frmEditReport
             // 

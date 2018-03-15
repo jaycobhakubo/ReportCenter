@@ -116,20 +116,87 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            SelectedRowOriginalValue = new ReportData();
-            DataGridViewRow selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
-            int tempId;
-            bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
-            SelectedRowOriginalValue.ReportId = tempId;
-            SelectedRowOriginalValue.IsActive = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
-            SelectedRowOriginalValue.ReportDisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
-            SelectedRowOriginalValue.ReportFileName = selectedRowUnchanged.Cells[3].Value.ToString();
+            if (e.RowIndex != -1)
+            {
+                SelectedRowOriginalValue = new ReportData();
+                DataGridViewRow selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
+                int tempId;
+                bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
+                SelectedRowOriginalValue.ReportId = tempId;
+                SelectedRowOriginalValue.IsActive = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
+                SelectedRowOriginalValue.ReportDisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
+                SelectedRowOriginalValue.ReportFileName = selectedRowUnchanged.Cells[3].Value.ToString();
+            }
         }
 
 
         public bool IsRefreshRequired { get; set; }
         public bool Is_IsActiveModify { get; set; }
-    }
+
+        private void dgReportList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+            SortOrder so = SortOrder.None;
+
+            if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
+                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+            {
+                so = SortOrder.Descending;
+            }
+            else
+            {
+                so = SortOrder.Ascending;
+            }
+            //set SortGlyphDirection after databinding otherwise will always be none 
+            Sort(grid.Columns[e.ColumnIndex].Name, so);
+            grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so; 
+        }
+
+          private void Sort(string column, SortOrder sortOrder)
+        {
+            switch (column)
+            {
+                case "ReportDisplayName":
+                    {
+                        if (sortOrder == SortOrder.Ascending)
+                        {
+                           dgReportList.DataSource = mListOfAllReports.OrderBy(x => x.ReportDisplayName).ToList();
+                        }
+                        else
+                        {
+                            dgReportList.DataSource = mListOfAllReports.OrderByDescending(x => x.ReportDisplayName).ToList();
+                        }
+                        break;
+                    }
+                case "ReportType":
+                    {
+                        if (sortOrder == SortOrder.Ascending)
+                        {
+                            dgReportList.DataSource = mListOfAllReports.OrderBy(x => x.ReportType).ToList();
+                        }
+                        else
+                        {
+                            dgReportList.DataSource = mListOfAllReports.OrderByDescending(x => x.ReportType).ToList();
+                        }
+                        break;
+                    }
+                //case "Birthday":
+                //    {
+                //        if (sortOrder == SortOrder.Ascending)
+                //        {
+                //            dgvPeople.DataSource = lstPeople.OrderBy(x => x.Birthday).ToList();
+                //        }
+                //        else
+                //        {
+                //            dgvPeople.DataSource = lstPeople.OrderByDescending(x => x.Birthday).ToList();
+                //        }
+                //        break;
+                    }
+            }
+
+        }
+    
+    
 
 
     public class ReportData

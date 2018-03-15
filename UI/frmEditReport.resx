@@ -164,7 +164,7 @@
     <value>File Name</value>
   </data>
   <data name="ReportFileName.Width" type="System.Int32, mscorlib">
-    <value>110</value>
+    <value>91</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dgReportList.Location" type="System.Drawing.Point, System.Drawing">

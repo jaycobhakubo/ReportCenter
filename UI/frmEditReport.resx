@@ -168,10 +168,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dgReportList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 118</value>
+    <value>17, 19</value>
   </data>
   <data name="dgReportList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 444</value>
+    <value>980, 537</value>
   </data>
   <data name="dgReportList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -403,7 +403,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>508, 587</value>
+    <value>504, 581</value>
   </data>
   <data name="btnCancel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>30, 40</value>
@@ -643,7 +643,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnSaveReportEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 586</value>
+    <value>335, 580</value>
   </data>
   <data name="btnSaveReportEdit.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>30, 40</value>
@@ -676,7 +676,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1025, 683</value>
+    <value>1025, 647</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 12pt, style=Bold</value>

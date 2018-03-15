@@ -91,7 +91,6 @@ namespace GTI.Modules.ReportCenter.UI
         private void mEditReport_Closed(object sender, EventArgs e)
         {
             //Update the whole report
-            //mCenter.RefreshReport();
             Debug.WriteLine("mEditReport_Closed");
         }
 
@@ -606,7 +605,9 @@ namespace GTI.Modules.ReportCenter.UI
             try
             {
                 LoadTarget(mCenter);
+                InitializeUserReport();
                 mCenter.LoadPredefinedReports();
+
             }
             catch (Exception ex)
             {
@@ -661,8 +662,10 @@ namespace GTI.Modules.ReportCenter.UI
                     mEditReport.Dock = DockStyle.Fill;
                 }
                 mEditReport.LoadDataIntoTheDataGrid();
-                userReportMenu.Visible = false;
+     
                 LoadTarget(mEditReport);
+                mEditReport.HideReportMenu();
+                //userReportMenu.Visible = false;
             }
             catch (Exception ex)
             {

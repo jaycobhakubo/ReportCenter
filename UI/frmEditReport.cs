@@ -36,7 +36,23 @@ namespace GTI.Modules.ReportCenter.UI
         private void frmEditReport_Load(object sender, EventArgs e)
         {
             if (MyParent.userReportMenu != null)
+            {
+                //MyParent.userReportMenu. = false;
+                //MyParent.userReportMenu.Hide();
+            }
+        }
+
+        public void HideReportMenu()
+        {
+            if (MyParent.userReportMenu != null)
+            {
+
                 MyParent.userReportMenu.Visible = false;
+                MyParent.userReportMenu.Hide();
+                MyParent.userReportMenu.Dispose();
+                MyParent.userReportMenu = null;
+
+            }
         }
 
         public void LoadDataIntoTheDataGrid()
@@ -95,10 +111,13 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void btnSaveReportEdit_Click(object sender, EventArgs e)
         {
-            SetUserDefineReports msg = new SetUserDefineReports(mListOfReportsEnable);
-            msg.Send();
-            UpdateOtherReportUI();
-            mListOfReportsEnable = new List<ReportData>();
+            if (mListOfReportsEnable.Count > 0)
+            {
+                SetUserDefineReports msg = new SetUserDefineReports(mListOfReportsEnable);
+                msg.Send();
+                UpdateOtherReportUI();
+                mListOfReportsEnable = new List<ReportData>();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -180,18 +199,7 @@ namespace GTI.Modules.ReportCenter.UI
                         }
                         break;
                     }
-                //case "Birthday":
-                //    {
-                //        if (sortOrder == SortOrder.Ascending)
-                //        {
-                //            dgvPeople.DataSource = lstPeople.OrderBy(x => x.Birthday).ToList();
-                //        }
-                //        else
-                //        {
-                //            dgvPeople.DataSource = lstPeople.OrderByDescending(x => x.Birthday).ToList();
-                //        }
-                //        break;
-                    }
+                }
             }
 
         }

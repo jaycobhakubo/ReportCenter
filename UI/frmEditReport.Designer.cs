@@ -31,13 +31,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditReport));
             this.dgReportList = new System.Windows.Forms.DataGridView();
-            this.btnCancel = new GTI.Controls.ImageButton();
-            this.btnSaveReportEdit = new GTI.Controls.ImageButton();
             this.ReportId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ReportDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReportType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReportFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancel = new GTI.Controls.ImageButton();
+            this.btnSaveReportEdit = new GTI.Controls.ImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,31 +72,6 @@
             this.dgReportList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellClick);
             this.dgReportList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellValueChanged);
             this.dgReportList.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgReportList_ColumnHeaderMouseClick);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.Color.Transparent;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FocusColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.btnCancel, "btnCancel");
-            this.btnCancel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImageNormal")));
-            this.btnCancel.ImagePressed = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImagePressed")));
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnSaveReportEdit
-            // 
-            this.btnSaveReportEdit.BackColor = System.Drawing.Color.Transparent;
-            this.btnSaveReportEdit.FocusColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.btnSaveReportEdit, "btnSaveReportEdit");
-            this.btnSaveReportEdit.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnSaveReportEdit.ImageNormal")));
-            this.btnSaveReportEdit.ImagePressed = ((System.Drawing.Image)(resources.GetObject("btnSaveReportEdit.ImagePressed")));
-            this.btnSaveReportEdit.Name = "btnSaveReportEdit";
-            this.btnSaveReportEdit.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
-            this.btnSaveReportEdit.UseVisualStyleBackColor = false;
-            this.btnSaveReportEdit.Click += new System.EventHandler(this.btnSaveReportEdit_Click);
             // 
             // ReportId
             // 
@@ -139,6 +114,31 @@
             this.ReportFileName.ReadOnly = true;
             this.ReportFileName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ReportFileName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Transparent;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FocusColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImageNormal")));
+            this.btnCancel.ImagePressed = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImagePressed")));
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnSaveReportEdit
+            // 
+            this.btnSaveReportEdit.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveReportEdit.FocusColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btnSaveReportEdit, "btnSaveReportEdit");
+            this.btnSaveReportEdit.ImageNormal = ((System.Drawing.Image)(resources.GetObject("btnSaveReportEdit.ImageNormal")));
+            this.btnSaveReportEdit.ImagePressed = ((System.Drawing.Image)(resources.GetObject("btnSaveReportEdit.ImagePressed")));
+            this.btnSaveReportEdit.Name = "btnSaveReportEdit";
+            this.btnSaveReportEdit.SecondaryTextPadding = new System.Windows.Forms.Padding(5);
+            this.btnSaveReportEdit.UseVisualStyleBackColor = false;
+            this.btnSaveReportEdit.Click += new System.EventHandler(this.btnSaveReportEdit_Click);
             // 
             // frmEditReport
             // 

@@ -11,12 +11,13 @@ using GTI.Modules.Shared;
 using GTI.Modules.ReportCenter.Data;
 using GTI.Modules.ReportCenter.Business;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace GTI.Modules.ReportCenter.UI
 {
-    public partial class frmEditReport :  GradientForm
+    public partial class frmEditReport : GradientForm
     {
-
+        //Private Member's
         private List<ReportData> mListOfAllReports;
         private List<ReportData> mListOfReportsEnable;
         private List<ReportData> mListOfReportsOriginal;
@@ -25,36 +26,38 @@ namespace GTI.Modules.ReportCenter.UI
         public frmReportCenterMDIParent MyParent { get; private set; }
         private GetUserDefineReports getUserDefineReportsMsg;
 
+        //Properties
+        public bool IsRefreshRequired { get; set; }
+        public bool Is_IsActiveModify { get; set; }
+
+
+
+        //Constructors
         public frmEditReport(frmReportCenterMDIParent myParent)
         {
-            MyParent = myParent;            
+            MyParent = myParent;
             InitializeComponent();
             mListOfReportsEnable = new List<ReportData>();
             mListOfReportsOriginal = new List<ReportData>();
-         }
-
-        private void frmEditReport_Load(object sender, EventArgs e)
-        {
-            if (MyParent.userReportMenu != null)
-            {
-                //MyParent.userReportMenu. = false;
-                //MyParent.userReportMenu.Hide();
-            }
         }
 
-        public void HideReportMenu()
+        #region Method
+
+        public void HideReportMenu()  //Delete tool strip menu. //UI keep shifting UI when this is active it should only be active in standard report.
         {
             if (MyParent.userReportMenu != null)
             {
 
-                MyParent.userReportMenu.Visible = false;
-                MyParent.userReportMenu.Hide();
+                //MyParent.userReportMenu.Visible = false;
+                //MyParent.userReportMenu.Hide();
                 MyParent.userReportMenu.Dispose();
                 MyParent.userReportMenu = null;
-
+                dgReportList.Refresh();
+              
             }
         }
 
+        //Get all list of report 
         public void LoadDataIntoTheDataGrid()
         {
             mListOfAllReports = new List<ReportData>();
@@ -64,9 +67,9 @@ namespace GTI.Modules.ReportCenter.UI
             SetDataGrid();
         }
 
-
+        //Update the whole report data
         private void UpdateOtherReportUI()
-        {       
+        {
             IsRefreshRequired = true;
             Cursor.Current = Cursors.WaitCursor;
             MyParent.RefreshReport();
@@ -74,7 +77,7 @@ namespace GTI.Modules.ReportCenter.UI
         }
 
 
-
+        //display UI 
         private void SetDataGrid()
         {
             dgReportList.DataSource = null;
@@ -82,96 +85,19 @@ namespace GTI.Modules.ReportCenter.UI
             dgReportList.AutoGenerateColumns = false;
             dgReportList.AllowUserToAddRows = false;
             dgReportList.DataSource = mListOfAllReports;
-            dgReportList.ClearSelection();   
+            Sort("ReportDisplayName", SortOrder.Ascending);
+            dgReportList.ClearSelection();
         }
 
-        private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {  
-            if ((e.ColumnIndex == 2 || e.ColumnIndex == 1)  && e.RowIndex != -1)
-            {
-                int tempId;
-                bool res;
-                DataGridViewRow selectedRow = new DataGridViewRow();
-                selectedRow = dgReportList.Rows[e.RowIndex];
-                SelectedRow = new ReportData();
-                res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);              
-                SelectedRow.ReportId = tempId;           
-                SelectedRow.IsActive = Convert.ToBoolean(selectedRow.Cells[1].Value);
-                SelectedRow.ReportDisplayName = selectedRow.Cells[2].Value.ToString();
-                SelectedRow.ReportFileName = selectedRow.Cells[3].Value.ToString();
-                AddRowData(SelectedRow);
-            }
-        }
-
+        //ADD original value and modifieed vale
         private void AddRowData(ReportData SelectedRow)
         {
             mListOfReportsEnable.Add(SelectedRow);
             mListOfReportsOriginal.Add(SelectedRowOriginalValue);
         }
 
-        private void btnSaveReportEdit_Click(object sender, EventArgs e)
-        {
-            if (mListOfReportsEnable.Count > 0)
-            {
-                SetUserDefineReports msg = new SetUserDefineReports(mListOfReportsEnable);
-                msg.Send();
-                UpdateOtherReportUI();
-                mListOfReportsEnable = new List<ReportData>();
-            }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            foreach (ReportData x in mListOfReportsOriginal)
-            {
-                int temID = x.ReportId;
-                mListOfAllReports.FirstOrDefault(l => l.ReportId == temID).ReportDisplayName= x.ReportDisplayName;
-            }
-
-            dgReportList.Update();
-            dgReportList.RefreshEdit();
-            dgReportList.Refresh();
-        }
-
-        private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1)
-            {
-                SelectedRowOriginalValue = new ReportData();
-                DataGridViewRow selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
-                int tempId;
-                bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
-                SelectedRowOriginalValue.ReportId = tempId;
-                SelectedRowOriginalValue.IsActive = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
-                SelectedRowOriginalValue.ReportDisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
-                SelectedRowOriginalValue.ReportFileName = selectedRowUnchanged.Cells[3].Value.ToString();
-            }
-        }
-
-
-        public bool IsRefreshRequired { get; set; }
-        public bool Is_IsActiveModify { get; set; }
-
-        private void dgReportList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            DataGridView grid = (DataGridView)sender;
-            SortOrder so = SortOrder.None;
-
-            if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
-                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
-            {
-                so = SortOrder.Descending;
-            }
-            else
-            {
-                so = SortOrder.Ascending;
-            }
-            //set SortGlyphDirection after databinding otherwise will always be none 
-            Sort(grid.Columns[e.ColumnIndex].Name, so);
-            grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so; 
-        }
-
-          private void Sort(string column, SortOrder sortOrder)
+        //SORT 
+        private void Sort(string column, SortOrder sortOrder)
         {
             switch (column)
             {
@@ -179,7 +105,7 @@ namespace GTI.Modules.ReportCenter.UI
                     {
                         if (sortOrder == SortOrder.Ascending)
                         {
-                           dgReportList.DataSource = mListOfAllReports.OrderBy(x => x.ReportDisplayName).ToList();
+                            dgReportList.DataSource = mListOfAllReports.OrderBy(x => x.ReportDisplayName).ToList();
                         }
                         else
                         {
@@ -199,14 +125,123 @@ namespace GTI.Modules.ReportCenter.UI
                         }
                         break;
                     }
+            }
+        }
+
+        #endregion
+
+        #region Event's
+
+        //private void frmEditReport_Load(object sender, EventArgs e)
+        //{
+        //    if (MyParent.userReportMenu != null)
+        //    {
+        //MyParent.userReportMenu. = false;
+        //MyParent.userReportMenu.Hide();
+        //    }
+        //}
+
+        //SAVE
+        private void btnSaveReportEdit_Click(object sender, EventArgs e)
+        {
+            if (mListOfReportsEnable.Count > 0)
+            {
+                SetUserDefineReports msg = new SetUserDefineReports(mListOfReportsEnable);
+                msg.Send();
+                UpdateOtherReportUI();
+                mListOfReportsEnable = new List<ReportData>();
+            }
+        }
+
+        //CANCEL
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            foreach (ReportData x in mListOfReportsOriginal)
+            {
+                int temID = x.ReportId;
+                mListOfAllReports.FirstOrDefault(l => l.ReportId == temID).ReportDisplayName = x.ReportDisplayName;
+            }
+
+            dgReportList.Update();
+            dgReportList.RefreshEdit();
+            dgReportList.Refresh();
+        }
+
+        //Validate user input no blank name report
+        private void dgReportList_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(e.FormattedValue.ToString()))
+            {
+                dgReportList.CancelEdit();
+                e.Cancel = true;
+            }
+        }
+
+        //Cell Click
+        private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                SelectedRowOriginalValue = new ReportData();
+                DataGridViewRow selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
+                int tempId;
+                bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
+                SelectedRowOriginalValue.ReportId = tempId;
+                SelectedRowOriginalValue.IsActive = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
+                SelectedRowOriginalValue.ReportDisplayName = selectedRowUnchanged.Cells[2].Value.ToString();
+                SelectedRowOriginalValue.ReportFileName = selectedRowUnchanged.Cells[3].Value.ToString();
+            }
+        }
+
+        //Cell value changed
+        private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if ((e.ColumnIndex == 2 || e.ColumnIndex == 1) && e.RowIndex != -1)
+            {
+                int tempId;
+                bool res;
+                DataGridViewRow selectedRow = new DataGridViewRow();
+                selectedRow = dgReportList.Rows[e.RowIndex];
+                SelectedRow = new ReportData();
+                res = int.TryParse(selectedRow.Cells[0].Value.ToString(), out tempId);
+                SelectedRow.ReportId = tempId;
+                SelectedRow.IsActive = Convert.ToBoolean(selectedRow.Cells[1].Value);
+                if (selectedRow.Cells[2].Value != null)
+                {
+                    SelectedRow.ReportDisplayName = selectedRow.Cells[2].Value.ToString();
                 }
+
+                SelectedRow.ReportFileName = selectedRow.Cells[3].Value.ToString();
+                AddRowData(SelectedRow);
             }
 
         }
-    
-    
 
 
+        //Header click for sorting
+        private void dgReportList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+            SortOrder so = SortOrder.None;
+
+            if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
+                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+            {
+                so = SortOrder.Descending;
+            }
+            else
+            {
+                so = SortOrder.Ascending;
+            }
+            //set SortGlyphDirection after databinding otherwise will always be none 
+            Sort(grid.Columns[e.ColumnIndex].Name, so);
+            grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so;
+        }
+
+        #endregion
+    }
+    
+    
     public class ReportData
     {
         public int ReportId { get; set; }

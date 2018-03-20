@@ -430,7 +430,6 @@ namespace GTI.Modules.ReportCenter.UI
         }
 
 
-
         public void LoadTarget(Form target)
         {
             try
@@ -438,6 +437,31 @@ namespace GTI.Modules.ReportCenter.UI
                 SuspendLayout();
                 if (mEditReport != null)
                 {
+                    if (mEditReport.IsMdiChild && mEditReport.IsModified())
+                    {
+                        //MessageBox.Show("I am child");
+                        ////mEditReport.'
+                        //mEditReport.
+                        mEditReport.Close();
+                        if (mEditReport.StopFromClosing == true)
+                        {
+                            mEditReport.HideReportMenu();
+                            return;
+                        }
+                        //    target = mEditReport;
+                        //    SetMDIFormValues(target);
+                        //    target.BringToFront();
+                        //    ResumeLayout(true);
+                        //    PerformLayout();
+                        //    return;          
+                        //}
+                    }
+
+                    //if (mEditReport.IsMdiContainer)
+                    //{
+                    //    MessageBox.Show("I am container");
+                    //}
+
                     if (mEditReport.IsRefreshRequired)
                     {                        
                         target.Name = "";

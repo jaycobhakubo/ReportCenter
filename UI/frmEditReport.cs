@@ -12,6 +12,7 @@ using GTI.Modules.ReportCenter.Data;
 using GTI.Modules.ReportCenter.Business;
 using System.Threading;
 using System.Text.RegularExpressions;
+using GTI.Modules.ReportCenter.Properties;
 
 namespace GTI.Modules.ReportCenter.UI
 {
@@ -48,8 +49,8 @@ namespace GTI.Modules.ReportCenter.UI
             if (MyParent.userReportMenu != null)
             {
 
-                //MyParent.userReportMenu.Visible = false;
-                //MyParent.userReportMenu.Hide();
+                MyParent.userReportMenu.Visible = false;
+                MyParent.userReportMenu.Hide();
                 MyParent.userReportMenu.Dispose();
                 MyParent.userReportMenu = null;
                 dgReportList.Refresh();
@@ -92,6 +93,12 @@ namespace GTI.Modules.ReportCenter.UI
         //ADD original value and modifieed vale
         private void AddRowData(ReportData SelectedRow)
         {
+            var f = mListOfReportsEnable.Exists(l => l.ReportId == SelectedRow.ReportId);
+            if (f == true)
+            {
+                mListOfReportsEnable.RemoveAll(l => l.ReportId == SelectedRow.ReportId);
+            }
+           
             mListOfReportsEnable.Add(SelectedRow);
             mListOfReportsOriginal.Add(SelectedRowOriginalValue);
         }
@@ -128,6 +135,26 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
+        public bool IsModified()
+        {
+            bool result = false;
+            if (selectedRowUnchanged.Index != -1)
+            {
+                bool Original = Convert.ToBoolean(selectedRowUnchanged.Cells[1].Value);
+                bool Edited = Convert.ToBoolean(selectedRowUnchanged.Cells[1].EditedFormattedValue);
+                if (Original != Edited)
+                {
+                    result = true;
+                }
+
+                if (selectedRowUnchanged.Cells[1].Value.ToString() != selectedRowUnchanged.Cells[2].EditedFormattedValue.ToString())
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
+
         #endregion
 
         #region Event's
@@ -142,7 +169,8 @@ namespace GTI.Modules.ReportCenter.UI
         //}
 
         //SAVE
-        private void btnSaveReportEdit_Click(object sender, EventArgs e)
+
+        private void Saved()
         {
             if (mListOfReportsEnable.Count > 0)
             {
@@ -150,21 +178,36 @@ namespace GTI.Modules.ReportCenter.UI
                 msg.Send();
                 UpdateOtherReportUI();
                 mListOfReportsEnable = new List<ReportData>();
+                selectedRowUnchanged = new DataGridViewRow();
+                mListOfReportsEnable = new List<ReportData>();
+                mListOfReportsOriginal = new System.Collections.Generic.List<ReportData>();
             }
         }
 
-        //CANCEL
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void RevertAllChanges()
         {
             foreach (ReportData x in mListOfReportsOriginal)
             {
                 int temID = x.ReportId;
                 mListOfAllReports.FirstOrDefault(l => l.ReportId == temID).ReportDisplayName = x.ReportDisplayName;
             }
-
+            selectedRowUnchanged = new DataGridViewRow();
+            mListOfReportsEnable = new List<ReportData>();
+            mListOfReportsOriginal = new System.Collections.Generic.List<ReportData>();
             dgReportList.Update();
             dgReportList.RefreshEdit();
             dgReportList.Refresh();
+        }
+
+        private void btnSaveReportEdit_Click(object sender, EventArgs e)
+        {
+            Saved();
+        }
+
+        //CANCEL
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            RevertAllChanges();
         }
 
         //Validate user input no blank name report
@@ -178,12 +221,13 @@ namespace GTI.Modules.ReportCenter.UI
         }
 
         //Cell Click
+        private DataGridViewRow selectedRowUnchanged = new DataGridViewRow();
         private void dgReportList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
             {
                 SelectedRowOriginalValue = new ReportData();
-                DataGridViewRow selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
+                selectedRowUnchanged = dgReportList.Rows[e.RowIndex];
                 int tempId;
                 bool res = int.TryParse(selectedRowUnchanged.Cells[0].Value.ToString(), out tempId);
                 SelectedRowOriginalValue.ReportId = tempId;
@@ -192,6 +236,31 @@ namespace GTI.Modules.ReportCenter.UI
                 SelectedRowOriginalValue.ReportFileName = selectedRowUnchanged.Cells[3].Value.ToString();
             }
         }
+
+    
+
+        //Header click for sorting
+        private void dgReportList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+            SortOrder so = SortOrder.None;
+
+            if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
+                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+            {
+                so = SortOrder.Descending;
+            }
+            else
+            {
+                so = SortOrder.Ascending;
+            }
+            //set SortGlyphDirection after databinding otherwise will always be none 
+            Sort(grid.Columns[e.ColumnIndex].Name, so);
+            grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so;
+        }
+
+        #endregion
+
 
         //Cell value changed
         private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -218,27 +287,85 @@ namespace GTI.Modules.ReportCenter.UI
         }
 
 
-        //Header click for sorting
-        private void dgReportList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            DataGridView grid = (DataGridView)sender;
-            SortOrder so = SortOrder.None;
 
-            if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
-                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+
+        private void frmEditReport_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            MessageBox.Show("Validating");
+        }
+        public bool StopFromClosing = false;
+
+        //private void frmEditReport_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //   // MessageBox.Show("closed");
+        //    if (mListOfReportsEnable.Count > 0)
+        //    {
+        //        DialogResult result = MessageForm.Show(this, Resources.SaveChangesMessage, Resources.SaveChangesHeader, MessageFormTypes.YesNoCancel);
+        //        this.Refresh();
+        //        if (result == DialogResult.Yes)
+        //        {
+        //            // If save fails remain on current tab
+        //            //if (!m_activeControl.SaveSettings())
+        //            //{
+        //            //e.Cancel = true;
+        //            //}
+        //            Saved();
+
+        //        }
+        //        else if (result == DialogResult.Cancel)
+        //        {
+        //            StopFromClosing = true;
+        //        }
+        //        else if (result == DialogResult.No)
+        //        {
+        //            RevertAllChanges();
+        //            // Flag it for reset if they do not save
+        //            //  m_bResetPreviousControl = true;
+        //        }
+        //    }
+          
+           
+        //}
+
+        private void frmEditReport_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            if (mListOfReportsEnable.Count > 0)
             {
-                so = SortOrder.Descending;
+                DialogResult result = MessageForm.Show(this, Resources.SaveChangesMessage, Resources.SaveChangesHeader, MessageFormTypes.YesNoCancel);
+                this.Refresh();
+                if (result == DialogResult.Yes)
+                {
+                    // If save fails remain on current tab
+                    //if (!m_activeControl.SaveSettings())
+                    //{
+                    //e.Cancel = true;
+                    //}
+                    Saved();
+
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    StopFromClosing = true;
+                }
+                else if (result == DialogResult.No)
+                {
+                    RevertAllChanges();
+                    // Flag it for reset if they do not save
+                    //  m_bResetPreviousControl = true;
+                }
+
+                e.Cancel = true;
+                MessageBox.Show("Closing");
             }
-            else
-            {
-                so = SortOrder.Ascending;
-            }
-            //set SortGlyphDirection after databinding otherwise will always be none 
-            Sort(grid.Columns[e.ColumnIndex].Name, so);
-            grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so;
         }
 
-        #endregion
+        //private void dgReportList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    MessageBox.Show("closing");
+        //}
+
     }
     
     

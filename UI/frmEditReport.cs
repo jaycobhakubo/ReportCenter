@@ -27,11 +27,6 @@ namespace GTI.Modules.ReportCenter.UI
         public frmReportCenterMDIParent MyParent { get; private set; }
         private GetUserDefineReports getUserDefineReportsMsg;
 
-        //Properties
-        public bool IsRefreshRequired { get; set; }
-        public bool Is_IsActiveModify { get; set; }
-
-
 
         //Constructors
         public frmEditReport(frmReportCenterMDIParent myParent)
@@ -155,20 +150,6 @@ namespace GTI.Modules.ReportCenter.UI
             return result;
         }
 
-        #endregion
-
-        #region Event's
-
-        //private void frmEditReport_Load(object sender, EventArgs e)
-        //{
-        //    if (MyParent.userReportMenu != null)
-        //    {
-        //MyParent.userReportMenu. = false;
-        //MyParent.userReportMenu.Hide();
-        //    }
-        //}
-
-        //SAVE
 
         private void Saved()
         {
@@ -199,6 +180,9 @@ namespace GTI.Modules.ReportCenter.UI
             dgReportList.Refresh();
         }
 
+        #endregion
+
+        #region Event's
         private void btnSaveReportEdit_Click(object sender, EventArgs e)
         {
             Saved();
@@ -242,25 +226,27 @@ namespace GTI.Modules.ReportCenter.UI
         //Header click for sorting
         private void dgReportList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+
             DataGridView grid = (DataGridView)sender;
             SortOrder so = SortOrder.None;
-
-            if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
-                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+            if (grid.Columns[e.ColumnIndex].Name == "ReportDisplayName" || grid.Columns[e.ColumnIndex].Name == "ReportType")
             {
-                so = SortOrder.Descending;
+                if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
+                    grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+                {
+                    so = SortOrder.Descending;
+                }
+                else
+                {
+                    so = SortOrder.Ascending;
+                }
+                //set SortGlyphDirection after databinding otherwise will always be none 
+                Sort(grid.Columns[e.ColumnIndex].Name, so);
+                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so;
             }
-            else
-            {
-                so = SortOrder.Ascending;
-            }
-            //set SortGlyphDirection after databinding otherwise will always be none 
-            Sort(grid.Columns[e.ColumnIndex].Name, so);
-            grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so;
         }
 
-        #endregion
-
+  
 
         //Cell value changed
         private void dgReportList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -289,86 +275,43 @@ namespace GTI.Modules.ReportCenter.UI
 
 
 
-        private void frmEditReport_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            MessageBox.Show("Validating");
-        }
-        public bool StopFromClosing = false;
-
-        //private void frmEditReport_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //   // MessageBox.Show("closed");
-        //    if (mListOfReportsEnable.Count > 0)
-        //    {
-        //        DialogResult result = MessageForm.Show(this, Resources.SaveChangesMessage, Resources.SaveChangesHeader, MessageFormTypes.YesNoCancel);
-        //        this.Refresh();
-        //        if (result == DialogResult.Yes)
-        //        {
-        //            // If save fails remain on current tab
-        //            //if (!m_activeControl.SaveSettings())
-        //            //{
-        //            //e.Cancel = true;
-        //            //}
-        //            Saved();
-
-        //        }
-        //        else if (result == DialogResult.Cancel)
-        //        {
-        //            StopFromClosing = true;
-        //        }
-        //        else if (result == DialogResult.No)
-        //        {
-        //            RevertAllChanges();
-        //            // Flag it for reset if they do not save
-        //            //  m_bResetPreviousControl = true;
-        //        }
-        //    }
-          
-           
-        //}
-
         private void frmEditReport_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            CancelClosingEvent = false;
             if (mListOfReportsEnable.Count > 0)
             {
                 DialogResult result = MessageForm.Show(this, Resources.SaveChangesMessage, Resources.SaveChangesHeader, MessageFormTypes.YesNoCancel);
                 this.Refresh();
                 if (result == DialogResult.Yes)
-                {
-                    // If save fails remain on current tab
-                    //if (!m_activeControl.SaveSettings())
-                    //{
-                    //e.Cancel = true;
-                    //}
+                {                  
                     Saved();
-
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                    StopFromClosing = true;
+                    CancelClosingEvent = true;
+                    e.Cancel = true;
                 }
                 else if (result == DialogResult.No)
                 {
                     RevertAllChanges();
-                    // Flag it for reset if they do not save
-                    //  m_bResetPreviousControl = true;
                 }
 
-                e.Cancel = true;
-                MessageBox.Show("Closing");
+               
             }
         }
+        #endregion
 
-        //private void dgReportList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    MessageBox.Show("closing");
-        //}
+
+        //Properties
+        public bool IsRefreshRequired { get; set; }
+        public bool Is_IsActiveModify { get; set; }
+        public bool CancelClosingEvent { get; set; }
 
     }
     
-    
+           
+
+
     public class ReportData
     {
         public int ReportId { get; set; }

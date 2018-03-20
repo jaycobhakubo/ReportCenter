@@ -429,10 +429,9 @@ namespace GTI.Modules.ReportCenter.UI
             mCenter.RefreshReport();
         }
 
-        bool mExit = false;
-        public void LoadTarget(Form target)
+        public bool LoadTarget(Form target)
         {
-            mExit = false;
+            bool result = false;
             try
             {
                 SuspendLayout();
@@ -440,56 +439,41 @@ namespace GTI.Modules.ReportCenter.UI
                 {
                     if (mEditReport.IsMdiChild && mEditReport.IsModified())
                     {
-                        //MessageBox.Show("I am child");
-                        ////mEditReport.'
-                        //mEditReport.
+
                         mEditReport.Close();
-                        if (mEditReport.StopFromClosing == true)
+                        if (mEditReport.CancelClosingEvent == true)
                         {
-                            mEditReport.HideReportMenu();
-                            mExit = true;
-                            return;
+                            result = true;
+                            return result;
                         }
-                        //    target = mEditReport;
-                        //    SetMDIFormValues(target);
-                        //    target.BringToFront();
-                        //    ResumeLayout(true);
-                        //    PerformLayout();
-                        //    return;          
-                        //}
+
+                        if (mEditReport.IsRefreshRequired)
+                        {
+                            target.Name = "";
+                            mEditReport.IsRefreshRequired = false;
+                        }
                     }
 
-                    //if (mEditReport.IsMdiContainer)
-                    //{
-                    //    MessageBox.Show("I am container");
-                    //}
 
-                    if (mEditReport.IsRefreshRequired)
-                    {                        
-                        target.Name = "";
-                        mEditReport.IsRefreshRequired = false;
-                    }
-                }
-
-
-                if (MdiChildren.Length > 0)
-                {
-                    foreach (Form frmTest in MdiChildren)
+                    if (MdiChildren.Length > 0)
                     {
-                        if (frmTest.Name.Equals(target.Name))
+                        foreach (Form frmTest in MdiChildren)
                         {
-                            SetMDIFormValues(target);
-                            target.BringToFront();
-                            ResumeLayout(true);
-                            PerformLayout();
-                            return;
+                            if (frmTest.Name.Equals(target.Name))
+                            {
+                                SetMDIFormValues(target);
+                                target.BringToFront();
+                                ResumeLayout(true);
+                                PerformLayout();
+                                return result;
+                            }
                         }
                     }
+                    SetMDIFormValues(target);
+                    target.Show();
+                    ResumeLayout(true);
+                    PerformLayout();
                 }
-                SetMDIFormValues(target);
-                target.Show();
-                ResumeLayout(true);
-                PerformLayout();
             }
             catch (Exception ex)
             {
@@ -501,6 +485,8 @@ namespace GTI.Modules.ReportCenter.UI
 
                 mEditReport.IsRefreshRequired = false;
             }
+
+            return result;
         }
 
         private void SetMDIFormValues(Form frmTemp)
@@ -630,8 +616,7 @@ namespace GTI.Modules.ReportCenter.UI
         {
             try
             {
-                LoadTarget(mCenter);
-                if (mExit != true)
+                if (!LoadTarget(mCenter))
                 {
                     InitializeUserReport();
                     mCenter.LoadPredefinedReports();
@@ -648,8 +633,10 @@ namespace GTI.Modules.ReportCenter.UI
         {
             try
             {
-                LoadTarget(mCenter);
-                mCenter.LoadPredefinedReports();
+                if (!LoadTarget(mCenter))
+                {
+                    mCenter.LoadPredefinedReports();
+                }
             }
             catch (Exception ex)
             {
@@ -660,22 +647,24 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void customizedReportsMenu_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (mCustomizeReport == null || mCustomizeReport.Disposing ||
-                             mCustomizeReport.IsDisposed)
+        
+                try
                 {
-                    mCustomizeReport = new frmCustomizeReport(this);
-                    mCustomizeReport.Closed += CustomizeUserReport_Closed;
-                    mCustomizeReport.Dock = DockStyle.Fill;
+                    if (mCustomizeReport == null || mCustomizeReport.Disposing ||
+                                 mCustomizeReport.IsDisposed)
+                    {
+                        mCustomizeReport = new frmCustomizeReport(this);
+                        mCustomizeReport.Closed += CustomizeUserReport_Closed;
+                        mCustomizeReport.Dock = DockStyle.Fill;
+                    }
+                    LoadTarget(mCustomizeReport);
+
                 }
-                LoadTarget(mCustomizeReport);
- 
-            }
-            catch (Exception ex)
-            {
-                MessageForm.Show(this,"customizedReportsToolStripMenuItem_Click()..Exception: " + ex.Message,Resources.report_center );
-            }
+                catch (Exception ex)
+                {
+                    MessageForm.Show(this, "customizedReportsToolStripMenuItem_Click()..Exception: " + ex.Message, Resources.report_center);
+                }
+        
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -703,20 +692,22 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void michiganQuarterlyReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (m_michiganQuarterlyReport == null || m_michiganQuarterlyReport.Disposing ||
-                             m_michiganQuarterlyReport.IsDisposed)
+         
+                try
                 {
-                    m_michiganQuarterlyReport = new MichiganQuarterlyReport {Location = Location, Size = Size};
-                }
+                    if (m_michiganQuarterlyReport == null || m_michiganQuarterlyReport.Disposing ||
+                                 m_michiganQuarterlyReport.IsDisposed)
+                    {
+                        m_michiganQuarterlyReport = new MichiganQuarterlyReport { Location = Location, Size = Size };
+                    }
 
-                m_michiganQuarterlyReport.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageForm.Show(this, "MichiganQuarterlyReport..Exception: " + ex.Message, Resources.report_center);
-            }
+                    m_michiganQuarterlyReport.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageForm.Show(this, "MichiganQuarterlyReport..Exception: " + ex.Message, Resources.report_center);
+                }
+           
         }
 
         private void cashAccountabilityReportToolStripMenuItem_Click(object sender, EventArgs e)

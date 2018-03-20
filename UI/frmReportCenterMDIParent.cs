@@ -452,28 +452,29 @@ namespace GTI.Modules.ReportCenter.UI
                             target.Name = "";
                             mEditReport.IsRefreshRequired = false;
                         }
+
                     }
+                  
+                }
 
-
-                    if (MdiChildren.Length > 0)
+                if (MdiChildren.Length > 0)
+                {
+                    foreach (Form frmTest in MdiChildren)
                     {
-                        foreach (Form frmTest in MdiChildren)
+                        if (frmTest.Name.Equals(target.Name))
                         {
-                            if (frmTest.Name.Equals(target.Name))
-                            {
-                                SetMDIFormValues(target);
-                                target.BringToFront();
-                                ResumeLayout(true);
-                                PerformLayout();
-                                return result;
-                            }
+                            SetMDIFormValues(target);
+                            target.BringToFront();
+                            ResumeLayout(true);
+                            PerformLayout();
+                            return result;
                         }
                     }
-                    SetMDIFormValues(target);
-                    target.Show();
-                    ResumeLayout(true);
-                    PerformLayout();
                 }
+                SetMDIFormValues(target);
+                target.Show();
+                ResumeLayout(true);
+                PerformLayout();
             }
             catch (Exception ex)
             {

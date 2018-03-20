@@ -429,9 +429,10 @@ namespace GTI.Modules.ReportCenter.UI
             mCenter.RefreshReport();
         }
 
-
+        bool mExit = false;
         public void LoadTarget(Form target)
         {
+            mExit = false;
             try
             {
                 SuspendLayout();
@@ -446,6 +447,7 @@ namespace GTI.Modules.ReportCenter.UI
                         if (mEditReport.StopFromClosing == true)
                         {
                             mEditReport.HideReportMenu();
+                            mExit = true;
                             return;
                         }
                         //    target = mEditReport;
@@ -629,9 +631,11 @@ namespace GTI.Modules.ReportCenter.UI
             try
             {
                 LoadTarget(mCenter);
-                InitializeUserReport();
-                mCenter.LoadPredefinedReports();
-
+                if (mExit != true)
+                {
+                    InitializeUserReport();
+                    mCenter.LoadPredefinedReports();
+                }
             }
             catch (Exception ex)
             {

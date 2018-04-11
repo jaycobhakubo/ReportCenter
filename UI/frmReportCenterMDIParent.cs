@@ -135,6 +135,11 @@ namespace GTI.Modules.ReportCenter.UI
             about.ShowDialog();
         }
 
+        private void importFileMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void ToolStripButtonClick(string strMode,object sender)
         {
             //All=0,
@@ -727,8 +732,6 @@ namespace GTI.Modules.ReportCenter.UI
             {
                 MessageForm.Show(this, "CashAccountabilityForm..Exception: " + ex.Message, Resources.report_center);
             }
-        }
-
-       
+        }      
     }
 }

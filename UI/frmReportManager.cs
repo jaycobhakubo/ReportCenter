@@ -21,7 +21,9 @@ using GTI.Modules.ReportCenter.Data;
 using GTI.Modules.ReportCenter.Properties;
 using GTI.Modules.Shared;
 using System.Windows.Documents;
+using GTI.Modules.Shared.Business;
 using GTI.Modules.Shared.Data;
+
 //UserStories fixed - US2244 OAS 6/20/2012
 //using System.Web.UI.WebControls;
 
@@ -367,17 +369,17 @@ namespace GTI.Modules.ReportCenter.UI
             GetMachineDataMessage getMachineDataMessage = new GetMachineDataMessage(0);
             getMachineDataMessage.Send();
 
-            foreach (SMachineData machineData in getMachineDataMessage.MachineDataList)
+            foreach (var machineData in getMachineDataMessage.MachineDataList)
             {
                 // DE11331 Added support for only displaying these device types in the machine list.
                 // 5 - POS
                 // 7 - Portable POS
                 // 10 - User Defined
                 // 13 - POS / Management
-                if (machineData.nDeviceId == 5 || machineData.nDeviceId == 7 || machineData.nDeviceId == 10 || machineData.nDeviceId == 13)
+                if (machineData.Id == 5 || machineData.Id == 7 || machineData.Id == 10 || machineData.Id == 13)
                 {
-                    string machineName = string.Format("{0} - {1}", machineData.nMachineId.ToString(), machineData.strDescription);
-                    cboMachine.Items.Add(new System.Web.UI.WebControls.ListItem(machineName, machineData.nMachineId.ToString()));
+                    string machineName = string.Format("{0} - {1}", machineData.Id.ToString(), machineData.Description);
+                    cboMachine.Items.Add(new System.Web.UI.WebControls.ListItem(machineName, machineData.Id.ToString()));
                 }
             }
 
@@ -501,7 +503,7 @@ namespace GTI.Modules.ReportCenter.UI
         private void LoadProgramCombo()
         {
             cboPrograms.Items.Clear();
-            foreach (ProgramType program in GetProgramList.GetList())
+            foreach (Data.ProgramType program in GetProgramList.GetList())
             {
                 cboPrograms.Items.Add(new System.Web.UI.WebControls.ListItem(program.ProgramName, program.ProgramId.ToString()));
             }

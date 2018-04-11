@@ -41,6 +41,7 @@ namespace GTI.Modules.ReportCenter.UI
             this.ReportManagerMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.importFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,14 +73,14 @@ namespace GTI.Modules.ReportCenter.UI
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(109, 26);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // exitMenu
             // 
             this.exitMenu.Name = "exitMenu";
-            this.exitMenu.Size = new System.Drawing.Size(152, 26);
+            this.exitMenu.Size = new System.Drawing.Size(109, 26);
             this.exitMenu.Text = "E&xit";
             this.exitMenu.Click += new System.EventHandler(this.ExitMenu_Click);
             // 
@@ -135,7 +136,8 @@ namespace GTI.Modules.ReportCenter.UI
             // helpMenu
             // 
             this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutMenu});
+            this.aboutMenu,
+            this.importFileMenu});
             this.helpMenu.Name = "helpMenu";
             this.helpMenu.Size = new System.Drawing.Size(55, 26);
             this.helpMenu.Text = "&Help";
@@ -143,9 +145,16 @@ namespace GTI.Modules.ReportCenter.UI
             // aboutMenu
             // 
             this.aboutMenu.Name = "aboutMenu";
-            this.aboutMenu.Size = new System.Drawing.Size(148, 26);
+            this.aboutMenu.Size = new System.Drawing.Size(185, 26);
             this.aboutMenu.Text = "&About ...";
             this.aboutMenu.Click += new System.EventHandler(this.aboutMenu_Click);
+            // 
+            // importFileMenu
+            // 
+            this.importFileMenu.Name = "importFileMenu";
+            this.importFileMenu.Size = new System.Drawing.Size(185, 26);
+            this.importFileMenu.Text = "&Import File ...";
+            this.importFileMenu.Click += new System.EventHandler(this.importFileMenu_Click);
             // 
             // frmReportCenterMDIParent
             // 
@@ -189,6 +198,7 @@ namespace GTI.Modules.ReportCenter.UI
         private System.Windows.Forms.ToolStripMenuItem cashAccountabilityReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReportManagerMenu;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importFileMenu;
     }
 }
 

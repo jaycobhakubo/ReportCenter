@@ -171,6 +171,7 @@ namespace GTI.Modules.ReportCenter.UI
             {
                 int temID = x.ReportId;
                 mListOfAllReports.FirstOrDefault(l => l.ReportId == temID).ReportDisplayName = x.ReportDisplayName;
+                mListOfAllReports.FirstOrDefault(l => l.ReportId == temID).IsActive = x.IsActive;
             }
             selectedRowUnchanged = new DataGridViewRow();
             mListOfReportsEnable = new List<ReportData>();

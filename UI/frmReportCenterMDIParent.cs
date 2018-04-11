@@ -16,6 +16,7 @@ using GTI.Modules.ReportCenter.Data;
 using GTI.Modules.Shared;
 using GTI.Modules.ReportCenter.Business;
 using GTI.Modules.ReportCenter.Properties;
+using System.IO;
 
 namespace GTI.Modules.ReportCenter.UI
 {
@@ -137,7 +138,28 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void importFileMenu_Click(object sender, EventArgs e)
         {
+            var rptFileSource = new OpenFileDialog();
+            rptFileSource.Title = "Please select a rpt file to import.";
+            rptFileSource.Filter = "Report File |*.rpt";
+            rptFileSource.Multiselect = true;
 
+            //lets move this file
+            if (rptFileSource.ShowDialog() == DialogResult.OK)
+            {
+                string[] moveFrom = rptFileSource.FileNames;
+                string moveTo = @"C:\GameTech\Reports\";
+                string copyTo = @"C:\GameTech\Reports\";
+
+                foreach (string files in moveFrom)
+                {
+                    var x = Path.GetFileName(files);
+                    var destinationFile = System.IO.Path.Combine(copyTo, x);
+                   // Directory.Move(files, Path.Combine(moveTo, Path.GetFileName(files)));
+                    System.IO.File.Copy(files, destinationFile, true);
+            
+                }            
+            }
+              
         }
 
         private void ToolStripButtonClick(string strMode,object sender)

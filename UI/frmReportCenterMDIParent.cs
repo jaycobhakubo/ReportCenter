@@ -139,25 +139,30 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void importFileMenu_Click(object sender, EventArgs e)
         {
-            var rptFileSource = new OpenFileDialog();
-            rptFileSource.Title = "Please select a zip file to import.";
-            rptFileSource.Filter = "Report File |*.zip";
+            var m_openFileDialog = new OpenFileDialog();
+            m_openFileDialog.Title = "Please select a zip file to import.";
+            m_openFileDialog.Filter = "Report File |*.zip";
             //rptFileSource.Multiselect = true;
 
             //lets move this file
-            if (rptFileSource.ShowDialog() == DialogResult.OK)
+            if (m_openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                //lets get the full location.
+                var fullpathfilename = m_openFileDialog.FileName;
+                FileInfo fileNameFileInfo = new FileInfo(fullpathfilename);
+                var pathLocation = fileNameFileInfo.Directory.FullName;
+
                 //Now lets unzip the file
-                string zipPath = @"D:\project_test\project_test.zip";
+                //string zipPath = @"D:\project_test\project_test.zip";
                 //string extractPath = @"c:\example\extract";
 
-                using (ZipArchive archive = ZipFile.OpenRead(zipPath))
+                using (ZipArchive archive = ZipFile.OpenRead(fullpathfilename))
                 {
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
-                        if (entry.FullName.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
+                        if (entry.FullName.EndsWith(".rpt", StringComparison.OrdinalIgnoreCase))
                         {
-                            //entry.ExtractToFile(Path.Combine(extractPath, entry.FullName));
+                            entry.ExtractToFile(Path.Combine(pathLocation, entry.FullName));
                         }
                     }
                 } 

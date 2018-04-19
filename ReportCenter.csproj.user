@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
     <StartProgram>d:\GameTech\Common\EliteMCP.exe</StartProgram>
-    <StartArguments>-server=jay-dev -window -runonce -guid={1E91225C-D482-452d-910C-5C4FE41A0484}</StartArguments>
+    <StartArguments>-server=gtiserver -window -runonce -guid={1E91225C-D482-452d-910C-5C4FE41A0484}</StartArguments>
     <StartWorkingDirectory>d:\GameTech\Common</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
@@ -11,5 +11,8 @@
     <StartProgram>d:\GameTech\Common\EliteMCP.exe</StartProgram>
     <StartArguments>-server=betaserver -windows -runonce -guid={1E91225C-D482-452d-910C-5C4FE41A0484}</StartArguments>
     <StartWorkingDirectory>d:\GameTech\Common</StartWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
 </Project>

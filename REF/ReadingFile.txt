@@ -1,0 +1,95 @@
+﻿  private void importFileMenu_Click(object sender, EventArgs e)
+        {
+            var m_openFileDialog = new OpenFileDialog();
+            m_openFileDialog.Title = "Please select a zip file to import.";
+            m_openFileDialog.Filter = "Report File |*.zip";
+
+            if (m_openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //lets get the full location.
+                var fullpathfilename = m_openFileDialog.FileName;
+                FileInfo fileNameFileInfo = new FileInfo(fullpathfilename);
+                var pathLocation = fileNameFileInfo.Directory.FullName;
+
+                FileStream fsRptFile;
+                FileStream fsSqlFile;
+                string sqlReportData = "";
+                string rptReportName = "";
+                Stream rptReportFile = null;
+                string rptFile = "";
+              
+
+                using (ZipArchive archive = ZipFile.OpenRead(fullpathfilename))
+                {
+                    foreach (ZipArchiveEntry entry in archive.Entries)
+                    {
+                        if (entry.FullName.EndsWith(".rpt", StringComparison.OrdinalIgnoreCase))
+                        {
+
+                            entry.ExtractToFile(Path.Combine(pathLocation, entry.FullName));
+                            rptFile = Path.Combine(pathLocation, entry.FullName);//check if the file exists
+                            // string x = entry.FullName
+
+                            //using (FileStream fsSource = File.OpenRead(rptFile))
+                            //{
+                            //    byte[] b = new byte[1024];
+                            //    UTF8Encoding temp = new UTF8Encoding(true);
+                            //    while (fsSource.Read(b,0,b.Length)>0)
+                            //    {
+                            //       // temp.GetString(b)
+                            //    }
+
+                            //}
+
+
+                            //convert this file to file stream
+                            fsRptFile = File.OpenRead(rptFile);
+                            //FileStream fsSource = new FileStream("D:\\csharpfile.txt", FileMode.Open, FileAccess.Read);
+                            //using (StreamReader sr = new StreamReader(fsSource))
+                            //{
+                            //    data = sr.ReadToEnd();
+                            //}
+
+
+
+
+                            rptReportFile = TestStream(rptFile);
+
+                            //rptReportName = Path.GetFileNameWithoutExtension(rptFile);
+                            rptReportName = Path.GetFileName(rptFile);
+
+                            //Send it to server message
+                            //var SetImportFile = new SetImportFile(fs);
+                            //SetImportFile.Send();
+                            continue;
+                        }
+
+                        if (entry.FullName.EndsWith(".sql", StringComparison.OrdinalIgnoreCase))
+                        {
+
+                            entry.ExtractToFile(Path.Combine(pathLocation, entry.FullName));
+                            var sqlFile = Path.Combine(pathLocation, entry.FullName);//check if the file exists
+
+                            //convert this file to file stream
+                            fsSqlFile = File.OpenRead(sqlFile);
+
+                            StreamReader sr = new StreamReader(sqlFile);
+
+                            sqlReportData = sr.ReadToEnd();
+                            MessageBox.Show(sqlReportData);
+
+                            //Send it to server message
+                            //var SetImportFile = new SetImportFile(fs);
+                            //SetImportFile.Send();
+                            continue;
+                        }
+                    }
+                }
+
+                var SetImportFile = new SetImportFile(sqlReportData, rptReportName, rptReportFile);
+                SetImportFile.Send();
+
+        
+            }
+              
+        }

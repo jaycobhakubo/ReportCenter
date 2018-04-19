@@ -145,25 +145,16 @@ namespace GTI.Modules.ReportCenter.UI
             return fs;
         }
 
+        private byte[] ReadFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
 
-
-        //private Stream TestStream()
-        //{
-        //    Stream fs = File.OpenRead(@"c:\testdocument.docx");
-        //    return fs;
-        //}
-
-        //// This method converts the filestream into a byte array so that when it is 
-        //// used in my ASP.Net project the file can be sent using response.Write
-        //private void Test()
-        //{
-        //    System.IO.MemoryStream data = new System.IO.MemoryStream();
-        //    System.IO.Stream str = TestStream();
-
-        //    str.CopyTo(data);
-        //    byte[] buf = new byte[data.Length];
-        //    data.Read(buf, 0, buf.Length);
-        //}
+        byte[] rptReportFileData;
 
 
         private void importFileMenu_Click(object sender, EventArgs e)
@@ -174,93 +165,73 @@ namespace GTI.Modules.ReportCenter.UI
 
             if (m_openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                //lets get the full location.
-                var fullpathfilename = m_openFileDialog.FileName;
-                FileInfo fileNameFileInfo = new FileInfo(fullpathfilename);
-                var pathLocation = fileNameFileInfo.Directory.FullName;
 
-                FileStream fsRptFile;
-                FileStream fsSqlFile;
+                var fullpathfilename = m_openFileDialog.FileName;       //lets get the full location.
+                FileInfo fileNameFileInfo = new FileInfo(fullpathfilename); //Get file info(zip).
+                var zipFileFolderLocation = fileNameFileInfo.Directory.FullName;    //PathLocation
+                //Get the file name to create a folder
+                var extractedFileFolder = Path.GetFileNameWithoutExtension(fullpathfilename);
+                var pathLocation = Path.Combine(zipFileFolderLocation, extractedFileFolder);
+                var isFileExtractedFolderExists = false;
+
+                if (!Directory.Exists(pathLocation))
+                {
+                    Directory.CreateDirectory(pathLocation);
+                }
+                else
+                {
+                    isFileExtractedFolderExists = true;
+                }
+
                 string sqlReportData = "";
                 string rptReportName = "";
-                Stream rptReportFile = null;
-
-
-
-
-
-                string rptFile = "";
-              
-
+          
+             
                 using (ZipArchive archive = ZipFile.OpenRead(fullpathfilename))
                 {
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
+                        //.rpt
                         if (entry.FullName.EndsWith(".rpt", StringComparison.OrdinalIgnoreCase))
                         {
-
-                            entry.ExtractToFile(Path.Combine(pathLocation, entry.FullName));
-                            rptFile = Path.Combine(pathLocation, entry.FullName);//check if the file exists
-                            // string x = entry.FullName
-
-                            //using (FileStream fsSource = File.OpenRead(rptFile))
-                            //{
-                            //    byte[] b = new byte[1024];
-                            //    UTF8Encoding temp = new UTF8Encoding(true);
-                            //    while (fsSource.Read(b,0,b.Length)>0)
-                            //    {
-                            //       // temp.GetString(b)
-                            //    }
-
-                            //}
-
-
-                            //convert this file to file stream
-                            fsRptFile = File.OpenRead(rptFile);
-                            //FileStream fsSource = new FileStream("D:\\csharpfile.txt", FileMode.Open, FileAccess.Read);
-                            //using (StreamReader sr = new StreamReader(fsSource))
-                            //{
-                            //    data = sr.ReadToEnd();
-                            //}
-
-
-
-
-                            rptReportFile = TestStream(rptFile);
-
-                            //rptReportName = Path.GetFileNameWithoutExtension(rptFile);
-                            rptReportName = Path.GetFileName(rptFile);
-
-                            //Send it to server message
-                            //var SetImportFile = new SetImportFile(fs);
-                            //SetImportFile.Send();
+                            var rptFileLocation = Path.Combine(pathLocation, entry.FullName);
+                            entry.ExtractToFile(rptFileLocation, true);
+                            Stream temprptReportFileData = File.OpenRead(rptFileLocation);//TestStream(rptFile);                          
+                            rptReportFileData = ReadFully(temprptReportFileData);
+                            temprptReportFileData.Close();
+                            rptReportName = Path.GetFileName(rptFileLocation);//ReportName
                             continue;
                         }
 
+                        //.sql
                         if (entry.FullName.EndsWith(".sql", StringComparison.OrdinalIgnoreCase))
                         {
-
-                            entry.ExtractToFile(Path.Combine(pathLocation, entry.FullName));
-                            var sqlFile = Path.Combine(pathLocation, entry.FullName);//check if the file exists
-
-                            //convert this file to file stream
-                            fsSqlFile = File.OpenRead(sqlFile);
-
-                            StreamReader sr = new StreamReader(sqlFile);
-
+                            var sqlFileLocation = Path.Combine(pathLocation, entry.FullName);//check if the file exists             
+                            entry.ExtractToFile(sqlFileLocation, true);
+                            var sr = new StreamReader(sqlFileLocation);
                             sqlReportData = sr.ReadToEnd();
-                            MessageBox.Show(sqlReportData);
-
-                            //Send it to server message
-                            //var SetImportFile = new SetImportFile(fs);
-                            //SetImportFile.Send();
+                            sr.Close();
                             continue;
                         }
                     }
                 }
 
-                var SetImportFile = new SetImportFile(sqlReportData, rptReportName, rptReportFile);
-                SetImportFile.Send();
+                var msgSetImportFile = new SetImportFile(sqlReportData, rptReportName, rptReportFileData);
+                msgSetImportFile.Send();
+
+                if (msgSetImportFile.ReturnCode == 0)
+                {
+                    MessageForm.Show("File imported successfully.", "Success");
+                }
+                
+
+
+                //Clean up extracted folder and file
+                if (isFileExtractedFolderExists == false)
+                {
+                  
+                    Directory.Delete(pathLocation, true);
+                }
 
         
             }

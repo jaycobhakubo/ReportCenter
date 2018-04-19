@@ -28,6 +28,15 @@ namespace GTI.Modules.ReportCenter.Data
             m_rptFileData = rptFileData;
         }
 
+        private byte[] ReadFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
         protected override void PackRequest()
         {
             MemoryStream requestStream = new MemoryStream();            // Create the streams we will be writing to.
@@ -53,8 +62,11 @@ namespace GTI.Modules.ReportCenter.Data
      //       }
 
             //requestWriter.Write((ushort)m_rptFileData.Length);
-            byte[] fileBytes = new byte[m_rptFileData.Length];
-            requestWriter.Write(fileBytes);
+
+            requestWriter.Write(ReadFully(m_rptFileData));
+            
+            //byte[] fileBytes = new byte[m_rptFileData.Length];
+            //requestWriter.Write(fileBytes);
 
 
             m_requestPayload = requestStream.ToArray();

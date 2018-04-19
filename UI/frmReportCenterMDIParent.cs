@@ -217,9 +217,19 @@ namespace GTI.Modules.ReportCenter.UI
 
                             //convert this file to file stream
                             fsRptFile = File.OpenRead(rptFile);
+                            //FileStream fsSource = new FileStream("D:\\csharpfile.txt", FileMode.Open, FileAccess.Read);
+                            //using (StreamReader sr = new StreamReader(fsSource))
+                            //{
+                            //    data = sr.ReadToEnd();
+                            //}
+
+
+
+
                             rptReportFile = TestStream(rptFile);
 
-                            rptReportName = Path.GetFileNameWithoutExtension(rptFile);
+                            //rptReportName = Path.GetFileNameWithoutExtension(rptFile);
+                            rptReportName = Path.GetFileName(rptFile);
 
                             //Send it to server message
                             //var SetImportFile = new SetImportFile(fs);

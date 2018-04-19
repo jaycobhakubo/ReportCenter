@@ -32,7 +32,10 @@ namespace GTI.Modules.ReportCenter.UI
         private MichiganQuarterlyReport m_michiganQuarterlyReport;
         private CashAccountabilityForm m_cashAccountability;
         public ToolStrip userReportMenu;
-        GetUserReportList mUserReports;
+        private GetUserReportList mUserReports;
+        private byte[] m_rptFileData;
+        private string m_rptSqlData;
+        private string m_rptName;
         #endregion
         
         internal Dictionary<int, ReportInfo> ReportsDictionary
@@ -139,13 +142,7 @@ namespace GTI.Modules.ReportCenter.UI
         }
 
 
-        private Stream TestStream(string fileLocation)
-        {
-            Stream fs = File.OpenRead(fileLocation);
-            return fs;
-        }
-
-        private byte[] ReadFully(Stream input)
+        private byte[] ConvertFileToByteArray(Stream input)
         {
             using (MemoryStream ms = new MemoryStream())
             {
@@ -153,8 +150,6 @@ namespace GTI.Modules.ReportCenter.UI
                 return ms.ToArray();
             }
         }
-
-        byte[] rptReportFileData;
 
 
         private void importFileMenu_Click(object sender, EventArgs e)
@@ -166,27 +161,22 @@ namespace GTI.Modules.ReportCenter.UI
             if (m_openFileDialog.ShowDialog() == DialogResult.OK)
             {
 
-                var fullpathfilename = m_openFileDialog.FileName;       //lets get the full location.
-                FileInfo fileNameFileInfo = new FileInfo(fullpathfilename); //Get file info(zip).
-                var zipFileFolderLocation = fileNameFileInfo.Directory.FullName;    //PathLocation
-                //Get the file name to create a folder
-                var extractedFileFolder = Path.GetFileNameWithoutExtension(fullpathfilename);
-                var pathLocation = Path.Combine(zipFileFolderLocation, extractedFileFolder);
-                var isFileExtractedFolderExists = false;
+                var fullpathfilename = m_openFileDialog.FileName;       //zip file directory
+                var fileNameFileInfo = new FileInfo(fullpathfilename); //zip file info
+                var zipFileFolderLocation = fileNameFileInfo.Directory.FullName; //zip file folder
+                var extractedFileFolder = Path.GetFileNameWithoutExtension(fullpathfilename); //zip file filename wout ext
+                var pathLocation = Path.Combine(zipFileFolderLocation, extractedFileFolder);//folder directory for extracting sql and rpt file
+                var isFileExtractedFolderExists = false;//flag to check if folder exists or not
 
                 if (!Directory.Exists(pathLocation))
                 {
-                    Directory.CreateDirectory(pathLocation);
+                    Directory.CreateDirectory(pathLocation);//create new directory for extracting sql and rpt file
                 }
                 else
                 {
                     isFileExtractedFolderExists = true;
                 }
-
-                string sqlReportData = "";
-                string rptReportName = "";
-          
-             
+            
                 using (ZipArchive archive = ZipFile.OpenRead(fullpathfilename))
                 {
                     foreach (ZipArchiveEntry entry in archive.Entries)
@@ -197,9 +187,9 @@ namespace GTI.Modules.ReportCenter.UI
                             var rptFileLocation = Path.Combine(pathLocation, entry.FullName);
                             entry.ExtractToFile(rptFileLocation, true);
                             Stream temprptReportFileData = File.OpenRead(rptFileLocation);//TestStream(rptFile);                          
-                            rptReportFileData = ReadFully(temprptReportFileData);
+                            m_rptFileData = ConvertFileToByteArray(temprptReportFileData);
                             temprptReportFileData.Close();
-                            rptReportName = Path.GetFileName(rptFileLocation);//ReportName
+                            m_rptName = Path.GetFileName(rptFileLocation);//ReportName
                             continue;
                         }
 
@@ -209,33 +199,28 @@ namespace GTI.Modules.ReportCenter.UI
                             var sqlFileLocation = Path.Combine(pathLocation, entry.FullName);//check if the file exists             
                             entry.ExtractToFile(sqlFileLocation, true);
                             var sr = new StreamReader(sqlFileLocation);
-                            sqlReportData = sr.ReadToEnd();
+                            m_rptSqlData = sr.ReadToEnd();
                             sr.Close();
                             continue;
                         }
                     }
                 }
 
-                var msgSetImportFile = new SetImportFile(sqlReportData, rptReportName, rptReportFileData);
+                //Server Message
+                var msgSetImportFile = new SetImportFile(m_rptSqlData, m_rptName, m_rptFileData);
                 msgSetImportFile.Send();
 
                 if (msgSetImportFile.ReturnCode == 0)
                 {
                     MessageForm.Show("File imported successfully.", "Success");
                 }
-                
 
-
-                //Clean up extracted folder and file
-                if (isFileExtractedFolderExists == false)
+                if (isFileExtractedFolderExists == false) //Clean up extracted folder and file
                 {
                   
                     Directory.Delete(pathLocation, true);
-                }
-
-        
-            }
-              
+                }        
+            }              
         }
 
         private void ToolStripButtonClick(string strMode,object sender)

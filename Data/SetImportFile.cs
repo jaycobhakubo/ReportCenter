@@ -20,6 +20,8 @@ namespace GTI.Modules.ReportCenter.Data
         public SetImportFile(string rptSqlData, string rptReportName, Stream rptFileData)
         {
             m_id = 18258;
+
+
             m_rptSqlData = rptSqlData;
             m_reportName = rptReportName;
             //m_rptDataPath = rptDataPath;

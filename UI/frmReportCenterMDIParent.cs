@@ -18,6 +18,7 @@ using GTI.Modules.ReportCenter.Business;
 using GTI.Modules.ReportCenter.Properties;
 using System.IO;
 using System.IO.Compression;
+using System.Text;
 
 namespace GTI.Modules.ReportCenter.UI
 {
@@ -137,14 +138,40 @@ namespace GTI.Modules.ReportCenter.UI
             about.ShowDialog();
         }
 
+
+        private Stream TestStream(string fileLocation)
+        {
+            Stream fs = File.OpenRead(fileLocation);
+            return fs;
+        }
+
+
+
+        //private Stream TestStream()
+        //{
+        //    Stream fs = File.OpenRead(@"c:\testdocument.docx");
+        //    return fs;
+        //}
+
+        //// This method converts the filestream into a byte array so that when it is 
+        //// used in my ASP.Net project the file can be sent using response.Write
+        //private void Test()
+        //{
+        //    System.IO.MemoryStream data = new System.IO.MemoryStream();
+        //    System.IO.Stream str = TestStream();
+
+        //    str.CopyTo(data);
+        //    byte[] buf = new byte[data.Length];
+        //    data.Read(buf, 0, buf.Length);
+        //}
+
+
         private void importFileMenu_Click(object sender, EventArgs e)
         {
             var m_openFileDialog = new OpenFileDialog();
             m_openFileDialog.Title = "Please select a zip file to import.";
             m_openFileDialog.Filter = "Report File |*.zip";
-            //rptFileSource.Multiselect = true;
 
-            //lets move this file
             if (m_openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 //lets get the full location.
@@ -152,9 +179,14 @@ namespace GTI.Modules.ReportCenter.UI
                 FileInfo fileNameFileInfo = new FileInfo(fullpathfilename);
                 var pathLocation = fileNameFileInfo.Directory.FullName;
 
-                //Now lets unzip the file
-                //string zipPath = @"D:\project_test\project_test.zip";
-                //string extractPath = @"c:\example\extract";
+                FileStream fsRptFile;
+                FileStream fsSqlFile;
+                string sqlReportData = "";
+                string rptReportName = "";
+                Stream rptReportFile = null;
+
+                string rptFile = "";
+              
 
                 using (ZipArchive archive = ZipFile.OpenRead(fullpathfilename))
                 {
@@ -162,24 +194,61 @@ namespace GTI.Modules.ReportCenter.UI
                     {
                         if (entry.FullName.EndsWith(".rpt", StringComparison.OrdinalIgnoreCase))
                         {
+
                             entry.ExtractToFile(Path.Combine(pathLocation, entry.FullName));
+                            rptFile = Path.Combine(pathLocation, entry.FullName);//check if the file exists
+                            // string x = entry.FullName
+
+                            //using (FileStream fsSource = File.OpenRead(rptFile))
+                            //{
+                            //    byte[] b = new byte[1024];
+                            //    UTF8Encoding temp = new UTF8Encoding(true);
+                            //    while (fsSource.Read(b,0,b.Length)>0)
+                            //    {
+                            //       // temp.GetString(b)
+                            //    }
+
+                            //}
+
+
+                            //convert this file to file stream
+                            fsRptFile = File.OpenRead(rptFile);
+                            rptReportFile = TestStream(rptFile);
+
+                            rptReportName = Path.GetFileNameWithoutExtension(rptFile);
+
+                            //Send it to server message
+                            //var SetImportFile = new SetImportFile(fs);
+                            //SetImportFile.Send();
+                            continue;
+                        }
+
+                        if (entry.FullName.EndsWith(".sql", StringComparison.OrdinalIgnoreCase))
+                        {
+
+                            entry.ExtractToFile(Path.Combine(pathLocation, entry.FullName));
+                            var sqlFile = Path.Combine(pathLocation, entry.FullName);//check if the file exists
+
+                            //convert this file to file stream
+                            fsSqlFile = File.OpenRead(sqlFile);
+
+                            StreamReader sr = new StreamReader(sqlFile);
+
+                            sqlReportData = sr.ReadToEnd();
+                            MessageBox.Show(sqlReportData);
+
+                            //Send it to server message
+                            //var SetImportFile = new SetImportFile(fs);
+                            //SetImportFile.Send();
+                            continue;
                         }
                     }
-                } 
+                }
 
+                var SetImportFile = new SetImportFile(sqlReportData, rptReportName, rptReportFile);
+                SetImportFile.Send();
 
-                //string[] moveFrom = rptFileSource.FileNames;
-                //string moveTo = @"C:\GameTech\Reports\";
-                //string copyTo = @"C:\GameTech\Reports\";
-
-                //foreach (string files in moveFrom)
-                //{
-                //    var x = Path.GetFileName(files);
-                //    var destinationFile = System.IO.Path.Combine(copyTo, x);
-                //    // Directory.Move(files, Path.Combine(moveTo, Path.GetFileName(files)));
-                //    System.IO.File.Copy(files, destinationFile, true);
-
-                //}            
+        
             }
               
         }

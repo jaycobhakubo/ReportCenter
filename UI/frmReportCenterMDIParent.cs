@@ -58,7 +58,7 @@ namespace GTI.Modules.ReportCenter.UI
             InitializeComponent();          
             mCenter = new FrmReportManager { Dock = DockStyle.Fill, MyParent = this };      //US1622
             mCustomizeReport = new frmCustomizeReport(this) {Dock = DockStyle.Fill};
-            mCustomizeReport.Closed += CustomizeUserReport_Closed;
+            mCustomizeReport.Closed += CustomizeUserReport_Closed;            
         }
 
         private void ReportCenterMDIParent_Load(object sender, EventArgs e)
@@ -66,6 +66,15 @@ namespace GTI.Modules.ReportCenter.UI
             //US1831
             //standardReportsMenu_Click(this, null);
             ReportManagerMenu_Click(this, null);
+
+            if (IsAdmin)
+            {
+                importFileMenu.Visible = true;
+            }
+            else
+            {
+                importFileMenu.Visible = false;
+            }
         }
         #endregion
 
@@ -80,6 +89,122 @@ namespace GTI.Modules.ReportCenter.UI
         {
             Debug.WriteLine("ExitMenu_Click");
             Close();
+        }
+
+        private void standardReportsMenu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!LoadTarget(mCenter))
+                {
+                    InitializeUserReport();
+                    mCenter.LoadPredefinedReports();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageForm.Show("standardReportsToolStripMenuItem_Click()..Exception: " + ex.Message);
+            }
+        }
+
+        //US1622
+        private void ReportManagerMenu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!LoadTarget(mCenter))
+                {
+                    mCenter.LoadPredefinedReports();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageForm.Show("ReportManagerMenu_Click()..Exception: " + ex.Message);
+            }
+        }
+
+
+        private void customizedReportsMenu_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (mCustomizeReport == null || mCustomizeReport.Disposing ||
+                             mCustomizeReport.IsDisposed)
+                {
+                    mCustomizeReport = new frmCustomizeReport(this);
+                    mCustomizeReport.Closed += CustomizeUserReport_Closed;
+                    mCustomizeReport.Dock = DockStyle.Fill;
+                }
+                LoadTarget(mCustomizeReport);
+
+            }
+            catch (Exception ex)
+            {
+                MessageForm.Show(this, "customizedReportsToolStripMenuItem_Click()..Exception: " + ex.Message, Resources.report_center);
+            }
+
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (mEditReport == null || mEditReport.Disposing ||
+                             mEditReport.IsDisposed)
+                {
+                    mEditReport = new frmEditReport(this);
+                    mEditReport.Closed += mEditReport_Closed;
+                    mEditReport.Dock = DockStyle.Fill;
+                }
+                mEditReport.LoadDataIntoTheDataGrid();
+
+                LoadTarget(mEditReport);
+                mEditReport.HideReportMenu();
+                //userReportMenu.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageForm.Show(this, "editToolStripMenuItem_Click()..Exception: " + ex.Message, Resources.report_center);
+            }
+        }
+
+        private void michiganQuarterlyReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (m_michiganQuarterlyReport == null || m_michiganQuarterlyReport.Disposing ||
+                             m_michiganQuarterlyReport.IsDisposed)
+                {
+                    m_michiganQuarterlyReport = new MichiganQuarterlyReport { Location = Location, Size = Size };
+                }
+
+                m_michiganQuarterlyReport.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageForm.Show(this, "MichiganQuarterlyReport..Exception: " + ex.Message, Resources.report_center);
+            }
+
+        }
+
+        private void cashAccountabilityReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (m_cashAccountability == null || m_cashAccountability.Disposing ||
+                             m_cashAccountability.IsDisposed)
+                {
+                    m_cashAccountability = new CashAccountabilityForm { Location = Location, Size = Size };
+                }
+
+                m_cashAccountability.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageForm.Show(this, "CashAccountabilityForm..Exception: " + ex.Message, Resources.report_center);
+            }
         }
 
         #region Close Events
@@ -607,6 +732,9 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
+
+       
+
         public bool LoadReports(SplashScreen splashScreen)
         {
             if (mCenter == null)
@@ -620,7 +748,6 @@ namespace GTI.Modules.ReportCenter.UI
 
             //load user defined type
             LoadUserDefinedReports(true);
-
             return true;
         }
 
@@ -701,120 +828,10 @@ namespace GTI.Modules.ReportCenter.UI
         }
         #endregion          
 
-        private void standardReportsMenu_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!LoadTarget(mCenter))
-                {
-                    InitializeUserReport();
-                    mCenter.LoadPredefinedReports();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageForm.Show("standardReportsToolStripMenuItem_Click()..Exception: " + ex.Message);
-            }
-        }
+      
 
-        //US1622
-        private void ReportManagerMenu_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!LoadTarget(mCenter))
-                {
-                    mCenter.LoadPredefinedReports();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageForm.Show("ReportManagerMenu_Click()..Exception: " + ex.Message);
-            }
-        }
-
-
-        private void customizedReportsMenu_Click(object sender, EventArgs e)
-        {
-        
-                try
-                {
-                    if (mCustomizeReport == null || mCustomizeReport.Disposing ||
-                                 mCustomizeReport.IsDisposed)
-                    {
-                        mCustomizeReport = new frmCustomizeReport(this);
-                        mCustomizeReport.Closed += CustomizeUserReport_Closed;
-                        mCustomizeReport.Dock = DockStyle.Fill;
-                    }
-                    LoadTarget(mCustomizeReport);
-
-                }
-                catch (Exception ex)
-                {
-                    MessageForm.Show(this, "customizedReportsToolStripMenuItem_Click()..Exception: " + ex.Message, Resources.report_center);
-                }
-        
-        }
-
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (mEditReport == null || mEditReport.Disposing ||
-                             mEditReport.IsDisposed)
-                {
-                    mEditReport = new frmEditReport(this);
-                    mEditReport.Closed += mEditReport_Closed;
-                    mEditReport.Dock = DockStyle.Fill;
-                }
-                mEditReport.LoadDataIntoTheDataGrid();
-     
-                LoadTarget(mEditReport);
-                mEditReport.HideReportMenu();
-                //userReportMenu.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                MessageForm.Show(this, "editToolStripMenuItem_Click()..Exception: " + ex.Message, Resources.report_center);
-            }
-        }
-
-        private void michiganQuarterlyReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-         
-                try
-                {
-                    if (m_michiganQuarterlyReport == null || m_michiganQuarterlyReport.Disposing ||
-                                 m_michiganQuarterlyReport.IsDisposed)
-                    {
-                        m_michiganQuarterlyReport = new MichiganQuarterlyReport { Location = Location, Size = Size };
-                    }
-
-                    m_michiganQuarterlyReport.Show();
-                }
-                catch (Exception ex)
-                {
-                    MessageForm.Show(this, "MichiganQuarterlyReport..Exception: " + ex.Message, Resources.report_center);
-                }
-           
-        }
-
-        private void cashAccountabilityReportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (m_cashAccountability == null || m_cashAccountability.Disposing ||
-                             m_cashAccountability.IsDisposed)
-                {
-                    m_cashAccountability = new CashAccountabilityForm {Location = Location, Size = Size};
-                }
-
-                m_cashAccountability.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageForm.Show(this, "CashAccountabilityForm..Exception: " + ex.Message, Resources.report_center);
-            }
-        }      
+        #region Properties
+        public bool IsAdmin { get; set; }
+        #endregion
     }
 }

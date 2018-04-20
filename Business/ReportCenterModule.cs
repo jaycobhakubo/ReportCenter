@@ -131,6 +131,7 @@ namespace GTI.Modules.ReportCenter.Business
                 ModuleComm comm = new ModuleComm();
                 Configuration.operatorID = comm.GetOperatorId();
                 Configuration.LoginStaffID = comm.GetStaffId();
+                mReportMDI.IsAdmin = (Configuration.LoginStaffID == 2) ? true : false;
                 Configuration.mMachineID = comm.GetMachineId();
                 GetGamingDate(); // Rally DE525
                 GetSettings();

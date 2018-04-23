@@ -67,6 +67,7 @@ namespace GTI.Modules.ReportCenter.UI
             //standardReportsMenu_Click(this, null);
             ReportManagerMenu_Click(this, null);
 
+            //Can only access by admin
             if (IsAdmin)
             {
                 importFileMenu.Visible = true;
@@ -282,6 +283,8 @@ namespace GTI.Modules.ReportCenter.UI
             var m_openFileDialog = new OpenFileDialog();
             m_openFileDialog.Title = "Please select a zip file to import.";
             m_openFileDialog.Filter = "Report File |*.zip";
+
+            
 
             if (m_openFileDialog.ShowDialog() == DialogResult.OK)
             {

@@ -159,10 +159,8 @@ namespace GTI.Modules.ReportCenter.UI
                     mEditReport.Dock = DockStyle.Fill;
                 }
                 mEditReport.LoadDataIntoTheDataGrid();
-
                 LoadTarget(mEditReport);
                 mEditReport.HideReportMenu();
-                //userReportMenu.Visible = false;
             }
             catch (Exception ex)
             {
@@ -172,11 +170,9 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void michiganQuarterlyReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             try
             {
-                if (m_michiganQuarterlyReport == null || m_michiganQuarterlyReport.Disposing ||
-                             m_michiganQuarterlyReport.IsDisposed)
+                if (m_michiganQuarterlyReport == null || m_michiganQuarterlyReport.Disposing || m_michiganQuarterlyReport.IsDisposed)
                 {
                     m_michiganQuarterlyReport = new MichiganQuarterlyReport { Location = Location, Size = Size };
                 }
@@ -187,7 +183,6 @@ namespace GTI.Modules.ReportCenter.UI
             {
                 MessageForm.Show(this, "MichiganQuarterlyReport..Exception: " + ex.Message, Resources.report_center);
             }
-
         }
 
         private void cashAccountabilityReportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -280,75 +275,38 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void importFileMenu_Click(object sender, EventArgs e)
         {
-            var m_openFileDialog = new OpenFileDialog();
-            m_openFileDialog.Title = "Please select a zip file to import.";
-            m_openFileDialog.Filter = "Report File |*.zip";
-
-            
-
-            if (m_openFileDialog.ShowDialog() == DialogResult.OK)
+            var m_openFileDialogRpt = new OpenFileDialog();           
+            m_openFileDialogRpt.Title = "Please select a report file to import.";
+            m_openFileDialogRpt.Filter = "Report File |*.rpt";
+         
+            if (m_openFileDialogRpt.ShowDialog() == DialogResult.OK)
             {
+                var m_openFileDialogSql = new OpenFileDialog();
+                m_openFileDialogSql.Title = "Please select a sql file to import.";
+                m_openFileDialogSql.Filter = "SQL File |*.sql";
 
-                var fullpathfilename = m_openFileDialog.FileName;       //zip file directory
-                var fileNameFileInfo = new FileInfo(fullpathfilename); //zip file info
-                var zipFileFolderLocation = fileNameFileInfo.Directory.FullName; //zip file folder
-                var extractedFileFolder = Path.GetFileNameWithoutExtension(fullpathfilename); //zip file filename wout ext
-                var pathLocation = Path.Combine(zipFileFolderLocation, extractedFileFolder);//folder directory for extracting sql and rpt file
-                var isFileExtractedFolderExists = false;//flag to check if folder exists or not
+                if (m_openFileDialogSql.ShowDialog() == DialogResult.OK)
+                {
+                    var fullPathFileNameRpt = m_openFileDialogRpt.FileName;   
+                    m_rptName = Path.GetFileName(fullPathFileNameRpt);//ReportName               
+                    Stream temprptReportFileData = File.OpenRead(fullPathFileNameRpt);//TestStream(rptFile);   
+                    m_rptFileData = ConvertFileToByteArray(temprptReportFileData);
+                    var sqlFileLocation = m_openFileDialogSql.FileName;
+                    var sr = new StreamReader(sqlFileLocation);
+                    m_rptSqlData = sr.ReadToEnd();
+                    var msgSetImportFile = new SetImportFile(m_rptSqlData, m_rptName, m_rptFileData);
+                    msgSetImportFile.Send();
 
-                if (!Directory.Exists(pathLocation))
-                {
-                    Directory.CreateDirectory(pathLocation);//create new directory for extracting sql and rpt file
-                }
-                else
-                {
-                    isFileExtractedFolderExists = true;
-                }
-            
-                using (ZipArchive archive = ZipFile.OpenRead(fullpathfilename))
-                {
-                    foreach (ZipArchiveEntry entry in archive.Entries)
+                    if (msgSetImportFile.ReturnCode == 0)
                     {
-                        //.rpt
-                        if (entry.FullName.EndsWith(".rpt", StringComparison.OrdinalIgnoreCase))
-                        {
-                            var rptFileLocation = Path.Combine(pathLocation, entry.FullName);
-                            entry.ExtractToFile(rptFileLocation, true);
-                            Stream temprptReportFileData = File.OpenRead(rptFileLocation);//TestStream(rptFile);                          
-                            m_rptFileData = ConvertFileToByteArray(temprptReportFileData);
-                            temprptReportFileData.Close();
-                            m_rptName = Path.GetFileName(rptFileLocation);//ReportName
-                            continue;
-                        }
-
-                        //.sql
-                        if (entry.FullName.EndsWith(".sql", StringComparison.OrdinalIgnoreCase))
-                        {
-                            var sqlFileLocation = Path.Combine(pathLocation, entry.FullName);//check if the file exists             
-                            entry.ExtractToFile(sqlFileLocation, true);
-                            var sr = new StreamReader(sqlFileLocation);
-                            m_rptSqlData = sr.ReadToEnd();
-                            sr.Close();
-                            continue;
-                        }
+                        MessageForm.Show("File imported successfully.", "Success");
+                    }
+                    else
+                    {
+                        MessageForm.Show("File imported unsuccessfully.", "Failed to import");
                     }
                 }
-
-                //Server Message
-                var msgSetImportFile = new SetImportFile(m_rptSqlData, m_rptName, m_rptFileData);
-                msgSetImportFile.Send();
-
-                if (msgSetImportFile.ReturnCode == 0)
-                {
-                    MessageForm.Show("File imported successfully.", "Success");
-                }
-
-                if (isFileExtractedFolderExists == false) //Clean up extracted folder and file
-                {
-                  
-                    Directory.Delete(pathLocation, true);
-                }        
-            }              
+            }        
         }
 
         private void ToolStripButtonClick(string strMode,object sender)
@@ -457,9 +415,7 @@ namespace GTI.Modules.ReportCenter.UI
                 if (!toolButton.Name.Equals("customizeToolStripButton"))
                 {
                 }
-                else if (!toolButton.Name.Equals("standardToolStripButton"))
-                {
-                }
+                else if (!toolButton.Name.Equals("standardToolStripButton")) { }               
             }
             catch (Exception ex)
             {
@@ -558,8 +514,7 @@ namespace GTI.Modules.ReportCenter.UI
                 {
                     Controls.Add(myControls[iControl]);
                 }
-                
-                
+                                
                 menuStrip.ResumeLayout(false);
                 ResumeLayout(true);
                 PerformLayout();
@@ -668,9 +623,7 @@ namespace GTI.Modules.ReportCenter.UI
                             target.Name = "";
                             mEditReport.IsRefreshRequired = false;
                         }
-
-                    }
-                  
+                    }              
                 }
 
                 if (MdiChildren.Length > 0)
@@ -710,7 +663,6 @@ namespace GTI.Modules.ReportCenter.UI
         {
             try
             {
-
                 frmTemp.AutoScroll = false;
                 frmTemp.ControlBox = false;
                 if (frmTemp.Name.ToUpper() != "frmReport")
@@ -718,7 +670,6 @@ namespace GTI.Modules.ReportCenter.UI
                     frmTemp.MdiParent = this;
                     frmTemp.WindowState = FormWindowState.Maximized;
                     frmTemp.Dock = DockStyle.Fill;
-
                 }                
                 else
                 {
@@ -830,8 +781,6 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
         #endregion          
-
-      
 
         #region Properties
         public bool IsAdmin { get; set; }

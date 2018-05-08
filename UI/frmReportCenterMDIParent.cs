@@ -371,8 +371,7 @@ namespace GTI.Modules.ReportCenter.UI
                         break;
                     
                     case "Customize":
-                        if (mCustomizeReport == null || mCustomizeReport.Disposing ||
-                            mCustomizeReport.IsDisposed)
+                        if (mCustomizeReport == null || mCustomizeReport.Disposing || mCustomizeReport.IsDisposed)
                         {
                             mCustomizeReport = new frmCustomizeReport(this);
                             mCustomizeReport.Closed += CustomizeUserReport_Closed;
@@ -406,9 +405,7 @@ namespace GTI.Modules.ReportCenter.UI
         {
             try
             {
-                if (toolButton == null)
-                    return;
-
+                if (toolButton == null) return;
                 DiableButtons();
                 toolButton.CheckState = CheckState.Checked;
 

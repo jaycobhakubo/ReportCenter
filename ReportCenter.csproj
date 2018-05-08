@@ -127,7 +127,6 @@
     <Compile Include="Data\GetProgramList.cs" />
     <Compile Include="Data\GetReportSessionList.cs" />
     <Compile Include="Data\GetSerialNumbers.cs" />
-    <Compile Include="Data\GetUserDefineReports.cs" />
     <Compile Include="Data\GetUserReportList.cs" />
     <Compile Include="Data\LocationType.cs" />
     <Compile Include="Data\PositionType.cs" />
@@ -141,7 +140,6 @@
     <Compile Include="Data\SetDailySalesData.cs" />
     <Compile Include="Data\SetImportFile.cs" />
     <Compile Include="Data\SetMonthlySalesData.cs" />
-    <Compile Include="Data\SetUserDefineReports.cs" />
     <Compile Include="Data\SetUserReportList.cs" />
     <Compile Include="Data\UserReportGroupTreeNode.cs" />
     <Compile Include="Data\UserReportType.cs" />

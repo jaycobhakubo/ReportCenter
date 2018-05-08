@@ -13,6 +13,8 @@ using GTI.Modules.ReportCenter.Business;
 using System.Threading;
 using System.Text.RegularExpressions;
 using GTI.Modules.ReportCenter.Properties;
+using GTI.Modules.Shared.Data;
+using GTI.Modules.Shared.Business;
 
 namespace GTI.Modules.ReportCenter.UI
 {
@@ -25,7 +27,6 @@ namespace GTI.Modules.ReportCenter.UI
         ReportData SelectedRow = new ReportData();
         ReportData SelectedRowOriginalValue = new ReportData();
         public frmReportCenterMDIParent MyParent { get; private set; }
-        private GetUserDefineReports getUserDefineReportsMsg;
 
 
         //Constructors
@@ -57,7 +58,7 @@ namespace GTI.Modules.ReportCenter.UI
         public void LoadDataIntoTheDataGrid()
         {
             mListOfAllReports = new List<ReportData>();
-            getUserDefineReportsMsg = new GetUserDefineReports();
+            GetAllReports getUserDefineReportsMsg = new GetAllReports();
             getUserDefineReportsMsg.Send();
             mListOfAllReports = getUserDefineReportsMsg.mListRptData;
             SetDataGrid();
@@ -155,7 +156,7 @@ namespace GTI.Modules.ReportCenter.UI
         {
             if (mListOfReportsEnable.Count > 0)
             {
-                SetUserDefineReports msg = new SetUserDefineReports(mListOfReportsEnable);
+                var msg = new SetUserDefineReports(mListOfReportsEnable);
                 msg.Send();
                 UpdateOtherReportUI();
                 mListOfReportsEnable = new List<ReportData>();
@@ -313,15 +314,15 @@ namespace GTI.Modules.ReportCenter.UI
            
 
 
-    public class ReportData
-    {
-        public int ReportId { get; set; }
-        public bool IsActive { get; set; }
-        public string ReportDisplayName { get; set; }
-        public string ReportFileName { get; set; }
-        public int ReportTypeId { get; set; }
-        public string ReportType { get; set; }
-    }
+    //public class ReportData
+    //{
+    //    public int ReportId { get; set; }
+    //    public bool IsActive { get; set; }
+    //    public string ReportDisplayName { get; set; }
+    //    public string ReportFileName { get; set; }
+    //    public int ReportTypeId { get; set; }
+    //    public string ReportType { get; set; }
+    //}
 }
 
 

@@ -17,7 +17,7 @@ namespace GTI.Modules.ReportCenter.Data
 
         public SetUserDefineReports(List<ReportData> ListOfListReportsEnableDisable)
         {
-            m_id = 18252;
+            m_id = 18260;
             mListOfListReportsEnableDisable = ListOfListReportsEnableDisable;
         } 
 

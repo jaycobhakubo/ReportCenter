@@ -25,6 +25,7 @@ namespace GTI.Modules.ReportCenter.Data
         {
             MemoryStream requestStream = new MemoryStream();
             BinaryWriter requestWriter = new BinaryWriter(requestStream, Encoding.Unicode);
+            requestWriter.Write((int)0);
             m_requestPayload = requestStream.ToArray();
             requestWriter.Close();
         }

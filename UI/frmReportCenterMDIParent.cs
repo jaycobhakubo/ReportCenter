@@ -53,6 +53,7 @@ namespace GTI.Modules.ReportCenter.UI
         }
 
         #region Constructors
+
         public frmReportCenterMDIParent()
         {
             InitializeComponent();          
@@ -63,19 +64,10 @@ namespace GTI.Modules.ReportCenter.UI
 
         private void ReportCenterMDIParent_Load(object sender, EventArgs e)
         {
-            //US1831
-            //standardReportsMenu_Click(this, null);
-            ReportManagerMenu_Click(this, null);
+            ReportManagerMenu_Click(this, null);  //US1831//standardReportsMenu_Click(this, null);
 
-            //Can only access by admin
-            if (IsAdmin)
-            {
-                importFileMenu.Visible = true;
-            }
-            else
-            {
-                importFileMenu.Visible = false;
-            }
+            if (IsAdmin) { importFileMenu.Visible = true; } /*Can only access by admin*/
+            else{importFileMenu.Visible = false;}
         }
         #endregion
 

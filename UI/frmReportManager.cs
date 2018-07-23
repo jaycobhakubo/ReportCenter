@@ -23,6 +23,7 @@ using GTI.Modules.Shared;
 using System.Windows.Documents;
 using GTI.Modules.Shared.Business;
 using GTI.Modules.Shared.Data;
+using System.Drawing.Printing;
 
 //UserStories fixed - US2244 OAS 6/20/2012
 //using System.Web.UI.WebControls;
@@ -2750,24 +2751,69 @@ namespace GTI.Modules.ReportCenter.UI
                         else
                         {
                             // print to printer 
-                            report.CrystalRptDoc.PrintOptions.PrinterName =
-                                Configuration.mGlobalPrinterName;
-                            if (string.IsNullOrEmpty(Configuration.mGlobalPrinterName))
+                            string ourPrinter = Configuration.mGlobalPrinterName;
+                            int copies = 1;
+
+                            if (string.IsNullOrEmpty(ourPrinter)) //we don't have a printer, get one from the user
                             {
                                 var printer = new PrintDialog();
+                                
+                                printer.AllowCurrentPage = false;
+                                printer.AllowPrintToFile = false;
+                                printer.AllowSelection = false;
+                                printer.AllowSomePages = false;
+                                printer.ShowHelp = false;
+
                                 DialogResult result = printer.ShowDialog();
+
                                 if (result == DialogResult.OK)
                                 {
-                                    report.CrystalRptDoc.PrintOptions.PrinterName =
-                                        printer.PrinterSettings.PrinterName;
-                                    report.CrystalRptDoc.PrintToPrinter(printer.PrinterSettings.Copies,
-                                                                         false, 0, 0);
-                                    break;
+                                    ourPrinter = printer.PrinterSettings.PrinterName;
+                                    copies = printer.PrinterSettings.Copies;
                                 }
+
+                                printer.Dispose();
                             }
 
-                            report.CrystalRptDoc.PrintToPrinter(1, false, 0, 0);
+                            if (!string.IsNullOrEmpty(ourPrinter)) //we have a printer, print the report
+                            {
+                                bool receiptPrinter = false;
+                                bool correctlyDefined = false;
+                                PrinterSettings ps = new PrinterSettings();
+                                
+                                ps.PrinterName = ourPrinter;
+
+                                if (ps.IsValid)
+                                {
+                                    foreach (System.Drawing.Printing.PaperSize psz in ps.PaperSizes)
+                                    {
+                                        if (psz.PaperName.ToUpper().Contains("RECEIPT") || psz.PaperName.ToUpper().Contains("ROLL PAPER") || (psz.Height / psz.Width > 10)) //looks like receipt paper, assume this is a receipt printer
+                                        {
+                                            receiptPrinter = true;
+
+                                            if (ps.DefaultPageSettings.PaperSize.RawKind == psz.RawKind)
+                                            {
+                                                correctlyDefined = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                report.CrystalRptDoc.PrintOptions.PrinterName = ourPrinter;
+
+                                if (receiptPrinter)
+                                {
+                                    if (correctlyDefined)
+                                        report.CrystalRptDoc.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.DefaultPaperSize; //a bug with some drivers sets this to LETTER, so we will fix it
+                                    else
+                                        report.CrystalRptDoc.PrintOptions.DissociatePageSizeAndPrinterPaperSize = true; //do our best to get the report to fill the page
+                                }
+
+                                report.CrystalRptDoc.PrintToPrinter(copies, copies > 1, 0, 0);
+                            }
                         }
+
                         ++curReport;
                         int percent = (int)((curReport / totalReports) * 100.0);
                         m_frmWaiting.ReportProgress(null, new ProgressChangedEventArgs(percent, null));

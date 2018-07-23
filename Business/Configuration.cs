@@ -31,6 +31,7 @@ namespace GTI.Modules.ReportCenter.Business
         internal static string mClientinstallDirectory;
         internal const string ReportDirectory = @"\Reports\";
         internal static string mGlobalPrinterName = string.Empty;
+        internal static string mReceiptPrinterName = string.Empty;
         internal static bool mMachineAccounts;
         // PDTS 1064
         internal static MagneticCardReaderMode mMagCardReaderMode;
@@ -217,6 +218,9 @@ namespace GTI.Modules.ReportCenter.Business
                         break;
                     case Setting.GlobalPrinterName:
                         Configuration.mGlobalPrinterName = setting.Value;
+                        break;
+                    case Setting.POSReceiptPrinterName:
+                        Configuration.mReceiptPrinterName = setting.Value;
                         break;
                     case Setting.DatabaseServer:
                         Configuration.DBServer = setting.Value;

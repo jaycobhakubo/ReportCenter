@@ -9,7 +9,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <StartAction>Program</StartAction>
     <StartProgram>d:\GameTech\Common\EliteMCP.exe</StartProgram>
-    <StartArguments>-server=betaserver -windows -runonce -guid={1E91225C-D482-452d-910C-5C4FE41A0484}</StartArguments>
+    <StartArguments>-server=10.0.11.107 -windows -runonce -guid={1E91225C-D482-452d-910C-5C4FE41A0484}</StartArguments>
     <StartWorkingDirectory>d:\GameTech\Common</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup>

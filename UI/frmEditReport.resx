@@ -151,7 +151,7 @@
     <value>btnSaveReportEdit</value>
   </data>
   <data name="&gt;&gt;btnSaveReportEdit.Type" xml:space="preserve">
-    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.1140, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
+    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.1164, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
   </data>
   <data name="&gt;&gt;btnSaveReportEdit.Parent" xml:space="preserve">
     <value>splitContainer2.Panel1</value>
@@ -199,7 +199,7 @@
     <value>btnCancel</value>
   </data>
   <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.1140, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
+    <value>GTI.Controls.ImageButton, GTIControls, Version=1.3.11.1164, Culture=neutral, PublicKeyToken=8379638106a1f521</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>splitContainer2.Panel2</value>
@@ -243,6 +243,18 @@
   <data name="&gt;&gt;splitContainer2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="splitContainer1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Trebuchet MS, 12pt</value>
+  </data>
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
+  </data>
   <data name="dgReportList.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
@@ -271,7 +283,7 @@
     <value>Report Name</value>
   </data>
   <data name="ReportDisplayName.Width" type="System.Int32, mscorlib">
-    <value>127</value>
+    <value>128</value>
   </data>
   <metadata name="ReportType.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -280,7 +292,7 @@
     <value>Report Type</value>
   </data>
   <data name="ReportType.Width" type="System.Int32, mscorlib">
-    <value>120</value>
+    <value>123</value>
   </data>
   <metadata name="ReportFileName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -289,7 +301,7 @@
     <value>File Name</value>
   </data>
   <data name="ReportFileName.Width" type="System.Int32, mscorlib">
-    <value>87</value>
+    <value>106</value>
   </data>
   <data name="dgReportList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -317,18 +329,6 @@
   </data>
   <data name="&gt;&gt;dgReportList.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="splitContainer1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Trebuchet MS, 12pt</value>
-  </data>
-  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
   </data>
   <data name="splitContainer1.Panel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Trebuchet MS, 12pt</value>
@@ -397,7 +397,7 @@
     <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>frmEditReport</value>
+    <value />
   </data>
   <data name="&gt;&gt;ReportId.Name" xml:space="preserve">
     <value>ReportId</value>
@@ -433,6 +433,6 @@
     <value>frmEditReport</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>GTI.Modules.Shared.GradientForm, ManagedEliteModule, Version=1.3.42.1141, Culture=neutral, PublicKeyToken=f7ab3ec26b04c7cf</value>
+    <value>GTI.Modules.Shared.GradientForm, ManagedEliteModule, Version=1.3.42.1165, Culture=neutral, PublicKeyToken=f7ab3ec26b04c7cf</value>
   </data>
 </root>

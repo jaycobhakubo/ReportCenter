@@ -44,13 +44,11 @@ namespace GTI.Modules.ReportCenter.UI
         {
             if (MyParent.userReportMenu != null)
             {
-
                 MyParent.userReportMenu.Visible = false;
                 MyParent.userReportMenu.Hide();
                 MyParent.userReportMenu.Dispose();
                 MyParent.userReportMenu = null;
-                dgReportList.Refresh();
-              
+                dgReportList.Refresh();             
             }
         }
 
@@ -72,7 +70,6 @@ namespace GTI.Modules.ReportCenter.UI
             MyParent.RefreshReport();
             Cursor.Current = Cursors.Default;
         }
-
 
         //display UI 
         private void SetDataGrid()
@@ -125,6 +122,18 @@ namespace GTI.Modules.ReportCenter.UI
                         else
                         {
                             dgReportList.DataSource = mListOfAllReports.OrderByDescending(x => x.ReportType).ToList();
+                        }
+                        break;
+                    }
+                case "ReportFileName":
+                    {
+                        if (sortOrder == SortOrder.Ascending)
+                        {
+                            dgReportList.DataSource = mListOfAllReports.OrderBy(x => x.ReportFileName).ToList();
+                        }
+                        else
+                        {
+                            dgReportList.DataSource = mListOfAllReports.OrderByDescending(x => x.ReportFileName).ToList();
                         }
                         break;
                     }
@@ -231,21 +240,25 @@ namespace GTI.Modules.ReportCenter.UI
 
             DataGridView grid = (DataGridView)sender;
             SortOrder so = SortOrder.None;
-            if (grid.Columns[e.ColumnIndex].Name == "ReportDisplayName" || grid.Columns[e.ColumnIndex].Name == "ReportType")
-            {
-                if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
-                    grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
-                {
-                    so = SortOrder.Descending;
-                }
-                else
-                {
-                    so = SortOrder.Ascending;
-                }
-                //set SortGlyphDirection after databinding otherwise will always be none 
-                Sort(grid.Columns[e.ColumnIndex].Name, so);
-                grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so;
-            }
+            if (
+                   grid.Columns[e.ColumnIndex].Name == "ReportDisplayName" 
+                || grid.Columns[e.ColumnIndex].Name == "ReportType"
+                || grid.Columns[e.ColumnIndex].Name == "ReportFileName"
+                )
+                    {
+                        if (grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.None ||
+                            grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection == SortOrder.Ascending)
+                        {
+                            so = SortOrder.Descending;
+                        }
+                        else
+                        {
+                            so = SortOrder.Ascending;
+                        }
+                        //set SortGlyphDirection after databinding otherwise will always be none 
+                        Sort(grid.Columns[e.ColumnIndex].Name, so);
+                        grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = so;
+                    }
         }
 
   

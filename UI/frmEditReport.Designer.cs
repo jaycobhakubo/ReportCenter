@@ -40,8 +40,8 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.btnSaveReportEdit = new GTI.Controls.ImageButton();
             this.btnCancel = new GTI.Controls.ImageButton();
-            this.dgReportList = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.dgReportList = new System.Windows.Forms.DataGridView();
             this.ReportId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ReportDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,11 +51,11 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer2
@@ -99,6 +99,22 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.splitContainer1, "splitContainer1");
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dgReportList);
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            // 
             // dgReportList
             // 
             this.dgReportList.AllowUserToAddRows = false;
@@ -111,7 +127,7 @@
             this.dgReportList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 12F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -127,7 +143,7 @@
             this.ReportFileName});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Trebuchet MS", 12F);
             dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DarkSlateBlue;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -144,22 +160,6 @@
             this.dgReportList.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgReportList_CellValidating);
             this.dgReportList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgReportList_CellValueChanged);
             this.dgReportList.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgReportList_ColumnHeaderMouseClick);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.splitContainer1, "splitContainer1");
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.dgReportList);
-            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             // 
             // ReportId
             // 
@@ -218,7 +218,6 @@
             this.ReportFileName.Name = "ReportFileName";
             this.ReportFileName.ReadOnly = true;
             this.ReportFileName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ReportFileName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frmEditReport
             // 
@@ -236,11 +235,11 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgReportList)).EndInit();
             this.ResumeLayout(false);
 
         }

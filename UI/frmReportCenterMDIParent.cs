@@ -667,7 +667,7 @@ namespace GTI.Modules.ReportCenter.UI
                     frmTemp.WindowState = FormWindowState.Normal;
                 }
 
-                frmTemp.Visible = true;
+                frmTemp.Visible = true;//kc
             }
             catch (Exception ex)
             {

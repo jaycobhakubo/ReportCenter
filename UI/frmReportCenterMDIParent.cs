@@ -88,7 +88,7 @@ namespace GTI.Modules.ReportCenter.UI
         {
             try
             {
-                if (!LoadTarget(mCenter))//knc
+                if (!LoadTarget(mCenter))
                 {
                     InitializeUserReport();
                     mCenter.LoadPredefinedReports();
@@ -107,7 +107,7 @@ namespace GTI.Modules.ReportCenter.UI
             {
                 if (!LoadTarget(mCenter))
                 {
-                    mCenter.LoadPredefinedReports();//knc2
+                    mCenter.LoadPredefinedReports();
                 }
             }
             catch (Exception ex)
@@ -151,7 +151,7 @@ namespace GTI.Modules.ReportCenter.UI
                     mEditReport.Dock = DockStyle.Fill;
                 }
                 mEditReport.LoadDataIntoTheDataGrid();
-                LoadTarget(mEditReport);//knc
+                LoadTarget(mEditReport);
                 mEditReport.HideReportMenu();
             }
             catch (Exception ex)
@@ -287,71 +287,47 @@ namespace GTI.Modules.ReportCenter.UI
                     var sr = new StreamReader(sqlFileLocation);
                     m_rptSqlData = sr.ReadToEnd();
                     var msgSetImportFile = new SetImportFile(m_rptSqlData, m_rptName, m_rptFileData);
+
+                    Cursor.Current = Cursors.WaitCursor;
                     msgSetImportFile.Send();
 
                     if (msgSetImportFile.ReturnCode == 0)
                     {
-                        MessageForm.Show("File imported successfully.", "Success");
-                        //How can we check which child form is active?
-
-                      
-                        //mCenter.LoadPredefinedReports();
-
-
-                        //LoadTarget(mCenter);
-                        //mCenter.LoadReportToTreeView(ReportTypes.Electronics);
-                        //mCenter.LoadPredefinedReports();
-
-                        //mEditReport.LoadDataIntoTheDataGrid();
-                        //mCenter.LoadPredefinedReports();
-                        //LoadTarget(mEditReport);//knc
-                        //mEditReport.HideReportMenu();
+   
 
                         ReloadReports(null);
 
 
                         if (mEditReport != null && mCenter.MyParent.ActiveMdiChild.Name == mEditReport.Name)
-                        {
-                            //if (mCenter.MyParent.ActiveMdiChild.Name == mEditReport.Name)
-                            //{
-                                //if (mEditReport == null || mEditReport.Disposing ||
-                                //mEditReport.IsDisposed)
-                                //{
-                                mEditReport = new frmEditReport(this);
-                                mEditReport.Closed += mEditReport_Closed;
-                                mEditReport.Dock = DockStyle.Fill;
-                                //}
+                        {                 
                                 mEditReport.LoadDataIntoTheDataGrid();
-                                LoadTarget(mEditReport);//knc
+                                LoadTarget(mEditReport);
                                 mEditReport.HideReportMenu();
-                            //}
+                                mEditReport.Dock = DockStyle.Fill;
                         }
-                        else if
-                            (mCustomizeReport != null && mCenter.MyParent.ActiveMdiChild.Name == mCustomizeReport.Name)
+                        else if (mCustomizeReport != null && mCenter.MyParent.ActiveMdiChild.Name == mCustomizeReport.Name)
                         {
-
-                            mCustomizeReport = new frmCustomizeReport(this);
-                            mCustomizeReport.Closed += CustomizeUserReport_Closed;
-                            mCustomizeReport.Dock = DockStyle.Fill;
+                            mCustomizeReport.LoadPredefinedReports();
                             LoadTarget(mCustomizeReport);
-                          
+                            mCustomizeReport.Dock = DockStyle.Fill;                         
                         }              
                         else
                         {
-                                LoadTarget(mCenter);
-                                mCenter.LoadPredefinedReports();
+                            mCenter.LoadPredefinedReports();
+                            LoadTarget(mCenter);                    
                         }
-                          
-                      
 
-
-                       
-
+                        Cursor.Current = Cursors.Default;
+                        MessageForm.Show("File imported successfully.", "Success");
+             
                     }
                     else
                     {
+
+                        Cursor.Current = Cursors.Default;
                         MessageForm.Show("File imported unsuccessfully.", "Failed to import");
                     }
+
                 }
             }        
         }
@@ -479,7 +455,7 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
-        public void LoadUserDefinedReports(bool showCustomButtons)//knc3
+        public void LoadUserDefinedReports(bool showCustomButtons)
         {
             string locale = Configuration.mForceEnglish ? "en-US" : Thread.CurrentThread.CurrentCulture.Name;
             mUserReports = new GetUserReportList(Configuration.operatorID, Configuration.LoginStaffID,
@@ -644,7 +620,7 @@ namespace GTI.Modules.ReportCenter.UI
             mCenter.RefreshReport();
         }
 
-        public bool LoadTarget(Form target)//knc
+        public bool LoadTarget(Form target)
         {
             bool result = false;
             try
@@ -684,7 +660,7 @@ namespace GTI.Modules.ReportCenter.UI
                         }
                     }
                 }
-                SetMDIFormValues(target);//knc
+                SetMDIFormValues(target);
                 target.Show();
                 ResumeLayout(true);
                 PerformLayout();
@@ -733,7 +709,7 @@ namespace GTI.Modules.ReportCenter.UI
 
        
 
-        public bool LoadReports(SplashScreen splashScreen)//knc6
+        public bool LoadReports(SplashScreen splashScreen)
         {
             if (mCenter == null)
             {
@@ -758,7 +734,7 @@ namespace GTI.Modules.ReportCenter.UI
               
             }
             mCenter.GetReportsFromServer(splashScreen);
-            LoadUserDefinedReports(true);           
+           // LoadUserDefinedReports(true);           
         }
 
         #endregion 

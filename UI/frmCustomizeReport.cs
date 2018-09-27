@@ -159,7 +159,7 @@ namespace GTI.Modules.ReportCenter.UI
         #endregion
 
         #region Pre-Defined Reports
-        private void LoadPredefinedReports()
+        internal void LoadPredefinedReports()
         {
             predefinedReportTreeView.Nodes.Clear();
 

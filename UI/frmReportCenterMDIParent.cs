@@ -88,7 +88,7 @@ namespace GTI.Modules.ReportCenter.UI
         {
             try
             {
-                if (!LoadTarget(mCenter))
+                if (!LoadTarget(mCenter))//knc
                 {
                     InitializeUserReport();
                     mCenter.LoadPredefinedReports();
@@ -107,7 +107,7 @@ namespace GTI.Modules.ReportCenter.UI
             {
                 if (!LoadTarget(mCenter))
                 {
-                    mCenter.LoadPredefinedReports();
+                    mCenter.LoadPredefinedReports();//knc2
                 }
             }
             catch (Exception ex)
@@ -151,7 +151,7 @@ namespace GTI.Modules.ReportCenter.UI
                     mEditReport.Dock = DockStyle.Fill;
                 }
                 mEditReport.LoadDataIntoTheDataGrid();
-                LoadTarget(mEditReport);
+                LoadTarget(mEditReport);//knc
                 mEditReport.HideReportMenu();
             }
             catch (Exception ex)
@@ -292,6 +292,61 @@ namespace GTI.Modules.ReportCenter.UI
                     if (msgSetImportFile.ReturnCode == 0)
                     {
                         MessageForm.Show("File imported successfully.", "Success");
+                        //How can we check which child form is active?
+
+                      
+                        //mCenter.LoadPredefinedReports();
+
+
+                        //LoadTarget(mCenter);
+                        //mCenter.LoadReportToTreeView(ReportTypes.Electronics);
+                        //mCenter.LoadPredefinedReports();
+
+                        //mEditReport.LoadDataIntoTheDataGrid();
+                        //mCenter.LoadPredefinedReports();
+                        //LoadTarget(mEditReport);//knc
+                        //mEditReport.HideReportMenu();
+
+                        ReloadReports(null);
+
+
+                        if (mEditReport != null && mCenter.MyParent.ActiveMdiChild.Name == mEditReport.Name)
+                        {
+                            //if (mCenter.MyParent.ActiveMdiChild.Name == mEditReport.Name)
+                            //{
+                                //if (mEditReport == null || mEditReport.Disposing ||
+                                //mEditReport.IsDisposed)
+                                //{
+                                mEditReport = new frmEditReport(this);
+                                mEditReport.Closed += mEditReport_Closed;
+                                mEditReport.Dock = DockStyle.Fill;
+                                //}
+                                mEditReport.LoadDataIntoTheDataGrid();
+                                LoadTarget(mEditReport);//knc
+                                mEditReport.HideReportMenu();
+                            //}
+                        }
+                        else if
+                            (mCustomizeReport != null && mCenter.MyParent.ActiveMdiChild.Name == mCustomizeReport.Name)
+                        {
+
+                            mCustomizeReport = new frmCustomizeReport(this);
+                            mCustomizeReport.Closed += CustomizeUserReport_Closed;
+                            mCustomizeReport.Dock = DockStyle.Fill;
+                            LoadTarget(mCustomizeReport);
+                          
+                        }              
+                        else
+                        {
+                                LoadTarget(mCenter);
+                                mCenter.LoadPredefinedReports();
+                        }
+                          
+                      
+
+
+                       
+
                     }
                     else
                     {
@@ -424,7 +479,7 @@ namespace GTI.Modules.ReportCenter.UI
             }
         }
 
-        public void LoadUserDefinedReports(bool showCustomButtons)
+        public void LoadUserDefinedReports(bool showCustomButtons)//knc3
         {
             string locale = Configuration.mForceEnglish ? "en-US" : Thread.CurrentThread.CurrentCulture.Name;
             mUserReports = new GetUserReportList(Configuration.operatorID, Configuration.LoginStaffID,
@@ -589,7 +644,7 @@ namespace GTI.Modules.ReportCenter.UI
             mCenter.RefreshReport();
         }
 
-        public bool LoadTarget(Form target)
+        public bool LoadTarget(Form target)//knc
         {
             bool result = false;
             try
@@ -629,7 +684,7 @@ namespace GTI.Modules.ReportCenter.UI
                         }
                     }
                 }
-                SetMDIFormValues(target);
+                SetMDIFormValues(target);//knc
                 target.Show();
                 ResumeLayout(true);
                 PerformLayout();
@@ -678,7 +733,7 @@ namespace GTI.Modules.ReportCenter.UI
 
        
 
-        public bool LoadReports(SplashScreen splashScreen)
+        public bool LoadReports(SplashScreen splashScreen)//knc6
         {
             if (mCenter == null)
             {
@@ -692,6 +747,18 @@ namespace GTI.Modules.ReportCenter.UI
             //load user defined type
             LoadUserDefinedReports(true);
             return true;
+        }
+
+        private void ReloadReports(SplashScreen splashScreen)
+        {
+            if (mCenter == null)
+            {
+                //mCenter = new FrmReportCenter();
+                mCenter = new FrmReportManager();   //US1622
+              
+            }
+            mCenter.GetReportsFromServer(splashScreen);
+            LoadUserDefinedReports(true);           
         }
 
         #endregion 

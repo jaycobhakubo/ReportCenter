@@ -173,7 +173,7 @@ namespace GTI.Modules.ReportCenter.UI
         #endregion
 
         #region Properties
-        internal Dictionary<int, ReportInfo> ReportsDictionary { get { return m_gotReports.Reports; } }
+        internal Dictionary<int, ReportInfo> ReportsDictionary { get { return m_gotReports.Reports; } }//knc4
         public Form MyParent { get { return m_frmMyParent; } set { m_frmMyParent = (frmReportCenterMDIParent)value; } }
         public string ErrorMessage { get; set; }
         #endregion
@@ -803,7 +803,7 @@ namespace GTI.Modules.ReportCenter.UI
             {
                 UserReportGroupTreeNode urgNode = new UserReportGroupTreeNode(rpts[c], false);
 
-                reportTreeView.Nodes.Add(urgNode);
+                reportTreeView.Nodes.Add(urgNode);//knc1
                 ctr++;
 
                 foreach (ReportInfo rpt in m_reportsDictionary.Values)
@@ -1177,7 +1177,7 @@ namespace GTI.Modules.ReportCenter.UI
 
         private SplashScreen msplashScreen = new SplashScreen();
 
-        internal bool GetReportsFromServer(SplashScreen splashScreen)
+        internal bool GetReportsFromServer(SplashScreen splashScreen)//knc5
         {
             m_gotReports = Configuration.mForceEnglish ?
                 new GetReportListExMessage(ReportTypes.All, "en-US") :
